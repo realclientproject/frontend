@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // import components
 import Admin from "./pages/dashboard/admin/admin.jsx";
@@ -11,45 +11,10 @@ import Profile from "./pages/profile/profile.jsx";
 import Home from "./pages/home/home.jsx";
 import SignUp from "./pages/signup/signup.jsx";
 import Quizze from "./pages/quizzes/quizzes.jsx";
-import SideBar from "./pages/SideBar/sidebar.jsx";
 function App() {
   return (
     <>
       <Router>
-        <div className="App">
-          <div className="App">
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/help">Help</Link>
-              </li>
-
-              <li>
-                <Link to="/signup">signup</Link>
-              </li>
-              <li>
-                <Link to="/login">login</Link>
-              </li>
-              <li>
-                <Link to="/policies">policies</Link>
-              </li>
-              <li>
-                <Link to="/profile">profile</Link>
-              </li>
-              <li>
-                <Link to="/superadmin">superadmin</Link>
-              </li>
-              <li>
-                <Link to="/quizzes">quizzes</Link>
-              </li>
-              <li>
-                <Link to="/lessons">lessons</Link>
-              </li>
-            </ul>
-          </div>
-        </div>
         <Routes>
           <Route exact path="/" element={<Home />}></Route>
           <Route exact path="/help" element={<Help />}></Route>
