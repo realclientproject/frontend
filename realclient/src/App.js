@@ -1,31 +1,68 @@
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 // import components
 import Admin from "./pages/dashboard/admin/admin.jsx";
 import Help from "./pages/help/help.jsx";
 import Login from "./pages/login/login.jsx";
+import Lesson from "./pages/lessons/lessons.jsx";
 import Policy from "./pages/policies/policies.jsx";
 import SuperAdmin from "./pages/dashboard/superadmin/superadmin.jsx";
 import Profile from "./pages/profile/profile.jsx";
-
+import Home from "./pages/home/home.jsx";
+import SignUp from "./pages/signup/signup.jsx";
+import Quizze from "./pages/quizzes/quizzes.jsx";
+import SideBar from "./pages/SideBar/sidebar.jsx";
 function App() {
   return (
     <>
-      <div className="App">
-        <div>
-          <h1>sidebar</h1>
-        </div>
-        <div className="App-container">
-          <Route path="/" element={<Login />} />
+      <Router>
+        <div className="App">
+          <div className="App">
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/help">Help</Link>
+              </li>
 
-          <Route exact path="/admin" element={<Admin />} />
-          <Route path="/superadmin" element={<SuperAdmin />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/help" element={<Help />} />
-          <Route path="/policy" element={<Policy />} />
-          <Route path="/profile" element={<Profile />} />
+              <li>
+                <Link to="/signup">signup</Link>
+              </li>
+              <li>
+                <Link to="/login">login</Link>
+              </li>
+              <li>
+                <Link to="/policies">policies</Link>
+              </li>
+              <li>
+                <Link to="/profile">profile</Link>
+              </li>
+              <li>
+                <Link to="/superadmin">superadmin</Link>
+              </li>
+              <li>
+                <Link to="/quizzes">quizzes</Link>
+              </li>
+              <li>
+                <Link to="/lessons">lessons</Link>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
+        <Routes>
+          <Route exact path="/" element={<Home />}></Route>
+          <Route exact path="/help" element={<Help />}></Route>
+          <Route exact path="/dashboard" element={<Admin />}></Route>
+          <Route exact path="/SuperAdmin" element={<SuperAdmin />}></Route>
+          <Route exact path="/profile" element={<Profile />}></Route>
+          <Route exact path="/policies" element={<Policy />}></Route>
+          <Route exact path="/lessons" element={<Lesson />}></Route>
+          <Route exact path="/login" element={<Login />}></Route>
+          <Route exact path="/signup" element={<SignUp />}></Route>
+          <Route exact path="/quizzes" element={<Quizze />}></Route>
+        </Routes>
+      </Router>
     </>
   );
 }
