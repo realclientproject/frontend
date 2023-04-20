@@ -8,7 +8,7 @@ function Hero() {
     display: "flex",
     justifyContent: "center",
     gap: "theme",
-    marginTop: theme.spacing(3),
+    marginTop: theme.spacing(0),
     [theme.breakpoints.down("sm")]: {
       flexDirection: "column",
       alignItems: "center",
@@ -29,8 +29,8 @@ function Hero() {
     <Box sx={{ backgroundColor: "#E6F0FF", minHeight: "80vh" }}>
       <Container>
         <CustomBox>
-          <Box sx={{ flex: "4", left: "0" }}>
-            <Title variant="h1" sx={{ width: "100%" }}>
+          <Box sx={{ flex: "4", left: "0"}}>
+            <Title variant="h1" sx={{ color: "black" }}>
               "TeachSupport: Empowering Educators to Achieve{" "}
               <Title sx={{ color: "#FFA500" }} variant="h1">
                 “Professional Excellence"?
