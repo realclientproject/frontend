@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
+import Hero from "../../components/hero/hero";
 function Home() {
   return (
     <div>
-      <h1>Home</h1>
+      <Hero />
     </div>
   );
 }
