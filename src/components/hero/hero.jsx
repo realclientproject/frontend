@@ -13,6 +13,12 @@ function Hero() {
       flexDirection: "column",
       alignItems: "center",
       textAlign: "center",
+      fontSize: "15px",
+    },
+    [theme.breakpoints.down("md")]: {
+      flexDirection: "row",
+      textAlign: "center",
+      fontSize: "17px",
     },
   }));
   const Title = styled(Typography)(({ theme }) => ({
@@ -21,7 +27,10 @@ function Hero() {
     fontWeight: "bold",
     margin: theme.spacing(4, 0, 4, 0),
     [theme.breakpoints.down("sm")]: {
-      fontSize: "40px",
+      fontSize: "20px",
+    },
+    [theme.breakpoints.down("lg")]: {
+      fontSize: "25px",
     },
   }));
 
@@ -29,7 +38,7 @@ function Hero() {
     <Box sx={{ backgroundColor: "#E6F0FF", minHeight: "80vh" }}>
       <Container>
         <CustomBox>
-          <Box sx={{ flex: "4", left: "0"}}>
+          <Box sx={{ flex: "4", left: "0" }}>
             <Title variant="h1" sx={{ color: "black" }}>
               "TeachSupport: Empowering Educators to Achieve{" "}
               <Title sx={{ color: "#FFA500" }} variant="h1">
@@ -47,7 +56,9 @@ function Hero() {
             <Box
               sx={{
                 display: "flex",
-                justifyContent: "space-evenly",
+                maxWidth: "70%",
+                justifyContent: "center",
+                alignItems: "center",
               }}
             >
               <CustomButton
@@ -56,23 +67,29 @@ function Hero() {
                 buttonText="Join now"
                 heroBtn={true}
                 display="block"
+                guideBtn="20px"
+                fontWeight="100"
+                height="40px"
               />
               <CustomButton
                 backgroundColor="#FFFFFF"
                 color="#0D7590"
                 buttonText="Discover server"
                 heroBtn={true}
+                guideBtn
+                height="40px"
               />
             </Box>
           </Box>
 
-          <Box sx={{ flex: "2" }}>
+          <Box sx={{ flex: "1.5" }}>
             <img
               src={heroImg}
               alt="heroImg"
               style={{
                 maxWidth: "100%",
                 marginBottom: "2rem",
+                marginLeft: "20px",
               }}
             />
           </Box>
