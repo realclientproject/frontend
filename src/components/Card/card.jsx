@@ -9,6 +9,7 @@ class Services extends Component {
       <>
         <div>
           <h1
+            className="card_title"
             style={{
               backgroundColor: "#E6F0FF",
               textAlign: "center",
@@ -33,17 +34,17 @@ class Services extends Component {
                   lesson then proceeds with the presentation of key ideas,
                   followed by examples, illustrations, and exercises that allow
                   students to apply what they have learned.
+                  <span
+                    style={{
+                      color: "#FFA500",
+                      float: "right",
+                      justifyContent: "end",
+                      padding: "30px 30px 15px",
+                    }}
+                  >
+                    Explore more ➡
+                  </span>
                 </p>
-                <span
-                  style={{
-                    color: "#FFA500",
-                    float: "right",
-                    justifyContent: "end",
-                    padding: "30px 30px 15px",
-                  }}
-                >
-                  Explore more ➡
-                </span>
               </div>
             </div>
             <div className="service-card">
@@ -59,17 +60,17 @@ class Services extends Component {
                   lesson then proceeds with the presentation of key ideas,
                   followed by examples, illustrations, and exercises that allow
                   students to apply what they have learned.
+                  <span
+                    style={{
+                      color: "#FFA500",
+                      float: "right",
+                      justifyContent: "end",
+                      padding: "30px 30px 15px",
+                    }}
+                  >
+                    Explore more ➡
+                  </span>
                 </p>
-                <span
-                  style={{
-                    color: "#FFA500",
-                    float: "right",
-                    justifyContent: "end",
-                    padding: "30px 30px 15px",
-                  }}
-                >
-                  Explore more ➡
-                </span>
               </div>
             </div>
           </div>

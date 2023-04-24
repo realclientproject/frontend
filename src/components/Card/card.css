@@ -63,4 +63,14 @@
     font-size: 0.8em;
     width: 100%;
   }
+  .service-card{
+    margin: 10px;
+    overflow:scroll;
+  }
+  .service-descrip>p{
+    line-height: 20px;
+  }
+  .card_title{
+    font-size: medium;
+  }
 }

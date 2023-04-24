@@ -1,119 +1,117 @@
+import { Box, Button, styled, Typography } from "@mui/material";
+import { Container, display } from "@mui/system";
 import React from "react";
 import img1 from "./img1.svg";
-import img2 from "./img2.svg";
-import img3 from "./img3.svg";
-import { Button, useMediaQuery } from "@mui/material";
-import Typography from "@mui/material/Typography";
-import { Box, positions } from "@mui/system";
-import CustomButton from "../hero/custombutton";
-export default function SubHero() {
-  return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100%",
-        height: "100%",
-        margin: "50px",
-        "@media (max-width: 1260px)": {
-          display: "flex",
-          justifyContent: "space-around",
-          columnGap: "40px",
-          flexWrap: "wrap",
-        },
-      }}
-    >
-      <Box
-        sx={{
-          width: "40%",
-          "@media (max-width: 960px)": {
-            height: "20%",
-            fontSize: "25px",
-            width: "60%",
-            marginBottom: "10px",
-          },
-          "@media (max-width: 600px)": {
-            height: "10%",
-            fontSize: "15px",
-            width: "80%",
-          },
-          "::after": {
-            content: `url(${img2})`,
-            position: "relative",
-            zIndex: 100000,
-            top: "-250px",
-            width: "10%",
-            left: "90px",
-            height: "10%",
-            "@media (max-width: 600px)": {
-              display: "none",
-            },
-            "@media (max-width: 1160px)": {
-              bottom: "150px",
-              width: "7%",
-              left: "0px",
-              height: "7%",
-            },
-          },
-        }}
-      >
-        <img
-          src={img1}
-          style={{
-            maxWidth: "100%",
-            height: "auto",
-          }}
-          alt="Image 1"
-        />
-      </Box>
+import img2 from "./img1.svg";
+import img3 from "./img1.svg";
 
-      <Box
-        sx={{
-          fontFamily: "Roboto,Helvetica,Arial,sans-serif",
-          width: "40%",
-          "@media (max-width: 600px)": {
-            height: 100,
-            fontSize: "20px",
-            width: "80%",
-          },
-          "@media (max-width: 960px)": {
-            height: 100,
-            fontSize: "25px",
-            width: "60%",
-          },
-        }}
-      >
-        <Typography
-          component="h2"
-          variant="h2"
-          sx={{
-            marginBottom: "40px",
-            fontSize: "40px",
-          }}
-        >
-          Elevate your teaching with innovative training{" "}
-          <span style={{ color: "#FFA500" }}> methods </span>
-        </Typography>
-        <p style={{ lineHeight: "30px", letterSpacing: "2px" }}>
-          Welcome to our website! Our main mission is to support newly graduated
-          teachers and individuals interested in the field of education in
-          finding professional jobs. We understand that embarking on a teaching
-          career can be both exciting and challenging, and we are here to help
-          ease the process. Our team is dedicated to providing valuable
-          resources, job search tips, and guidance to assist you in navigating
-          the competitive job market and securing your dream teaching position.
-          We are passionate about education and are committed to empowering
-          educators by connecting them with meaningful employment opportunities.
-          Join us on this journey to kickstart your teaching career.
-        </p>
-        <CustomButton
-          buttonText="Learn more"
-          backgroundColor="#0D7590"
-          color="#fff"
-          margin="10px 0 0 0"
-        ></CustomButton>
-      </Box>
+import CustomButton from "../hero/custombutton";
+function Hero() {
+  const CustomBox = styled(Box)(({ theme }) => ({
+    display: "flex",
+    justifyContent: "center",
+    gap: "theme",
+    marginTop: theme.spacing(0),
+    [theme.breakpoints.down("sm")]: {
+      flexDirection: "column",
+      alignItems: "center",
+      textAlign: "center",
+      fontSize: "15px",
+    },
+    [theme.breakpoints.down("md")]: {
+      flexDirection: "column",
+      gap: "10px",
+      margin: "0px 40px 0px 40px",
+      textAlign: "center",
+      fontSize: "17px",
+    },
+  }));
+  const Title = styled(Typography)(({ theme }) => ({
+    fontSize: "64px",
+    color: "#000336",
+    fontWeight: "normal",
+    margin: theme.spacing(4, 0, 4, 0),
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "20px",
+    },
+    [theme.breakpoints.down("lg")]: {
+      fontSize: "25px",
+    },
+  }));
+
+  return (
+    <Box sx={{ backgroundColor: "#E6F0FF", minHeight: "80vh" }}>
+      <Container>
+        <CustomBox>
+          <Box
+            sx={{
+              flex: "2",
+              marginRight: "50px",
+
+              "@media (max-width: 660px)": {
+                display: "none",
+              },
+            }}
+          >
+            <img
+              src={img2}
+              alt="heroImg"
+              style={{
+                maxWidth: "100%",
+                marginBottom: "2rem",
+                marginLeft: "20px",
+              }}
+            />
+          </Box>
+          <Box sx={{ flex: "4", left: "0" }}>
+            <Title variant="h2" sx={{ color: "black" }}>
+              Elevate your teaching with innovative training{" "}
+              <span style={{ color: "#FFA500" }}>methods</span>
+            </Title>
+            <Typography
+              variant="body2"
+              sx={{
+                fontSize: "18px",
+                color: "#5A6473",
+                my: 4,
+              }}
+            >
+              Welcome to our website! Our main mission is to support newly
+              graduated teachers and individuals interested in the field of
+              education in finding professional jobs. We understand that
+              embarking on a teaching career can be both exciting and
+              challenging, and we are here to help ease the process. Our team is
+              dedicated to providing valuable resources, job search tips, and
+              guidance to assist you in navigating the competitive job market
+              and securing your dream teaching position. We are passionate about
+              education and are committed to empowering educators by connecting
+              them with meaningful employment opportunities. Join us on this
+              journey to kickstart your teaching career.
+            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                maxWidth: "70%",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <CustomButton
+                backgroundColor="#0D7590"
+                color="#fff"
+                buttonText="Learn more"
+                heroBtn={true}
+                display="block"
+                guideBtn="20px"
+                fontWeight="100"
+                height="40px"
+              />
+            </Box>
+          </Box>
+        </CustomBox>
+      </Container>
     </Box>
   );
 }
+
+export default Hero;

@@ -82,7 +82,14 @@ function Hero() {
             </Box>
           </Box>
 
-          <Box sx={{ flex: "1.5" }}>
+          <Box
+            sx={{
+              flex: "1.5",
+              "@media (max-width: 660px)": {
+                display: "none",
+              },
+            }}
+          >
             <img
               src={heroImg}
               alt="heroImg"
