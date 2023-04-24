@@ -1,9 +1,5 @@
-import logo from "./logo.svg";
-import style from "./navbar.css";
-import CustomButton from "../hero/custombutton.jsx";
-// import { Button, Grid } from "@mui/material";
-
 import * as React from "react";
+
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -14,12 +10,22 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
+import DropDown from "./DropDown.jsx";
+// import Tooltip from "@mui/material/Tooltip";
+// import { Button, Grid } from "@mui/material";
 
-const pages = ["Home", "Categories", "Teachers", "Testimonials", "About Us"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+import logo from "./logo.svg";
+import CustomButton from "../hero/custombutton.jsx";
+
+const pages = [
+  "Home",
+  `${(<DropDown />)}`,
+  "teachers",
+  "testimonials",
+  "about",
+];
 
 function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -28,9 +34,9 @@ function NavBar() {
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
+  // const handleOpenUserMenu = (event) => {
+  //   setAnchorElUser(event.currentTarget);
+  // };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
@@ -44,11 +50,12 @@ function NavBar() {
     <AppBar sx={{ backgroundColor: "#e6f0fe" }} position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
+          {/* Logo in Resp Mode */}
           <Typography
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            // href="/"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -59,20 +66,13 @@ function NavBar() {
               textDecoration: "none",
             }}
           >
-            {/* <Tooltip title="Open settings"> */}
-            <IconButton
-              // onClick={handleOpenUserMenu}
-              sx={{ p: 0, marginRight: 50 }}
-            >
-              <Avatar
-                sx={{ height: "auto", width: "auto" }}
-                alt="Remy Sharp"
-                src={logo}
-              />
-            </IconButton>
-            {/* </Tooltip> */}
+            <Avatar
+              sx={{ height: "auto", width: "auto", p: 0, marginRight: 50 }}
+              alt="Remy Sharp"
+              src={logo}
+            />
           </Typography>
-
+          {/* Links Resp Mode */}
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -102,7 +102,7 @@ function NavBar() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
+              {/* {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
                     <Link
@@ -113,14 +113,67 @@ function NavBar() {
                     </Link>
                   </Typography>
                 </MenuItem>
-              ))}
+              ))} */}
+
+              {/* Mobile resp */}
+              <Link to="/login">
+                <CustomButton
+                  backgroundColor="#0D7590"
+                  color="#fff"
+                  buttonText="Login"
+                  heroBtn={true}
+                  display="block"
+                />
+              </Link>
+              <Link to="/signup">
+                <CustomButton
+                  backgroundColor="#0D7590"
+                  color="#fff"
+                  buttonText="Register now"
+                  heroBtn={true}
+                  display="block"
+                />
+              </Link>
+              {/* Mobile resp */}
+              <Button sx={{ my: 2, color: "black", display: "block"}}>
+                <Link style={{ textDecoration: "none", color: "black" }} to="/">
+                  Home
+                </Link>
+              </Button>
+              <Button>
+                <DropDown>
+                  <Link
+                    style={{ textDecoration: "none", color: "black" }}
+                    to="/help"
+                  >
+                    help
+                  </Link>
+                </DropDown>
+              </Button>
+              <Button sx={{ my: 2, color: "black", display: "block" }}>
+                <Link
+                  style={{ textDecoration: "none", color: "black" }}
+                  to="/teachers"
+                >
+                  Teachers
+                </Link>
+              </Button>
+              <Button sx={{ my: 2, color: "black", display: "block" }}>
+                <Link
+                  style={{ textDecoration: "none", color: "black" }}
+                  to="/testimonials"
+                >
+                  testimonials
+                </Link>
+              </Button>
             </Menu>
           </Box>
+          {/* Logo */}
           <Typography
             variant="h5"
             noWrap
             component="a"
-            href=""
+            // href=""
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -134,8 +187,10 @@ function NavBar() {
           >
             <Avatar alt="Remy Sharp" src={logo} />
           </Typography>
+
+          {/* Links */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
+            {/* {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
@@ -144,51 +199,68 @@ function NavBar() {
                 <Link
                   style={{ textDecoration: "none", color: "black" }}
                   to={`/${page}`}
+                  // to="/quizzes"
                 >
                   {page}
                 </Link>
               </Button>
-            ))}
-          </Box>
+            ))} */}
 
-          <Box sx={{ flexGrow: 0 }}>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <CustomButton
-                backgroundColor="#0D7590"
-                color="#fff"
-                buttonText="Login"
-                heroBtn={true}
-                display="block"
-              />
-              <CustomButton
-                backgroundColor="#0D7590"
-                color="#fff"
-                buttonText="Register now"
-                heroBtn={true}
-                display="block"
-              />
+            <Button sx={{ my: 2, color: "black", display: "block" }}>
+              <Link style={{ textDecoration: "none", color: "black" }} to="/">
+                Home
+              </Link>
+            </Button>
+            <Button>
+              <DropDown>
+                <Link
+                  style={{ textDecoration: "none", color: "black" }}
+                  to="/help"
+                >
+                  help
+                </Link>
+              </DropDown>
+            </Button>
+            <Button sx={{ my: 2, color: "black", display: "block" }}>
+              <Link
+                style={{ textDecoration: "none", color: "black" }}
+                to="/teachers"
+              >
+                teachers
+              </Link>
+            </Button>
+            <Button sx={{ my: 2, color: "black", display: "block" }}>
+              <Link
+                style={{ textDecoration: "none", color: "black" }}
+                to="/testimonials"
+              >
+                testimonials
+              </Link>
+            </Button>
+
+            {/* normal screen */}
+            <Box sx={{ flex: "4", left: "0" , display:  "flex", justifyContent: "end"}}>
+              
+            <Box sx={{marginRight: "10px"}}>
+                <Link to="/login">
+                  <CustomButton
+                    backgroundColor="#0D7590"
+                    color="#fff"
+                    buttonText="Login"
+                    heroBtn={true}
+                    display="block"
+                  />
+                </Link>
+                </Box>
+                <Link to="/signup">
+                  <CustomButton
+                    backgroundColor="#0D7590"
+                    color="#fff"
+                    buttonText="Register now"
+                    heroBtn={true}
+                    display="block"
+                  />
+                </Link>
             </Box>
           </Box>
         </Toolbar>
