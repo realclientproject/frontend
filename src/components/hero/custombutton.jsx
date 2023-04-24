@@ -11,10 +11,12 @@ const CustomButton = ({
   fontSize,
   width,
   height,
+  margin,
 }) => {
   const CustomButton = styled(Button)(({ theme }) => ({
     backgroundColor: backgroundColor,
     marginLeft: "5px",
+    margin: margin,
     color: color,
     fontWeight: "700",
     fontSize: "13px",
