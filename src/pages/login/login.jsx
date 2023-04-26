@@ -1,88 +1,94 @@
-import React, { useState, useEffect } from "react";
-import { Button ,
- TextField ,
-FormControlLabel,
- Checkbox ,
- Link ,
- Grid ,
-Box ,
- Typography ,
-Container } from "@mui/material";
+import React from "react";
+import { Link as RouterLink } from "react-router-dom";
+import { Container, Typography, Link, Box} from "@mui/material";
+import styled from "@emotion/styled";
+// import LoginForm from "./components/LoginForm.jsx";
+// import SocialAuth from "../components/SocialAuth";
+import { motion } from "framer-motion";
+import Logo from "../../components/login&signup/logo";
+import LoginForm from "../../components/login&signup/loginForm";
 
-export default function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
+//////////////////////////////////
+const RootStyle = styled("div")({
+  background: "rgb(249, 250, 251)",
+  height: "100vh",
+  display: "grid",
+  placeItems: "center",
+});
 
+const HeadingStyle = styled(Box)({
+  textAlign: "center",
+});
+
+const ContentStyle = styled("div")({
+  maxWidth: 480,
+  padding: 44,
+  margin: "auto",
+  display: "flex",
+  justifyContent: "center",
+  flexDirection: "column",
+  background: "#fff",
+});
+
+let easing = [0.6, -0.05, 0.01, 0.99];
+const fadeInUp = {
+  initial: {
+    y: 60,
+    opacity: 0,
+    transition: { duration: 0.6, ease: easing },
+  },
+  animate: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      ease: easing,
+    },
+  },
+};
+
+const Login = ({ setAuth }) => {
   return (
-    <Container component="main" maxWidth="sm">
-      <Box
-        sx={{
-          boxShadow: 3,
-          borderRadius: 2,
-          px: 4,
-          py: 6,
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+    <RootStyle>
+      <Container maxWidth="sm">
+        <ContentStyle>
+          <HeadingStyle component={motion.div} {...fadeInUp}>
+            <Logo sx={{ mt: 3 }} />
+            <Typography sx={{ mt: 3, mb: 1 }} variant="h3" fontWeight="bold">
+              Welcome Back
+            </Typography>
+            <Typography
+              sx={{ color: "text.secondary", fontSize: "0.8rem" }}
+              variant="body1"
+              fontWeight="bold"
+              mb={5}
+            >
+              Please enter your details to sign in
+            </Typography>{" "}
+          </HeadingStyle>
+
+          <Box component={motion.div} {...fadeInUp}>
+            {/* <SocialAuth /> */}
+          </Box>
+
+          <LoginForm setAuth={setAuth} />
+
+          <Typography
+            component={motion.p}
+            {...fadeInUp}
+            variant="body2"
+            align="center"
+            sx={{ mt: 3 }}
           >
-            Sign In
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
-        </Box>
-      </Box>
-    </Container>
+            Don’t have an account?{" "}
+            <Link variant="subtitle2" component={RouterLink} to="/signup">
+              Sign up
+            </Link>
+          </Typography>
+        </ContentStyle>
+      </Container>
+    </RootStyle>
   );
-}
+};
+
+export default Login;

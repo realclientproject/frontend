@@ -1,0 +1,15 @@
+   .teacherCard, .testimonailCard{
+    margin-inline: 20px;
+  }
+  .slick-dots li button:before {
+    content: " ";
+    background: #D8D8D8;
+    opacity: 1;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+  }
+  .slick-dots li.slick-active button:before {
+    background: #0D7590;
+    opacity: 1;
+  }
