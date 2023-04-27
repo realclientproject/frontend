@@ -12,8 +12,9 @@ import Home from "./pages/home/home.jsx";
 import SignUp from "./pages/signup/signup.jsx";
 import Quizze from "./pages/quizzes/quizzes.jsx";
 import AdminLogin from "./pages/login/adminlogin.jsx";
-
+import { useAuthContext } from "./hooks/useAuthContext";
 const AllRoutes = () => {
+  const { user } = useAuthContext();
 	return (
 	<Router>
          <Routes>

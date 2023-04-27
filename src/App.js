@@ -1,5 +1,5 @@
 import AllRoutes from "./Routes";
-import { UserProvider } from './Contexts/UserContext';
+import { UserProvider } from './Contexts/AuthContext';
 
 // import components
 function App() {
