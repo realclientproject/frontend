@@ -23,19 +23,18 @@ import {
 import { Box } from "@mui/system";
 import Logo from "../../images/logoo.png";
 
-function Sidebar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const isMobile = useMediaQuery("(max-width:600px)");
+function Sidebar({ isMenuOpen, setIsMenuOpen }) {
+  // const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleDrawerToggle = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const drawerItems = [
+  const SuperAdminDrawerItems = [
     {
       text: "Dashboard",
       icon: <DashboardIcon />,
-      path: "/",
+      path: "/dashbord",
     },
     {
       text: "Admins",
@@ -43,22 +42,47 @@ function Sidebar() {
       path: "/admins",
     },
     {
-      text: "Transactions",
+      text: "Users",
+      icon: <PersonIcon />,
+      path: "/users",
+    },
+    {
+      text: "Lessons",
       icon: <TransactionsIcon />,
-      path: "/transactions",
+      path: "/admin/lessons",
+    },
+    {
+      text: "Quizzes",
+      icon: <TransactionsIcon />,
+      path: "/admin/quizzes",
     },
     {
       text: "Statistics",
       icon: <StatisticsIcon />,
       path: "/statistics",
     },
-    {
-      text: "Add Transaction",
-      icon: <AddBoxIcon />,
-      path: "/addtransactionpage"
-    }
   ];
 
+  const AdminDrawerItems = [
+    {
+      text: "Dashboard",
+      icon: <DashboardIcon />,
+      path: "/dashbord",
+    },
+    {
+      text: "Lessons",
+      icon: <TransactionsIcon />,
+      path: "/admin/lessons",
+    },
+    {
+      text: "Quizzes",
+      icon: <TransactionsIcon />,
+      path: "/admin/quizzes",
+    },
+  ];
+
+  //need check role of admin
+  
   const drawer = (
     <List
       sx={{
@@ -78,7 +102,7 @@ function Sidebar() {
         <Typography mt={2} color="GrayText" paddingX="16px" paddingY="8px">
           User Panel
         </Typography>
-        {drawerItems.map((item, index) => (
+        {SuperAdminDrawerItems.map((item, index) => (
           <ListItem
             button
             component={Link}
@@ -132,7 +156,7 @@ function Sidebar() {
   return (
     <>
       {isMobile ? (
-        <div >
+        <div>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -164,10 +188,9 @@ function Sidebar() {
             boxShadow: "4px 4px 20px -10px rgba(0, 0, 0, 0.1)",
             // position: "fixed",
             // zIndex: "1",
-            // top: "0", 
+            // top: "0",
             // left: "0",
-            // overflowX: "hidden", 
-            
+            // overflowX: "hidden",
           }}
         >
           {drawer}
