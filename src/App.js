@@ -12,6 +12,8 @@ import Home from "./pages/home/home.jsx";
 import SignUp from "./pages/signup/signup.jsx";
 import Quizze from "./pages/quizzes/quizzes.jsx";
 import AdminLogin from "./pages/login/adminlogin.jsx";
+import NotFoundPage from "./pages/404page/404.jsx";
+import TableContent from "./pages/dashboard/admin/admin.jsx";
 function App() {
   return (
     <>
@@ -28,6 +30,9 @@ function App() {
           <Route exact path="/adminpanel" element={<AdminLogin />}></Route>
           <Route exact path="/signup" element={<SignUp />}></Route>
           <Route exact path="/quizzes" element={<Quizze />}></Route>
+          <Route path="*" element={<NotFoundPage />} />
+          <Route exact path="/table" element={<TableContent />}></Route>
+
         </Routes>
       </Router>
     </>
