@@ -10,10 +10,13 @@ import Settings from "@mui/icons-material/SettingsOutlined";
 import Logout from "@mui/icons-material/Logout";
 import Profile from "@mui/icons-material/PersonOutlineOutlined";
 import Notification from "../notification/notification";
+import { Menu as MenuIcon } from "@mui/icons-material";
 
 export default function BasicTextFields({
   title = "Dashboard",
   userName = "test name",
+  isMenuOpen,
+  handleDrawerToggle,
 }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -28,7 +31,18 @@ export default function BasicTextFields({
     <>
       <Box sx={styles.Header_container}>
         <Stack sx={styles.Stack} direction="row">
-          <h1>{title}</h1>
+          <Stack direction="row" spacing={2}>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ display: ["block", "none"] }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <h1>{title}</h1>
+          </Stack>
           <aside style={{ display: "flex", gap: "12px", alignItems: "center" }}>
             <Notification />
             <IconButton
