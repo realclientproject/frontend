@@ -12,7 +12,9 @@ import Home from "./pages/home/home.jsx";
 import SignUp from "./pages/signup/signup.jsx";
 import Quizze from "./pages/quizzes/quizzes.jsx";
 import AdminLogin from "./pages/login/adminlogin.jsx";
-
+import NotFoundPage from "./pages/404page/404.jsx";
+import TableContent from "./pages/dashboard/admin/admin.jsx";
+import ResourcesTables from './components/resourcesTable.jsx/resourcesTable.jsx';
 const AllRoutes = () => {
 	return (
 	<Router>
@@ -28,6 +30,10 @@ const AllRoutes = () => {
           <Route exact path="/adminpanel" element={<AdminLogin />}></Route>
           <Route exact path="/signup" element={<SignUp />}></Route>
           <Route exact path="/quizzes" element={<Quizze />}></Route>
+          <Route path="*" element={<NotFoundPage />} />
+          <Route exact path="/table" element={<TableContent />}></Route>
+          <Route exact path="/Resources" element={<ResourcesTables />}></Route>
+
         </Routes>
       </Router>
 	);

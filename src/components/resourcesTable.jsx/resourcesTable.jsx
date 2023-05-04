@@ -19,12 +19,10 @@ import {
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import AddButton from './addbutton';
-import NavBar from '../../../components/navbar/navbar';
-import Footer from '../../../components/Footer/footer';
-import BasicTextFields from '../../../components/header/header';
+import BasicTextFields from '../header/header';
+import ResourcesAddButton from './resourcesAddButton';
 
-function Tables() {
+function ResourcesTables() {
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [editingData, setEditingData] = useState({});
   const [page, setPage] = useState(0);
@@ -72,7 +70,15 @@ function Tables() {
     const handleDeleteClick = (row) => {
     // handle delete logic here
     };
-   
+    const handleImageUpload = (event) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+          setEditingData({ ...editingData, image: reader.result });
+        };
+      };
+      
     
     return (
     <>
@@ -81,11 +87,11 @@ function Tables() {
     <Table>
     <TableHead style={{ backgroundColor: "#0D7590" }}>
   <TableRow>
-    <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>First Name</TableCell>
-    <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>Last Name</TableCell>
-    <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>Phone Number</TableCell>
-    <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>Email</TableCell>
-    <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>Role</TableCell>
+    <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>Name</TableCell>
+    <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>Type</TableCell>
+    <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>Description</TableCell>
+    <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>Price</TableCell>
+    <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>media</TableCell>
     <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>Actions</TableCell>
   </TableRow>
 </TableHead>
@@ -110,7 +116,7 @@ function Tables() {
     </TableBody>
     </Table>
     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", margin: 0, padding: 0 }}>
-  <AddButton />
+  <ResourcesAddButton />
   <TablePagination
     rowsPerPageOptions={[5, 10, 25]}
     component="div"
@@ -133,7 +139,7 @@ function Tables() {
           <TextField
             autoFocus
             margin="dense"
-            label="First Name"
+            label="Name"
             type="text"
             fullWidth
             value={editingData.firstName || ''}
@@ -171,6 +177,19 @@ function Tables() {
             value={editingData.role || ''}
             onChange={(e) => setEditingData({ ...editingData, role: e.target.value })}
           />
+          <input
+accept="image/*"
+id="contained-button-file"
+multiple
+type="file"
+onChange={(e) => handleImageUpload(e)}
+style={{ display: 'none' }}
+/>
+<label htmlFor="contained-button-file">
+<Button variant="contained" color="primary" component="span">
+Upload Image
+</Button>
+</label>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleEditDialogClose}>Cancel</Button>
@@ -180,4 +199,4 @@ function Tables() {
     </>
   );
 }
-export default Tables;
+export default ResourcesTables;
