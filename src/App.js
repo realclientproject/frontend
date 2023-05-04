@@ -1,13 +1,13 @@
 import AllRoutes from "./Routes";
-import { UserProvider } from './Contexts/UserContext';
+// import { UserProvider } from './Contexts/UserContext.jsx';
 
 // import components
 function App() {
   return (
     <>
-    <UserProvider>
+    {/* <UserProvider> */}
      <AllRoutes/>
-     </UserProvider>
+     {/* </UserProvider> */}
      </>
 
   );
