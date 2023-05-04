@@ -46,10 +46,10 @@ const AddButton = () => {
     <>
       <Button
         variant="contained"
-        color="primary"
         onClick={handleClickOpen}
         startIcon={<Add />}
-      >
+        sx={{ m:2 ,backgroundColor: "#0D7590", ":hover": { boxShadow: '0px 0px 0px 1px #0D7590' ,backgroundColor: "white", color:"#0D7590"
+      } }}      >
         Add
       </Button>
       <Dialog

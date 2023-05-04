@@ -20,7 +20,7 @@ import {
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddButton from './addbutton';
-import NavBar from '../../../components/navbar/navbar';
+import DashboardLayout from '../../../components/layout/dashboardLayout';
 import Footer from '../../../components/Footer/footer';
 import BasicTextFields from '../../../components/header/header';
 
@@ -76,8 +76,8 @@ function Tables() {
     
     return (
     <>
-    <BasicTextFields/>
-        <TableContainer component={Paper} style={{ width: "80%", margin: "auto",}}>
+    <DashboardLayout>
+    <TableContainer component={Paper} sx={{ width: "98%", margin: "auto",}}>
     <Table>
     <TableHead style={{ backgroundColor: "#0D7590" }}>
   <TableRow>
@@ -177,6 +177,8 @@ function Tables() {
           <Button onClick={handleEditDialogSave}>Save</Button>
           </DialogActions>
       </Dialog>
+</DashboardLayout>
+
     </>
   );
 }
