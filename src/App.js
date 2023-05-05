@@ -1,15 +1,14 @@
 import AllRoutes from "./Routes";
-import { UserProvider } from './Contexts/AuthContext';
+import { AuthContextProvider } from "./Contexts/AuthContext";
 
 // import components
 function App() {
   return (
     <>
-    <UserProvider>
-     <AllRoutes/>
-     </UserProvider>
-     </>
-
+      <AuthContextProvider>
+        <AllRoutes />
+      </AuthContextProvider>
+    </>
   );
 }
 
