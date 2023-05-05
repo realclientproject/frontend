@@ -12,10 +12,13 @@ import Home from "./pages/home/home.jsx";
 import SignUp from "./pages/signup/signup.jsx";
 import Quizze from "./pages/quizzes/quizzes.jsx";
 import AdminLogin from "./pages/login/adminlogin.jsx";
+import Layout from './components/layout/layout.jsx';
 
 const AllRoutes = () => {
 	return (
 	<Router>
+              <Layout>
+
          <Routes>
           <Route exact path="/" element={<Home />}></Route>
           <Route exact path="/help" element={<Help />}></Route>
@@ -28,7 +31,7 @@ const AllRoutes = () => {
           <Route exact path="/adminpanel" element={<AdminLogin />}></Route>
           <Route exact path="/signup" element={<SignUp />}></Route>
           <Route exact path="/quizzes" element={<Quizze />}></Route>
-        </Routes>
+        </Routes></Layout>
       </Router>
 	);
 };

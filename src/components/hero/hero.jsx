@@ -35,14 +35,31 @@ function Hero() {
   }));
 
   return (
-    <Box sx={{ backgroundColor: "#E6F0FF", minHeight: "80vh" }}>
-      <Container>
+    <Box
+      sx={{
+        backgroundColor: "#E6F0FF",
+        minHeight: "90vh",
+        display: "flex",
+        alignItems: "center",
+      }}
+    >
+      <Container
+        sx={{ maxWidth: ["98%", "80%"]}}
+      >
         <CustomBox>
-          <Box sx={{ flex: "4", left: "0" }}>
+          <Box
+            sx={{
+              flex: "4",
+              left: "0",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+            }}
+          >
             <Title variant="h1" sx={{ color: "black" }}>
               "TeachSupport: Empowering Educators to Achieve{" "}
               <Title sx={{ color: "#FFA500" }} variant="h1">
-                “Professional Excellence"?
+                “Professional Excellence" ?
               </Title>
             </Title>
             <Typography
@@ -56,7 +73,6 @@ function Hero() {
             <Box
               sx={{
                 display: "flex",
-                maxWidth: "70%",
                 justifyContent: "center",
                 alignItems: "center",
               }}
@@ -69,16 +85,17 @@ function Hero() {
                 display="block"
                 guideBtn="20px"
                 fontWeight="100"
-                height="40px"
+                height="50px"
+                width={100}
               />
-              <CustomButton
+              {/* <CustomButton
                 backgroundColor="#FFFFFF"
                 color="#0D7590"
                 buttonText="Discover server"
                 heroBtn={true}
                 guideBtn
                 height="40px"
-              />
+              /> */}
             </Box>
           </Box>
 
@@ -94,7 +111,7 @@ function Hero() {
               src={heroImg}
               alt="heroImg"
               style={{
-                maxWidth: "100%",
+                maxWidth: "500px",
                 marginBottom: "2rem",
                 marginLeft: "20px",
               }}

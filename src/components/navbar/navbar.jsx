@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -10,44 +9,23 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
 import DropDown from "./DropDown.jsx";
-// import Tooltip from "@mui/material/Tooltip";
-// import { Button, Grid } from "@mui/material";
-
 import logo from "./logo.svg";
 import CustomButton from "../hero/custombutton.jsx";
 
-const pages = [
-  "Home",
-  `${(<DropDown />)}`,
-  "teachers",
-  "testimonials",
-  "about",
-];
-
 function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  // const handleOpenUserMenu = (event) => {
-  //   setAnchorElUser(event.currentTarget);
-  // };
-
+  
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
   return (
-    <AppBar sx={{ backgroundColor: "#e6f0fe" }} position="static">
+    <AppBar elevation={0} sx={{ backgroundColor: "#e6f0fe" }} position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* Logo in Resp Mode */}
@@ -66,11 +44,7 @@ function NavBar() {
               textDecoration: "none",
             }}
           >
-            <Avatar
-              sx={{ height: "auto", width: "auto", p: 0, marginRight: 50 }}
-              alt="Remy Sharp"
-              src={logo}
-            />
+            <img style={{ height: "100px" }} alt="Remy Sharp" src={logo} />
           </Typography>
           {/* Links Resp Mode */}
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -102,19 +76,6 @@ function NavBar() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {/* {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">
-                    <Link
-                      style={{ textDecoration: "none", color: "black" }}
-                      to={`/${page}`}
-                    >
-                      {page}
-                    </Link>
-                  </Typography>
-                </MenuItem>
-              ))} */}
-
               {/* Mobile resp */}
               <Link to="/login">
                 <CustomButton
@@ -135,7 +96,7 @@ function NavBar() {
                 />
               </Link>
               {/* Mobile resp */}
-              <Button sx={{ my: 2, color: "black", display: "block"}}>
+              <Button sx={{ my: 2, color: "black", display: "block" }}>
                 <Link style={{ textDecoration: "none", color: "black" }} to="/">
                   Home
                 </Link>
@@ -190,22 +151,6 @@ function NavBar() {
 
           {/* Links */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {/* {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "black", display: "block" }}
-              >
-                <Link
-                  style={{ textDecoration: "none", color: "black" }}
-                  to={`/${page}`}
-                  // to="/quizzes"
-                >
-                  {page}
-                </Link>
-              </Button>
-            ))} */}
-
             <Button sx={{ my: 2, color: "black", display: "block" }}>
               <Link style={{ textDecoration: "none", color: "black" }} to="/">
                 Home
@@ -239,9 +184,15 @@ function NavBar() {
             </Button>
 
             {/* normal screen */}
-            <Box sx={{ flex: "4", left: "0" , display:  "flex", justifyContent: "end"}}>
-              
-            <Box sx={{marginRight: "10px"}}>
+            <Box
+              sx={{
+                flex: "4",
+                left: "0",
+                display: "flex",
+                justifyContent: "end",
+              }}
+            >
+              <Box sx={{ marginRight: "10px" }}>
                 <Link to="/login">
                   <CustomButton
                     backgroundColor="#0D7590"
@@ -251,16 +202,16 @@ function NavBar() {
                     display="block"
                   />
                 </Link>
-                </Box>
-                <Link to="/signup">
-                  <CustomButton
-                    backgroundColor="#0D7590"
-                    color="#fff"
-                    buttonText="Register now"
-                    heroBtn={true}
-                    display="block"
-                  />
-                </Link>
+              </Box>
+              <Link to="/signup">
+                <CustomButton
+                  backgroundColor="#0D7590"
+                  color="#fff"
+                  buttonText="Register now"
+                  heroBtn={true}
+                  display="block"
+                />
+              </Link>
             </Box>
           </Box>
         </Toolbar>
