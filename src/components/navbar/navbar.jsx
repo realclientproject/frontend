@@ -11,20 +11,31 @@ import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AvatarGroup, Popover } from "@mui/material";
 
 // import Tooltip from "@mui/material/Tooltip";
 // import { Button, Grid } from "@mui/material";
 
 import logo from "./logo.svg";
 import CustomButton from "../hero/custombutton.jsx";
+import { Person } from "@mui/icons-material";
 
 const pages = ["Home", "Lessons", "Quizzes", "teachers", "about"];
 
 function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const user = localStorage.getItem("user");
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [isUser, setisUser] = React.useState(
+    JSON.parse(localStorage.getItem("user"))
+  );
+
+  const navigate = useNavigate();
+  const removeData = () => {
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -39,6 +50,15 @@ function NavBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  function handleClick(event) {
+    setAnchorEl(event.currentTarget);
+  }
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
 
   return (
     <AppBar sx={{ backgroundColor: "#e6f0fe" }} position="static">
@@ -100,14 +120,24 @@ function NavBar() {
               {/* Mobile resp */}
 
               {/* Mobile resp */}
-              <Button sx={{ my: 2, color: "black", display: "block" }}>
-                <Link
-                  style={{ textDecoration: "none", color: "black" }}
-                  to="/login"
-                >
-                  Login
-                </Link>
-              </Button>
+              <>
+                {isUser ? (
+                  <Avatar
+                    sx={{ ml: 1, bgcolor: "#0D7590" }}
+                    onClick={handleClick}
+                  />
+                ) : (
+                  <Button sx={{ my: 2, color: "black", display: "block" }}>
+                    <Link
+                      style={{ textDecoration: "none", color: "black" }}
+                      to="/login"
+                    >
+                      Login
+                    </Link>
+                  </Button>
+                )}
+              </>
+
               <Button sx={{ my: 2, color: "black", display: "block" }}>
                 <Link style={{ textDecoration: "none", color: "black" }} to="/">
                   Home
@@ -202,8 +232,38 @@ function NavBar() {
             >
               <Box sx={{ marginRight: "10px" }}>
                 <>
-                  {user ? (
-                    <Avatar />
+                  {isUser ? (
+                    <>
+                      <Avatar
+                        sx={{ cursor: "pointer" }}
+                        aria-describedby={id}
+                        variant="contained"
+                        onClick={handleClick}
+                      >
+                        {isUser.email[0]}
+                      </Avatar>
+                      <Popover
+                        id={id}
+                        open={open}
+                        anchorEl={anchorEl}
+                        onClose={handleClose}
+                        anchorOrigin={{
+                          vertical: "bottom",
+                          horizontal: "left",
+                        }}
+                      >
+                        <Typography sx={{ p: 2 }}>{isUser.email}</Typography>{" "}
+                        <Typography sx={{ p: 2 }}>
+                          <Button
+                            onClick={() => {
+                              removeData();
+                            }}
+                          >
+                            Logout
+                          </Button>
+                        </Typography>
+                      </Popover>
+                    </>
                   ) : (
                     <Link to="/login">
                       <CustomButton
