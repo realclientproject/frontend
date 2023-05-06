@@ -24,7 +24,6 @@ import PrivateSuperAdmin from "./utils/pivateroute.jsx";
 import PrivateAdmin from "./utils/adminroute.jsx";
 import RequireAuth from "./utils/requireAuth.jsx";
 const AllRoutes = () => {
-  const { user } = useAuthContext();
   return (
     <Router>
       <Routes>
