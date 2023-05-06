@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import "./card.css";
 import img1 from "./item1.svg";
 import img2 from "./item2.svg";
+import { Box } from "@mui/material";
 
 class Services extends Component {
   render() {
     return (
       <>
-        <div>
+        <Box sx={{backgroundColor:"#E6F0FF", py:10}}>
           <h1
             className="card_title"
             style={{
@@ -74,7 +75,7 @@ class Services extends Component {
               </div>
             </div>
           </div>
-        </div>
+        </Box>
       </>
     );
   }

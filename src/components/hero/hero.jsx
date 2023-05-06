@@ -56,7 +56,7 @@ function Hero() {
               justifyContent: "center",
             }}
           >
-            <Title variant="h1" sx={{ color: "black" }}>
+            <Title variant="h1" sx={{ color: "black", m:0}}>
               "TeachSupport: Empowering Educators to Achieve{" "}
               <Title sx={{ color: "#FFA500" }} variant="h1">
                 “Professional Excellence" ?
@@ -64,7 +64,7 @@ function Hero() {
             </Title>
             <Typography
               variant="body2"
-              sx={{ fontSize: "18px", color: "#5A6473", my: 4 }}
+              sx={{ fontSize: "18px", color: "#5A6473", my: 4, maxWidth:["100%", "90%"], textAlign: "center" }}
             >
               Online platform that provides teachers with the resources and
               support they need to enhance their skills, develop their careers,
@@ -75,6 +75,7 @@ function Hero() {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                gap:4
               }}
             >
               <CustomButton
@@ -86,16 +87,17 @@ function Hero() {
                 guideBtn="20px"
                 fontWeight="100"
                 height="50px"
-                width={100}
+                width={150}
               />
-              {/* <CustomButton
+              <CustomButton
                 backgroundColor="#FFFFFF"
                 color="#0D7590"
-                buttonText="Discover server"
+                buttonText="Discover lessons"
                 heroBtn={true}
                 guideBtn
-                height="40px"
-              /> */}
+                height="50px"
+                width={150}
+              />
             </Box>
           </Box>
 
