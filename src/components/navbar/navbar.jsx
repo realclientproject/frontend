@@ -11,26 +11,31 @@ import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
-import { Link } from "react-router-dom";
-import DropDown from "./DropDown.jsx";
+import { Link, useNavigate } from "react-router-dom";
+import { AvatarGroup, Popover } from "@mui/material";
+
 // import Tooltip from "@mui/material/Tooltip";
 // import { Button, Grid } from "@mui/material";
 
 import logo from "./logo.svg";
 import CustomButton from "../hero/custombutton.jsx";
+import { Person } from "@mui/icons-material";
 
-const pages = [
-  "Home",
-  `${(<DropDown />)}`,
-  "teachers",
-  "testimonials",
-  "about",
-];
+const pages = ["Home", "Lessons", "Quizzes", "teachers", "about"];
 
 function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [isUser, setisUser] = React.useState(
+    JSON.parse(localStorage.getItem("user"))
+  );
 
+  const navigate = useNavigate();
+  const removeData = () => {
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -45,6 +50,15 @@ function NavBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  function handleClick(event) {
+    setAnchorEl(event.currentTarget);
+  }
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
 
   return (
     <AppBar sx={{ backgroundColor: "#e6f0fe" }} position="static">
@@ -67,6 +81,7 @@ function NavBar() {
             }}
           >
             <Avatar
+              viewBox="0 0 100 100"
               sx={{ height: "auto", width: "auto", p: 0, marginRight: 50 }}
               alt="Remy Sharp"
               src={logo}
@@ -102,53 +117,31 @@ function NavBar() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {/* {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">
-                    <Link
-                      style={{ textDecoration: "none", color: "black" }}
-                      to={`/${page}`}
-                    >
-                      {page}
-                    </Link>
-                  </Typography>
-                </MenuItem>
-              ))} */}
+              {/* Mobile resp */}
 
               {/* Mobile resp */}
-              <Link to="/login">
-                <CustomButton
-                  backgroundColor="#0D7590"
-                  color="#fff"
-                  buttonText="Login"
-                  heroBtn={true}
-                  display="block"
-                />
-              </Link>
-              <Link to="/signup">
-                <CustomButton
-                  backgroundColor="#0D7590"
-                  color="#fff"
-                  buttonText="Register now"
-                  heroBtn={true}
-                  display="block"
-                />
-              </Link>
-              {/* Mobile resp */}
-              <Button sx={{ my: 2, color: "black", display: "block"}}>
+              <>
+                {isUser ? (
+                  <Avatar
+                    sx={{ ml: 1, bgcolor: "#0D7590" }}
+                    onClick={handleClick}
+                  />
+                ) : (
+                  <Button sx={{ my: 2, color: "black", display: "block" }}>
+                    <Link
+                      style={{ textDecoration: "none", color: "black" }}
+                      to="/login"
+                    >
+                      Login
+                    </Link>
+                  </Button>
+                )}
+              </>
+
+              <Button sx={{ my: 2, color: "black", display: "block" }}>
                 <Link style={{ textDecoration: "none", color: "black" }} to="/">
                   Home
                 </Link>
-              </Button>
-              <Button>
-                <DropDown>
-                  <Link
-                    style={{ textDecoration: "none", color: "black" }}
-                    to="/help"
-                  >
-                    help
-                  </Link>
-                </DropDown>
               </Button>
               <Button sx={{ my: 2, color: "black", display: "block" }}>
                 <Link
@@ -161,9 +154,17 @@ function NavBar() {
               <Button sx={{ my: 2, color: "black", display: "block" }}>
                 <Link
                   style={{ textDecoration: "none", color: "black" }}
-                  to="/testimonials"
+                  to="/lessons"
                 >
-                  testimonials
+                  Lessons
+                </Link>
+              </Button>
+              <Button sx={{ my: 2, color: "black", display: "block" }}>
+                <Link
+                  style={{ textDecoration: "none", color: "black" }}
+                  to="/quizzes"
+                >
+                  quizzes
                 </Link>
               </Button>
             </Menu>
@@ -190,37 +191,12 @@ function NavBar() {
 
           {/* Links */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {/* {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "black", display: "block" }}
-              >
-                <Link
-                  style={{ textDecoration: "none", color: "black" }}
-                  to={`/${page}`}
-                  // to="/quizzes"
-                >
-                  {page}
-                </Link>
-              </Button>
-            ))} */}
-
             <Button sx={{ my: 2, color: "black", display: "block" }}>
               <Link style={{ textDecoration: "none", color: "black" }} to="/">
                 Home
               </Link>
             </Button>
-            <Button>
-              <DropDown>
-                <Link
-                  style={{ textDecoration: "none", color: "black" }}
-                  to="/help"
-                >
-                  help
-                </Link>
-              </DropDown>
-            </Button>
+
             <Button sx={{ my: 2, color: "black", display: "block" }}>
               <Link
                 style={{ textDecoration: "none", color: "black" }}
@@ -232,35 +208,75 @@ function NavBar() {
             <Button sx={{ my: 2, color: "black", display: "block" }}>
               <Link
                 style={{ textDecoration: "none", color: "black" }}
-                to="/testimonials"
+                to="/lessons"
               >
-                testimonials
+                Lessons
               </Link>
             </Button>
-
+            <Button sx={{ my: 2, color: "black", display: "block" }}>
+              <Link
+                style={{ textDecoration: "none", color: "black" }}
+                to="/quizzes"
+              >
+                Quizzes
+              </Link>
+            </Button>
             {/* normal screen */}
-            <Box sx={{ flex: "4", left: "0" , display:  "flex", justifyContent: "end"}}>
-              
-            <Box sx={{marginRight: "10px"}}>
-                <Link to="/login">
-                  <CustomButton
-                    backgroundColor="#0D7590"
-                    color="#fff"
-                    buttonText="Login"
-                    heroBtn={true}
-                    display="block"
-                  />
-                </Link>
-                </Box>
-                <Link to="/signup">
-                  <CustomButton
-                    backgroundColor="#0D7590"
-                    color="#fff"
-                    buttonText="Register now"
-                    heroBtn={true}
-                    display="block"
-                  />
-                </Link>
+            <Box
+              sx={{
+                flex: "4",
+                left: "0",
+                display: "flex",
+                justifyContent: "end",
+              }}
+            >
+              <Box sx={{ marginRight: "10px" }}>
+                <>
+                  {isUser ? (
+                    <>
+                      <Avatar
+                        sx={{ cursor: "pointer" }}
+                        aria-describedby={id}
+                        variant="contained"
+                        onClick={handleClick}
+                      >
+                        {isUser.email[0]}
+                      </Avatar>
+                      <Popover
+                        id={id}
+                        open={open}
+                        anchorEl={anchorEl}
+                        onClose={handleClose}
+                        anchorOrigin={{
+                          vertical: "bottom",
+                          horizontal: "left",
+                        }}
+                      >
+                        <Typography sx={{ p: 2 }}>{isUser.email}</Typography>{" "}
+                        <Typography sx={{ p: 2 }}>
+                          <Button
+                            onClick={() => {
+                              removeData();
+                            }}
+                          >
+                            Logout
+                          </Button>
+                        </Typography>
+                      </Popover>
+                    </>
+                  ) : (
+                    <Link to="/login">
+                      <CustomButton
+                        backgroundColor="#0D7590"
+                        color="#fff"
+                        buttonText="Login"
+                        heroBtn={true}
+                        display="block"
+                      />
+                    </Link>
+                  )}
+                </>
+              </Box>
             </Box>
           </Box>
         </Toolbar>
