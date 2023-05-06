@@ -33,14 +33,14 @@ export default function NestedList() {
   };
 
   return (
-    <div>
-      <ul style={{ listStyleType: "none", padding: "20px", backgroundColor: "#f9f9f9" }}>
+    <div style={{ width: "30%" }}>
+      <ul style={{ listStyleType: "none", padding: "20px", backgroundColor: "#f9f9f9",width: "100%"  }}>
         {subject.map((data1, index) => (
           <li key={index} style={{ marginBottom: "10px" }}>
             <div
               style={{
                 padding: "10px",
-                fontSize: "12px",
+                fontSize: "20px",
               }}
             >
               <h4

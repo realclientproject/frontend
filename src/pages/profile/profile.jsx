@@ -19,13 +19,13 @@ const UserProfileCard = () => {
       <CardHeader
         title={
           <>
-            <Bogx sx={{ display: "flex", justifyContent: "center", mb: 1 }}>
+            <Box sx={{ display: "flex", justifyContent: "center", mb: 1 }}>
               <img
                 src={avatarUrl}
                 alt={`${firstName} ${lastName}'s avatar`}
                 style={{ width: 70, height: 70, borderRadius: "50%" }}
               />
-            </Bogx>
+            </Box>
             <Typography
               variant="h6"
               align="center"
