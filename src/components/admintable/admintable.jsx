@@ -14,14 +14,14 @@ import {
   DialogContentText,
   TextField,
   DialogActions,
-  Button,} from "@mui/material";
-import BasicTextFields from '../../../components/header/header';
+  Button,
+  TablePagination,
+} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddButton from "./addbutton";
-import DashboardLayout from "../../../components/layout/dashboardLayout";
+// import DashboardLayout from "../../../components/layout/dashboardLayout";
 import axios from "axios";
-
 
 function Tables() {
   const [editDialogOpen, setEditDialogOpen] = useState(false);
@@ -141,7 +141,7 @@ function Tables() {
 
   return (
     <>
-      <DashboardLayout>
+      {/* <DashboardLayout> */}
         <TableContainer component={Paper} sx={{ width: "98%", margin: "auto" }}>
           <Table>
             <TableHead style={{ backgroundColor: "#0D7590" }}>
@@ -272,7 +272,7 @@ function Tables() {
             <Button onClick={()=>handleEditDialogSave(editingData._id)}>Save</Button>
           </DialogActions>
         </Dialog>
-      </DashboardLayout>
+      {/* </DashboardLayout> */}
     </>
   );
 }

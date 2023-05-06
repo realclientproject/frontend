@@ -9,16 +9,25 @@ import {
 } from "@mui/material";
 import { Add } from "@mui/icons-material";
 import { DialogActions } from "@mui/material";
+import axios from "axios";
+import { Input, InputAdornment, IconButton } from "@mui/material";
+import { CloudUpload } from "@mui/icons-material";
 
-const ResourcesAddButton = () => {
+const AddresourcesButton = () => {
   const [open, setOpen] = useState(false);
-  const[editingData,setEditingData] = useState(true);
+  const [showmedia, setShowmedia] = useState(false);
   const [formData, setFormData] = useState({
-    Name: "",
+    name: "",
     type: "",
-    Descrition: "",
-    Price: "",
+    description: "",
+    price: "",
+    count: "",
+    media: "",
   });
+
+  const handleClickShowmedia = () => {
+    setShowmedia(!showmedia);
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -36,26 +45,53 @@ const ResourcesAddButton = () => {
     }));
   };
 
-  const handleAddClick = () => {
+  const handleAddClick = (e) => {
     // handle adding data
+    e.preventDefault();
     console.log(formData);
-    handleClose();
+    axios
+      .post("http://localhost:8000/resource", formData)
+      .then((response) => {
+        // Handle success response
+        console.log(response);
+
+        // >> RESET THE INPUTS
+        setFormData({
+          name: "",
+          type: "",
+          description: "",
+          price: "",
+          count: "",
+          media: "",
+        });
+        handleClose();
+      })
+      .catch((error) => {
+        // Handle error response
+        console.error(error);
+        if (error.response && error.response.status === 409) {
+          alert("price already taken, please use a different price.");
+        } else {
+          alert("Something went wrong. Please try to change the price.");
+        }
+      });
   };
-  const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setEditingData({ ...editingData, image: reader.result });
-    };
-  };
+
   return (
     <>
       <Button
         variant="contained"
-        color="primary"
         onClick={handleClickOpen}
         startIcon={<Add />}
+        sx={{
+          m: 2,
+          backgroundColor: "#0D7590",
+          ":hover": {
+            boxShadow: "0px 0px 0px 1px #0D7590",
+            backgroundColor: "white",
+            color: "#0D7590",
+          },
+        }}
       >
         Add
       </Button>
@@ -72,17 +108,17 @@ const ResourcesAddButton = () => {
           <TextField
             autoFocus
             margin="dense"
-            name="Name"
+            name="name"
             label="Name"
             type="text"
             fullWidth
             required
-            value={formData.Name}
+            value={formData.name}
             onChange={handleInputChange}
           />
           <TextField
             margin="dense"
-            name="Type"
+            name="type"
             label="Type"
             type="text"
             fullWidth
@@ -92,47 +128,50 @@ const ResourcesAddButton = () => {
           />
           <TextField
             margin="dense"
-            name="Descrition"
-            label="Descrition"
+            name="description"
+            label="description "
             type="text"
             fullWidth
             required
-            value={formData.phoneNumber}
+            value={formData.description}
             onChange={handleInputChange}
           />
           <TextField
             margin="dense"
-            name="Price"
-            label="Price"
-            type="Price"
+            name="price"
+            label="price"
+            type="text"
             fullWidth
             required
-            value={formData.email}
+            value={formData.price}
             onChange={handleInputChange}
           />
           <TextField
             margin="dense"
-            name="Count"
-            label="Count"
+            name="count"
+            label="count"
             type="text"
             fullWidth
             required
-            value={formData.Count}
+            value={formData.count}
             onChange={handleInputChange}
           />
-                    <input
-accept="image/*"
-id="contained-button-file"
-multiple
-type="file"
-onChange={(e) => handleImageUpload(e)}
-style={{ display: 'none' }}
+         <Input
+  margin="dense"
+  name="media"
+  type="file"
+  fullWidth
+  required
+  inputProps={{ accept: "image/*, .pdf, .doc, .docx" }}
+  onChange={handleClickShowmedia}
+  endAdornment={
+    <InputAdornment position="end">
+      <IconButton>
+        <CloudUpload />
+      </IconButton>
+    </InputAdornment>
+  }
 />
-<label htmlFor="contained-button-file">
-<Button variant="contained" color="primary" component="span">
-Upload File
-</Button>
-</label>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
@@ -146,4 +185,4 @@ Upload File
     </>
   );
 };
-export default ResourcesAddButton;
+export default AddresourcesButton;
