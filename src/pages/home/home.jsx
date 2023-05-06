@@ -4,9 +4,10 @@ import NavBar from "../../components/navbar/navbar";
 import Card from "../../components/Card/card";
 import Footer from "../../components/Footer/footer";
 import SubHero from "../../components/subhero/subhero";
-import TeacherCard from "../../components/teachercard/teachercard";
 import Client from "../../components/client/client";
 import Pricing from "../../components/pricing/pricing";
+import ContactUs from "../../components/contactUs/contactUs";
+import TeacherCard from "../../components/teacherCard/teacherCard";
 function Home() {
   return (
     <div>
@@ -15,8 +16,8 @@ function Home() {
       <SubHero />
       <Card />
       <TeacherCard />
-      <Client />
       <Pricing />
+      <ContactUs />
       <Footer />
     </div>
   );
