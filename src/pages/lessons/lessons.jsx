@@ -14,6 +14,7 @@ import DownloadIcon from "@mui/icons-material/Download";
 import NestedList from "../../components/lessons/NestedList";
 import RenderGroup from "../../components/lessons/searchbar";
 
+////////card style + animation ////
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -28,7 +29,7 @@ const ExpandMore = styled((props) => {
 export default function RecipeReviewCard() {
   const [cards, setCards] = React.useState([
     { expanded: false },
-    { expanded: false },
+    
   ]);
 
   const handleExpandClick = (index) => {
@@ -37,21 +38,44 @@ export default function RecipeReviewCard() {
     setCards(newCards);
   };
 
-  const handleAddCard = () => {
-    setCards([...cards, { expanded: false }]);
-  };
-
+  /////////////////////////////////
+  const [data, setData] = React.useState([
+    
+  ]);
   React.useEffect(() => {
     axios
-      .get("https://localhost:5000/resources/")
+      .get("http://localhost:8000/resource", {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("access_token"),
+        },
+      })
       .then((response) => {
-        console.log(response.data);
-        // Do something with the data
+        setData(response.data.response);
+        console.log(response.data.response);
       })
       .catch((error) => {
-        console.error(error);
+        console.log(error);
       });
   }, []);
+//////////////////////////////////////////////////////////
+// const [data1, setData1] = React.useState([
+//   []
+// ]);
+// React.useEffect(() => {
+//   axios
+//     .get("http://localhost:8000/subject", {
+//       headers: {
+//         Authorization: "Bearer " + localStorage.getItem("access_token"),
+//       },
+//     })
+//     .then((response) => {
+//       setData1(response.data1.response);
+//       console.log(response.data1.response);
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
+// }, []);
 
   return (
     <>
@@ -86,6 +110,7 @@ export default function RecipeReviewCard() {
             >
               {cards.map((card, index) => (
                 <Card sx={{ maxWidth: 345, margin: "1rem" }} key={index}>
+                 
                   <CardMedia
                     component="img"
                     height="194"
@@ -108,25 +133,24 @@ export default function RecipeReviewCard() {
                     </IconButton>
                   </CardActions>
                   <Collapse in={card.expanded} timeout="auto" unmountOnExit>
-                    <CardContent>
-                      <Typography paragraph>Method:</Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        <strong>Name:</strong>
-                        Débutant
-                        <br />
-                        <strong>Subject:</strong> Mathematics
-                        <br />
-                        <strong>Grade:</strong> 9th
-                      </Typography>
-                    </CardContent>
-                  </Collapse>
-                </Card>
+                  <CardContent>
+        <Typography paragraph>Method:</Typography>
+        {data.map((row, index) => (
+          <Typography key={index} variant="body2" color="text.secondary">
+            <strong>Name:</strong>{row.name}
+            <br />
+            <strong>Subject:</strong> {row.type}
+            <br />
+            <strong>Grade:</strong> 9th
+          </Typography>
+        ))}
+      </CardContent>
+    </Collapse>
+  </Card>
               ))}
             </div>
           </div>
-          <IconButton aria-label="add card" onClick={handleAddCard}>
-            <AddIcon />
-          </IconButton>
+         
         </div>
 
       </div>

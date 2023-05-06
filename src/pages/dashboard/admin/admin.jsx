@@ -20,8 +20,6 @@ import {
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddButton from './addbutton';
-import NavBar from '../../../components/navbar/navbar';
-import Footer from '../../../components/Footer/footer';
 import BasicTextFields from '../../../components/header/header';
 
 function Tables() {
