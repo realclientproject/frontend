@@ -1,5 +1,10 @@
-import React from 'react';
-import { BrowserRouter as Router, Route ,Routes} from 'react-router-dom';
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 
 import Admin from "./pages/dashboard/admin/admin.jsx";
 import Help from "./pages/help/help.jsx";
@@ -14,29 +19,35 @@ import Quizze from "./pages/quizzes/quizzes.jsx";
 import AdminLogin from "./pages/login/adminlogin.jsx";
 import NotFoundPage from "./pages/404page/404.jsx";
 import TableContent from "./pages/dashboard/admin/admin.jsx";
-import ResourcesTables from './components/resourcesTable.jsx/resourcesTable.jsx';
+import ResourcesTables from './components/resourcesTable.jsx/resourcesTable.jsx';import { useAuthContext } from "./hooks/useAuthContext";
+import PrivateSuperAdmin from "./utils/pivateroute.jsx";
+import PrivateAdmin from "./utils/adminroute.jsx";
+import RequireAuth from "./utils/requireAuth.jsx";
 const AllRoutes = () => {
-	return (
-	<Router>
-         <Routes>
-          <Route exact path="/" element={<Home />}></Route>
-          <Route exact path="/help" element={<Help />}></Route>
-          <Route exact path="/dashboard" element={<Admin />}></Route>
-          <Route exact path="/SuperAdmin" element={<SuperAdmin />}></Route>
-          <Route exact path="/profile" element={<Profile />}></Route>
-          <Route exact path="/policies" element={<Policy />}></Route>
-          <Route exact path="/lessons" element={<Lesson />}></Route>
-          <Route exact path="/login" element={<Login />}></Route>
-          <Route exact path="/adminpanel" element={<AdminLogin />}></Route>
-          <Route exact path="/signup" element={<SignUp />}></Route>
-          <Route exact path="/quizzes" element={<Quizze />}></Route>
-          <Route path="*" element={<NotFoundPage />} />
-          <Route exact path="/table" element={<TableContent />}></Route>
-          <Route exact path="/Resources" element={<ResourcesTables />}></Route>
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route exact path="/home" element={<Home />}></Route>
+        <Route exact path="/help" element={<Help />}></Route>
+        <Route element={<PrivateAdmin />}>
+          <Route path="/admin" element={<Admin />} />
+        </Route>
+        <Route element={<PrivateSuperAdmin />}>
+          <Route path="/superadmin" element={<SuperAdmin />} />
+        </Route>
 
-        </Routes>
-      </Router>
-	);
+        <Route exact path="/policies" element={<Policy />}></Route>
+        <Route exact path="/login" element={<Login />}></Route>
+        <Route exact path="/adminpanel" element={<AdminLogin />}></Route>
+        <Route exact path="/signup" element={<SignUp />}></Route>
+        <Route element={<RequireAuth />}>
+          <Route exact path="/quizzes" element={<Quizze />}></Route>
+          <Route exact path="/lessons" element={<Lesson />}></Route>
+        </Route>
+      </Routes>
+    </Router>
+  );
 };
 
 export default AllRoutes;

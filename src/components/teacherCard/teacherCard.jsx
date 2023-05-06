@@ -3,25 +3,6 @@ import { Box, minHeight } from "@mui/system";
 import React from "react";
 import Jeffry from "../../images/Jeffry.png";
 
-export default function TeacherCard({ teacher }) {
-  return (
-    <div className="teacherCard">
-      <Box sx={styles.card}>
-        <img src={Jeffry} style={styles.teacherImage} />
-      </Box>
-      <Box sx={styles.subcard}>
-        <Typography variant="h3" sx={styles.name}>
-          {teacher.Name}
-        </Typography>
-        <Typography variant="h4" sx={styles.subject}>
-          {teacher.Subject} Teacher
-        </Typography>
-        <Typography>{teacher.Experience}</Typography>
-      </Box>
-    </div>
-  );
-}
-
 const styles = {
   card: {
     display: "flex",
@@ -59,3 +40,21 @@ const styles = {
     alignSelf: "center",
   },
 };
+export default function TeacherCard({ teacher }) {
+  return (
+    <div className="teacherCard">
+      <Box sx={styles.card}>
+        <img src={Jeffry} style={styles.teacherImage} />
+      </Box>
+      <Box sx={styles.subcard}>
+        <Typography variant="h3" sx={styles.name}>
+          Omar
+        </Typography>
+        <Typography variant="h4" sx={styles.subject}>
+          English Teacher
+        </Typography>
+        <Typography>5 years of experience </Typography>
+      </Box>
+    </div>
+  );
+}

@@ -182,15 +182,16 @@ const styles = {
   container: {
     textAlign: ["center", ""],
     justifyContent: "space-between",
-    gap: [4,15],
+    gap: [4, 15],
     pb: 5,
+    m: 5,
   },
   title: {
     mb: 2,
   },
- 
+
   paragraph: {
-    mb: [3,10],
+    mb: [3, 10],
   },
 
   fields: {

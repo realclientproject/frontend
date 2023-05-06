@@ -27,19 +27,18 @@ import BookIcon from "@mui/icons-material/Book";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import { Box } from "@mui/system";
 import Logo from "../../images/logoo.png";
+import { useTheme } from "@mui/material/styles";
 
-function Sidebar({ isMenuOpen, setIsMenuOpen }) {
+function Sidebar({ isMenuOpen, handleDrawerToggle }) {
   // const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const handleDrawerToggle = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const SuperAdminDrawerItems = [
     {
       text: "Dashboard",
       icon: <DashboardIcon />,
-      path: "/dashbord",
+      path: "/dashboard",
     },
     {
       text: "Admins",
@@ -94,7 +93,12 @@ function Sidebar({ isMenuOpen, setIsMenuOpen }) {
         <img
           src={Logo}
           alt="logo"
-          style={{ height: "40px", alignSelf: "center", margin: "auto" }}
+          style={{
+            height: "100px",
+            alignSelf: "center",
+            margin: "auto",
+            padding: "12px",
+          }}
         />
       </Toolbar>
       <Divider />
@@ -110,7 +114,7 @@ function Sidebar({ isMenuOpen, setIsMenuOpen }) {
           <Typography mt={2} color="GrayText" paddingX="16px" paddingY="8px">
             User Panel
           </Typography>
-          {SuperAdminDrawerItems.map((item, index) => (
+          {SuperAdminDrawerItems.map((item) => (
             <ListItem
               button
               component={Link}
@@ -122,13 +126,13 @@ function Sidebar({ isMenuOpen, setIsMenuOpen }) {
                   window.location.pathname === item.path
                     ? "rgba(2, 111, 194, 0.1)"
                     : "",
-                color: window.location.pathname === item.path ? "#026FC2" : "",
+                color: window.location.pathname === item.path ? "#0D7590" : "",
               }}
             >
               <ListItemIcon
                 style={{
                   color:
-                    window.location.pathname === item.path ? "#026FC2" : "",
+                    window.location.pathname === item.path ? "#0D7590" : "",
                 }}
               >
                 {item.icon}
@@ -137,37 +141,38 @@ function Sidebar({ isMenuOpen, setIsMenuOpen }) {
             </ListItem>
           ))}
         </Box>
-        
       </List>
     </div>
   );
-
+  const drawerWidth = "318px";
   return (
     <>
-      {/* <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          edge="start"
-          onClick={handleDrawerToggle}
-        >
-          <MenuIcon />
-        </IconButton> */}
       <Drawer
-        variant="temporary"
+        variant={isMobile ? "temporary" : "permanent"}
         anchor="left"
         open={isMenuOpen}
         onClose={handleDrawerToggle}
         ModalProps={{
           keepMounted: true,
         }}
-        sx={{ display: ["flex", "none"] }}
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          "& .MuiDrawer-paper": {
+            width: drawerWidth,
+            boxSizing: "border-box",
+          },
+          background: "white",
+          border: "1px solid rgba(109, 125, 147, 0.15)",
+          boxShadow: "4px 4px 20px -10px rgba(0, 0, 0, 0.1)",
+        }}
       >
         {drawer}
       </Drawer>
 
       {/* //desktop */}
 
-      <Box
+      {/* <Box
         variant="permanent"
         anchor="left"
         maxWidth="315px"
@@ -182,11 +187,10 @@ function Sidebar({ isMenuOpen, setIsMenuOpen }) {
           // overflowX: "hidden",
           display: ["none", "block"],
           height: "100vh",
-
         }}
       >
         {drawer}
-      </Box>
+      </Box> */}
     </>
   );
 }

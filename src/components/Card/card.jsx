@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./card.css";
 import img1 from "./item1.svg";
 import img2 from "./item2.svg";
-
+import { Link } from "react-router-dom";
 class Services extends Component {
   render() {
     return (
@@ -26,24 +26,27 @@ class Services extends Component {
               <div className="service-descrip">
                 <h3>Quizzes</h3>
                 <p>
-                  Lessons can be delivered in a variety of formats, including
-                  classroom lectures, interactive discussions, hands-on
-                  activities, or online courses. A well-structured lesson
-                  usually begins with an introduction that sets the stage for
-                  the topic and establishes its relevance to the students. The
-                  lesson then proceeds with the presentation of key ideas,
-                  followed by examples, illustrations, and exercises that allow
-                  students to apply what they have learned.
-                  <span
-                    style={{
-                      color: "#FFA500",
-                      float: "right",
-                      justifyContent: "end",
-                      padding: "30px 30px 15px",
-                    }}
-                  >
-                    Explore more ➡
-                  </span>
+                  Quizzes are assessments that are designed to evaluate a
+                  person's knowledge, skills, or understanding of a particular
+                  subject or topic. They typically consist of a set of questions
+                  that test a person's knowledge or comprehension of a specific
+                  subject matter. Quizzes can be used for educational,
+                  professional, or entertainment purposes and can be
+                  administered in a variety of formats, such as online,
+                  paper-based, or in-person.
+                  <Link to="/quizzes">
+                    {" "}
+                    <span
+                      style={{
+                        color: "#FFA500",
+                        float: "right",
+                        justifyContent: "end",
+                        padding: "30px 30px 15px",
+                      }}
+                    >
+                      Explore more ➡
+                    </span>
+                  </Link>
                 </p>
               </div>
             </div>
@@ -60,16 +63,19 @@ class Services extends Component {
                   lesson then proceeds with the presentation of key ideas,
                   followed by examples, illustrations, and exercises that allow
                   students to apply what they have learned.
-                  <span
-                    style={{
-                      color: "#FFA500",
-                      float: "right",
-                      justifyContent: "end",
-                      padding: "30px 30px 15px",
-                    }}
-                  >
-                    Explore more ➡
-                  </span>
+                  <Link to="/lessons">
+                    {" "}
+                    <span
+                      style={{
+                        color: "#FFA500",
+                        float: "right",
+                        justifyContent: "end",
+                        padding: "30px 30px 15px",
+                      }}
+                    >
+                      Explore more ➡
+                    </span>
+                  </Link>
                 </p>
               </div>
             </div>
