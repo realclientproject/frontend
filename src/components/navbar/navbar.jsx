@@ -12,25 +12,19 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
-import DropDown from "./DropDown.jsx";
+
 // import Tooltip from "@mui/material/Tooltip";
 // import { Button, Grid } from "@mui/material";
 
 import logo from "./logo.svg";
 import CustomButton from "../hero/custombutton.jsx";
 
-const pages = [
-  "Home",
-  `${(<DropDown />)}`,
-  "teachers",
-  "testimonials",
-  "about",
-];
+const pages = ["Home", "Lessons", "Quizzes", "teachers", "about"];
 
 function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+  const user = localStorage.getItem("user");
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -67,6 +61,7 @@ function NavBar() {
             }}
           >
             <Avatar
+              viewBox="0 0 100 100"
               sx={{ height: "auto", width: "auto", p: 0, marginRight: 50 }}
               alt="Remy Sharp"
               src={logo}
@@ -102,53 +97,21 @@ function NavBar() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {/* {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">
-                    <Link
-                      style={{ textDecoration: "none", color: "black" }}
-                      to={`/${page}`}
-                    >
-                      {page}
-                    </Link>
-                  </Typography>
-                </MenuItem>
-              ))} */}
+              {/* Mobile resp */}
 
               {/* Mobile resp */}
-              <Link to="/login">
-                <CustomButton
-                  backgroundColor="#0D7590"
-                  color="#fff"
-                  buttonText="Login"
-                  heroBtn={true}
-                  display="block"
-                />
-              </Link>
-              <Link to="/signup">
-                <CustomButton
-                  backgroundColor="#0D7590"
-                  color="#fff"
-                  buttonText="Register now"
-                  heroBtn={true}
-                  display="block"
-                />
-              </Link>
-              {/* Mobile resp */}
-              <Button sx={{ my: 2, color: "black", display: "block"}}>
+              <Button sx={{ my: 2, color: "black", display: "block" }}>
+                <Link
+                  style={{ textDecoration: "none", color: "black" }}
+                  to="/login"
+                >
+                  Login
+                </Link>
+              </Button>
+              <Button sx={{ my: 2, color: "black", display: "block" }}>
                 <Link style={{ textDecoration: "none", color: "black" }} to="/">
                   Home
                 </Link>
-              </Button>
-              <Button>
-                <DropDown>
-                  <Link
-                    style={{ textDecoration: "none", color: "black" }}
-                    to="/help"
-                  >
-                    help
-                  </Link>
-                </DropDown>
               </Button>
               <Button sx={{ my: 2, color: "black", display: "block" }}>
                 <Link
@@ -161,9 +124,17 @@ function NavBar() {
               <Button sx={{ my: 2, color: "black", display: "block" }}>
                 <Link
                   style={{ textDecoration: "none", color: "black" }}
-                  to="/testimonials"
+                  to="/lessons"
                 >
-                  testimonials
+                  Lessons
+                </Link>
+              </Button>
+              <Button sx={{ my: 2, color: "black", display: "block" }}>
+                <Link
+                  style={{ textDecoration: "none", color: "black" }}
+                  to="/quizzes"
+                >
+                  quizzes
                 </Link>
               </Button>
             </Menu>
@@ -190,37 +161,12 @@ function NavBar() {
 
           {/* Links */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {/* {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "black", display: "block" }}
-              >
-                <Link
-                  style={{ textDecoration: "none", color: "black" }}
-                  to={`/${page}`}
-                  // to="/quizzes"
-                >
-                  {page}
-                </Link>
-              </Button>
-            ))} */}
-
             <Button sx={{ my: 2, color: "black", display: "block" }}>
               <Link style={{ textDecoration: "none", color: "black" }} to="/">
                 Home
               </Link>
             </Button>
-            <Button>
-              <DropDown>
-                <Link
-                  style={{ textDecoration: "none", color: "black" }}
-                  to="/help"
-                >
-                  help
-                </Link>
-              </DropDown>
-            </Button>
+
             <Button sx={{ my: 2, color: "black", display: "block" }}>
               <Link
                 style={{ textDecoration: "none", color: "black" }}
@@ -232,35 +178,45 @@ function NavBar() {
             <Button sx={{ my: 2, color: "black", display: "block" }}>
               <Link
                 style={{ textDecoration: "none", color: "black" }}
-                to="/testimonials"
+                to="/lessons"
               >
-                testimonials
+                Lessons
               </Link>
             </Button>
-
+            <Button sx={{ my: 2, color: "black", display: "block" }}>
+              <Link
+                style={{ textDecoration: "none", color: "black" }}
+                to="/quizzes"
+              >
+                Quizzes
+              </Link>
+            </Button>
             {/* normal screen */}
-            <Box sx={{ flex: "4", left: "0" , display:  "flex", justifyContent: "end"}}>
-              
-            <Box sx={{marginRight: "10px"}}>
-                <Link to="/login">
-                  <CustomButton
-                    backgroundColor="#0D7590"
-                    color="#fff"
-                    buttonText="Login"
-                    heroBtn={true}
-                    display="block"
-                  />
-                </Link>
-                </Box>
-                <Link to="/signup">
-                  <CustomButton
-                    backgroundColor="#0D7590"
-                    color="#fff"
-                    buttonText="Register now"
-                    heroBtn={true}
-                    display="block"
-                  />
-                </Link>
+            <Box
+              sx={{
+                flex: "4",
+                left: "0",
+                display: "flex",
+                justifyContent: "end",
+              }}
+            >
+              <Box sx={{ marginRight: "10px" }}>
+                <>
+                  {user ? (
+                    <Avatar />
+                  ) : (
+                    <Link to="/login">
+                      <CustomButton
+                        backgroundColor="#0D7590"
+                        color="#fff"
+                        buttonText="Login"
+                        heroBtn={true}
+                        display="block"
+                      />
+                    </Link>
+                  )}
+                </>
+              </Box>
             </Box>
           </Box>
         </Toolbar>
