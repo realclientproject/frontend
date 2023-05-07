@@ -2,7 +2,6 @@ import * as React from "react";
 import axios from "axios";
 import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
-import NavBar from "../../components/navbar/navbar";
 import NestedList from "../../components/lessons/NestedList";
 import Footer from "../../components/Footer/footer";
 import ComboBox from "../../components/lessons/searchbar";

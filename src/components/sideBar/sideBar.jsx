@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Drawer,
@@ -6,7 +6,6 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  IconButton,
   useMediaQuery,
   Typography,
   Divider,
@@ -15,8 +14,6 @@ import {
 import {
   Dashboard as DashboardIcon,
   Person as PersonIcon,
-  CompareArrows as TransactionsIcon,
-  ShowChart as StatisticsIcon,
   Menu as MenuIcon,
   Help as HelpIcon,
   Logout as LogoutIcon,
@@ -29,27 +26,41 @@ import { Box } from "@mui/system";
 import Logo from "../../images/logoo.png";
 import { useTheme } from "@mui/material/styles";
 
-function Sidebar({ isMenuOpen, handleDrawerToggle }) {
+function Sidebar({ isMenuOpen, handleDrawerToggle, admin }) {
   // const [isMenuOpen, setIsMenuOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
   const SuperAdminDrawerItems = [
     {
       text: "Dashboard",
       icon: <DashboardIcon />,
-      path: "/dashboard",
+      path: "/superadmin/dashboard",
     },
     {
       text: "Admins",
       icon: <SupervisorAccountIcon />,
-      path: "/admins",
+      path: "/superadmin/role_admins",
     },
     {
       text: "Users",
       icon: <PersonIcon />,
-      path: "/users",
+      path: "/superadmin/role_users",
     },
+    {
+      text: "Lessons",
+      icon: <BookIcon />,
+      path: "/superadmin/lessons",
+    },
+    {
+      text: "Quizzes",
+      icon: <QuizIcon />,
+      path: "/superadmin/quizzes",
+    },
+  ];
+
+  const AdminDrawerItems = [
     {
       text: "Lessons",
       icon: <BookIcon />,
@@ -60,46 +71,27 @@ function Sidebar({ isMenuOpen, handleDrawerToggle }) {
       icon: <QuizIcon />,
       path: "/admin/quizzes",
     },
-    {
-      text: "Statistics",
-      icon: <StatisticsIcon />,
-      path: "/statistics",
-    },
-  ];
-
-  const AdminDrawerItems = [
-    {
-      text: "Dashboard",
-      icon: <DashboardIcon />,
-      path: "/dashbord",
-    },
-    {
-      text: "Lessons",
-      icon: <TransactionsIcon />,
-      path: "/admin/lessons",
-    },
-    {
-      text: "Quizzes",
-      icon: <TransactionsIcon />,
-      path: "/admin/quizzes",
-    },
   ];
 
   //need check role of admin
+  let sideList =
+    user.role === "superadmin" ? SuperAdminDrawerItems : AdminDrawerItems;
 
   const drawer = (
     <div>
       <Toolbar>
-        <img
-          src={Logo}
-          alt="logo"
-          style={{
-            height: "100px",
-            alignSelf: "center",
-            margin: "auto",
-            padding: "12px",
-          }}
-        />
+        <Link to="/">
+          <img
+            src={Logo}
+            alt="logo"
+            style={{
+              height: "100px",
+              alignSelf: "center",
+              margin: "auto",
+              padding: "12px",
+            }}
+          />
+        </Link>
       </Toolbar>
       <Divider />
       <List
@@ -114,7 +106,7 @@ function Sidebar({ isMenuOpen, handleDrawerToggle }) {
           <Typography mt={2} color="GrayText" paddingX="16px" paddingY="8px">
             User Panel
           </Typography>
-          {SuperAdminDrawerItems.map((item) => (
+          {sideList.map((item) => (
             <ListItem
               button
               component={Link}

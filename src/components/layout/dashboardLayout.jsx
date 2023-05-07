@@ -2,15 +2,19 @@ import React from "react";
 import Sidebar from "../sideBar/sideBar";
 import Header from "../header/header";
 import { Box } from "@mui/material";
+
 export default function DashboardLayout({ children }) {
-    const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
   const handleDrawerToggle = () => {
     setIsMenuOpen(!isMenuOpen);
   };
   return (
     <Box sx={{ display: "flex" }}>
-      <Sidebar isMenuOpen={isMenuOpen} handleDrawerToggle={handleDrawerToggle}/>
+      <Sidebar
+        isMenuOpen={isMenuOpen}
+        handleDrawerToggle={handleDrawerToggle}
+      />
       <Box
         component="main"
         sx={{
@@ -22,7 +26,10 @@ export default function DashboardLayout({ children }) {
           width: `calc(100% - 318px)`,
         }}
       >
-        <Header isMenuOpen={isMenuOpen} handleDrawerToggle={handleDrawerToggle}/>
+        <Header
+          isMenuOpen={isMenuOpen}
+          handleDrawerToggle={handleDrawerToggle}
+        />
         {children}
       </Box>
     </Box>
