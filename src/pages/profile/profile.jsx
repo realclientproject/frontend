@@ -1,21 +1,17 @@
 import { Box, Card, CardContent, CardHeader, IconButton, Typography } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
+import { Logout } from "@mui/icons-material";
 
 const UserProfileCard = () => {
   const firstName = "John";
   const lastName = "Doe";
   const email = "johndoe@example.com";
   const phoneNumber = "555-555-5555";
-  const avatarUrl = "https://via.placeholder.com/150"; // Replace with the URL of the user's avatar image
+  const avatarUrl = "https://st3.depositphotos.com/19428878/37071/v/450/depositphotos_370714622-stock-illustration-businessman-icon-vector-male-avatar.jpg"; // Replace with the URL of the user's avatar image
   const subjects = ["React", "JavaScript", "CSS"]; // Replace with the subjects that the user chooses
 
   return (
-    <Card sx={{ maxWidth: 400, backgroundColor: "#f5f5f5" }}>
-      <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 1 }}>
-              <IconButton color="primary" aria-label="edit profile">
-                <EditIcon />
-              </IconButton>
-            </Box>
+<Card sx={{ background: "none", border: "none", boxShadow: "none" }}>
+    
       <CardHeader
         title={
           <>
@@ -80,13 +76,8 @@ const UserProfileCard = () => {
           </>
         }
       />
-      <CardContent>
-        <CardContent sx={{ textAlign: "center" }}>
-          <Typography variant="body2" color="text.secondary">
-            Hi, I'm {firstName} {lastName}. I'm a software developer and love building things with {subjects[0]}.
-          </Typography>
-        </CardContent>
-      </CardContent>
+    
+
     </Card>
   );
 };

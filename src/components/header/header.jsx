@@ -11,6 +11,7 @@ import Logout from "@mui/icons-material/Logout";
 import Profile from "@mui/icons-material/PersonOutlineOutlined";
 import Notification from "../notification/notification";
 import { Menu as MenuIcon } from "@mui/icons-material";
+import UserProfileCard from "../../pages/profile/profile";
 
 export default function BasicTextFields({
   title = "Dashboard",
@@ -71,6 +72,12 @@ export default function BasicTextFields({
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem>
+        <Box sx={{ width: "250px", height: "240px" }}>
+  <UserProfileCard />
+</Box>
+        </MenuItem>
+        <MenuItem>
+        
           <ListItemIcon>
             <Help fontSize="small" />
           </ListItemIcon>
@@ -82,6 +89,7 @@ export default function BasicTextFields({
           </ListItemIcon>
           Settings
         </MenuItem>
+        
         <MenuItem>
           <ListItemIcon>
             <Logout fontSize="small" />
