@@ -2,7 +2,6 @@ import * as React from "react";
 import axios from "axios";
 import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
-import NavBar from "../../components/navbar/navbar";
 import NestedList from "../../components/lessons/NestedList";
 
 ////////card style + animation ////
@@ -84,7 +83,6 @@ export default function RecipeReviewCard() {
 
   return (
     <>
-      <NavBar />
       <div style={{ display: "flex", flexDirection: "row", marginTop: "1rem" }}>
         <NestedList />
         <div style={{ display: "flex", flexWrap: "wrap" }}>

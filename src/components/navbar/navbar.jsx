@@ -11,14 +11,14 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import { Link, useNavigate } from "react-router-dom";
-import { AvatarGroup, Popover } from "@mui/material";
+import { AvatarGroup, ListItemIcon, ListItemText, Popover } from "@mui/material";
 
 // import Tooltip from "@mui/material/Tooltip";
 // import { Button, Grid } from "@mui/material";
 
 import logo from "./logo.svg";
 import CustomButton from "../hero/custombutton.jsx";
-import { Person } from "@mui/icons-material";
+import { Help, Logout, Person } from "@mui/icons-material";
 
 const pages = ["Home", "Lessons", "Quizzes", "teachers", "about"];
 
@@ -38,7 +38,7 @@ function NavBar() {
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  
+
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
@@ -51,6 +51,9 @@ function NavBar() {
   }
   const handleClose = () => {
     setAnchorEl(null);
+  };
+  const navigateHelp = () => {
+    navigate("/help");
   };
 
   const open = Boolean(anchorEl);
@@ -247,6 +250,7 @@ function NavBar() {
                           vertical: "bottom",
                           horizontal: "left",
                         }}
+                        sx={{ mt: 1.5}}
                       >
                         <Typography sx={{ p: 2 }}>{isUser.email}</Typography>{" "}
                         <Typography sx={{ p: 2 }}>

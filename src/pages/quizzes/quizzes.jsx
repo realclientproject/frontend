@@ -9,7 +9,6 @@ import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import AddIcon from "@mui/icons-material/Add";
-import NavBar from "../../components/navbar/navbar";
 import DownloadIcon from "@mui/icons-material/Download";
 
 const ExpandMore = styled((props) => {
@@ -52,7 +51,6 @@ export default function RecipeReviewCard() {
 
   return (
     <>
-      <NavBar />
       <div
         style={{
           display: "flex",

@@ -1,10 +1,8 @@
 import React from "react";
 import { Container, Typography, Button, List } from "@mui/material";
-import Layout from "../../components/layout/layout";
 
 function Policy() {
   return (
-    <Layout>
       <Container maxWidth="md">
         <Typography variant="h4" mt={5} mb={5}>
           Legal and Policies
@@ -129,7 +127,6 @@ function Policy() {
           parties. Please review our privacy policy for more information.
         </Typography>
       </Container>
-    </Layout>
   );
 }
 

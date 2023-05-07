@@ -141,7 +141,6 @@ function Tables() {
 
   return (
     <>
-      <DashboardLayout>
         <TableContainer component={Paper} sx={{ width: "98%", margin: "auto" }}>
           <Table>
             <TableHead style={{ backgroundColor: "#0D7590" }}>
@@ -272,7 +271,6 @@ function Tables() {
             <Button onClick={()=>handleEditDialogSave(editingData._id)}>Save</Button>
           </DialogActions>
         </Dialog>
-      </DashboardLayout>
     </>
   );
 }
