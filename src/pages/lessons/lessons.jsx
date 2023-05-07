@@ -4,6 +4,12 @@ import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import NavBar from "../../components/navbar/navbar";
 import NestedList from "../../components/lessons/NestedList";
+import Footer from "../../components/Footer/footer";
+import ComboBox from "../../components/lessons/searchbar";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import GetAppIcon from "@mui/icons-material/GetApp";
+import DownloadIcon from '@mui/icons-material/Download';
 
 ////////card style + animation ////
 const ExpandMore = styled((props) => {
@@ -25,13 +31,14 @@ const CardContainer = styled("div")({
   flexDirection: "column",
   justifyContent: "space-between",
   margin: "2rem",
-  maxWidth: "70%", 
+  maxWidth: "70%",
   overflow: "hidden",
   padding: "0.5rem",
   position: "relative",
   transition: "transform 0.2s",
   "&:hover": {
     transform: "scale(1.02)",
+    opacity: "0.7",
   },
 });
 
@@ -64,6 +71,10 @@ const CardFooter = styled("div")({
   justifyContent: "space-between",
 });
 
+const DownloadButton = styled(GetAppIcon)({
+  fontSize: "2rem",
+});
+
 export default function RecipeReviewCard() {
   const [data, setData] = React.useState([]);
   React.useEffect(() => {
@@ -85,22 +96,43 @@ export default function RecipeReviewCard() {
   return (
     <>
       <NavBar />
+
+      <div style={{ textAlign: "center", margin: "1rem 0" }}>
+        <p style={{ fontFamily: "Arial", fontWeight: "bold", fontSize: "50px", marginTop: "3rem" }}>
+          Lessons
+        </p>
+      </div>
+
       <div style={{ display: "flex", flexDirection: "row", marginTop: "1rem" }}>
         <NestedList />
         <div style={{ display: "flex", flexWrap: "wrap" }}>
-          {data.map((data2, index) => (
-            <CardContainer key={index}>
-              <CardImage src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTf1W8A9Tu441wNHIA1DBXFo7FHJ4UubahKQbyq7N1FuU5Dv84KbjucMfks1CfmLjQGLoE&usqp=CAU" alt="Media" />
-              <CardTitle>{data2.name}</CardTitle>
-              <CardDescription>{data2.description}</CardDescription>
-              <CardFooter>
-                <div>{data2.type}</div>
-                <div>{data2.price}</div>
-              </CardFooter>
-            </CardContainer>
-          ))}
-        </div>
-      </div>
-    </>
-  );
+          {data.map((data2, index)=> (
+<CardContainer key={index}>
+<CardImage src="https://c8.alamy.com/comp/PH522D/lets-learn-maths-lightbox-message-on-a-bright-yellow-background-PH522D.jpg" alt="Media" />
+<CardTitle>{data2.name}</CardTitle>
+<CardDescription>{data2.description}</CardDescription>
+<CardFooter>
+<div>{data2.type}</div>
+<div>{data2.price}</div>
+<div>
+<IconButton
+aria-label="download"
+component="span"
+style={{ color: "#444" }}
+>
+<DownloadIcon />
+</IconButton>
+</div>
+</CardFooter>
+</CardContainer>
+))}
+</div>
+</div>
+<div style={{ marginBottom: "3rem" }}>
+<ComboBox />
+</div>
+<Footer />
+</>
+);
 }
+

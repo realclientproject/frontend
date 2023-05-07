@@ -1,17 +1,17 @@
 import * as React from "react";
 import axios from "axios";
 import { styled } from "@mui/material/styles";
-import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import AddIcon from "@mui/icons-material/Add";
 import NavBar from "../../components/navbar/navbar";
-import DownloadIcon from "@mui/icons-material/Download";
+import NestedList from "../../components/lessons/NestedList";
+import Footer from "../../components/Footer/footer";
+import ComboBox from "../../components/lessons/searchbar";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import GetAppIcon from "@mui/icons-material/GetApp";
+import DownloadIcon from '@mui/icons-material/Download';
 
+////////card style + animation ////
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -23,98 +23,114 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
+const CardContainer = styled("div")({
+  backgroundColor: "#fff",
+  borderRadius: "8px",
+  boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2)",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+  margin: "2rem",
+  maxWidth: "70%",
+  overflow: "hidden",
+  padding: "0.5rem",
+  position: "relative",
+  transition: "transform 0.2s",
+  "&:hover": {
+    transform: "scale(1.02)",
+  },
+});
+
+const CardImage = styled("img")({
+  height: "200px",
+  objectFit: "cover",
+  width: "100%",
+});
+
+const CardTitle = styled("h2")({
+  fontSize: "1.5rem",
+  fontWeight: "bold",
+  margin: "1rem 0 0.5rem",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
+});
+
+const CardDescription = styled("p")({
+  color: "#777",
+  fontSize: "1rem",
+  margin: "0.5rem 0",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
+});
+
+const CardFooter = styled("div")({
+  display: "flex",
+  justifyContent: "space-between",
+});
+
+const DownloadButton = styled(GetAppIcon)({
+  fontSize: "2rem",
+});
+
 export default function RecipeReviewCard() {
-  const [cards, setCards] = React.useState([
-    { expanded: false },
-    { expanded: false },
-  ]);
-
-  const handleExpandClick = (index) => {
-    const newCards = [...cards];
-    newCards[index].expanded = !newCards[index].expanded;
-    setCards(newCards);
-  };
-
-  const handleAddCard = () => {
-    setCards([...cards, { expanded: false }]);
-  };
-
+  const [data, setData] = React.useState([]);
   React.useEffect(() => {
-    axios.get("https://localhost:5000/resources/")
-      .then(response => {
-        console.log(response.data);
-        // Do something with the data
+    axios
+      .get("http://localhost:8000/resource", {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("access_token"),
+        },
       })
-      .catch(error => {
-        console.error(error);
+      .then((response) => {
+        setData(response.data.response);
+        console.log(response.data.response);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }, []);
 
   return (
     <>
       <NavBar />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          margin: "3rem",
-        }}
-      >
-        <Typography variant="h3" align="center" fontWeight="bold">
-          Lessons
-        </Typography>
-        <div
-          style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", marginTop: "2rem" }}
-        >
-          {cards.map((card, index) => (
-            <Card sx={{ maxWidth: 345, margin: "1rem" }} key={index}>
-              <CardMedia
-                component="img"
-                height="194"
-                src="https://i.ytimg.com/vi/ezpcyQQ5zAU/maxresdefault.jpg"
-                alt="Débutant"
-              />
-              <CardActions disableSpacing>
-                <Typography>
-                  le gens fille
-                </Typography>
 
-                <ExpandMore
-                  expand={card.expanded}
-                  onClick={() => handleExpandClick(index)}
-                  aria-expanded={card.expanded}
-                  aria-label="show more"
-                >
-                  <AddIcon />
-                </ExpandMore>
-                <IconButton aria-label="download">
-                  <DownloadIcon />
-                </IconButton>
-              </CardActions>
-              <Collapse in={card.expanded} timeout="auto" unmountOnExit>
-                <CardContent>
-                  <Typography paragraph>Method:</Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    <strong>Name:</strong>
-Débutant
-                    <br />
-                    <strong>Subject:</strong> Mathematics
-                    <br />
-                    <strong>Grade:</strong> 9th
-                  </Typography>
-                </CardContent>
-             
+      <div style={{ textAlign: "center", margin: "1rem 0" }}>
+        <p style={{ fontFamily: "Arial", fontWeight: "bold", fontSize: "50px", marginTop: "3rem" }}>
+          Quizzes
+        </p>
+      </div>
 
-              </Collapse>
-            </Card>
+      <div style={{ display: "flex", flexDirection: "row", marginTop: "1rem" }}>
+        <NestedList />
+        <div style={{ display: "flex", flexWrap: "wrap" }}>
+          {data.map((data2, index) => (
+<CardContainer key={index}>
+              <CardImage src="https://viralsolutions.net/wp-content/uploads/2019/06/shutterstock_749036344.jpg" alt="Media" />
+              <CardTitle>{data2.name}</CardTitle>
+              <CardDescription>{data2.description}</CardDescription>
+              <CardFooter>
+                <div>{data2.type}</div>
+                <div>{data2.price}</div>
+                <div>
+                  <IconButton
+                    aria-label="download"
+                    component="span"
+                    style={{ color: "#444" }}
+                  >
+                    <DownloadIcon />
+                  </IconButton>
+                </div>
+              </CardFooter>
+            </CardContainer>
           ))}
         </div>
       </div>
-      <IconButton aria-label="add card" onClick={handleAddCard}>
-        <AddIcon />
-      </IconButton>
+      <div style={{ marginBottom: "3rem" }}>
+        <ComboBox />
+      </div>
+      <Footer />
     </>
   );
 }
