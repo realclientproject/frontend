@@ -94,8 +94,6 @@ export default function RecipeReviewCard() {
 
   return (
     <>
-      <NavBar />
-
       <div style={{ textAlign: "center", margin: "1rem 0" }}>
         <p style={{ fontFamily: "Arial", fontWeight: "bold", fontSize: "50px", marginTop: "3rem" }}>
           Lessons
@@ -130,7 +128,6 @@ style={{ color: "#444" }}
 <div style={{ marginBottom: "3rem" }}>
 <ComboBox />
 </div>
-<Footer />
 </>
 );
 }
