@@ -72,13 +72,13 @@ const LoginForm = ({ setAuth }) => {
   const SwitchRoute = () => {
     switch (user?.role) {
       case "admin":
-        navigate("/admin");
+        navigate("/admin/lessons");
         break;
       case "user":
         navigate("/");
         break;
       case "superadmin":
-        navigate("/superadmin");
+        navigate("/superadmin/dashboard");
         break;
       default:
         navigate("/");

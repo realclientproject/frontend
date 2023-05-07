@@ -12,6 +12,8 @@ import Profile from "@mui/icons-material/PersonOutlineOutlined";
 import Notification from "../notification/notification";
 import { Menu as MenuIcon } from "@mui/icons-material";
 import UserProfileCard from "../../pages/profile/profile";
+import { useNavigate } from "react-router-dom";
+
 
 export default function BasicTextFields({
   title = "Dashboard",
@@ -27,7 +29,14 @@ export default function BasicTextFields({
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  const navigate = useNavigate();
+  const removeData = () => {
+    localStorage.removeItem("user");
+    navigate("/adminpanel");
+  };
+  const navigateHelp = () => {
+    navigate("/help");
+  };
   return (
     <>
       <Box sx={styles.Header_container}>
@@ -76,21 +85,24 @@ export default function BasicTextFields({
   <UserProfileCard />
 </Box>
         </MenuItem>
-        <MenuItem>
-        
+    
+        <MenuItem onClick={() => navigateHelp()}>
           <ListItemIcon>
             <Help fontSize="small" />
           </ListItemIcon>
           Help
         </MenuItem>
-        <MenuItem>
+        {/* <MenuItem>
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>
           Settings
         </MenuItem>
-        
-        <MenuItem>
+        <MenuItem
+          onClick={() => {
+            removeData();
+          }}
+        >
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

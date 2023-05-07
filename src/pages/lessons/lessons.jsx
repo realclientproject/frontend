@@ -2,7 +2,6 @@ import * as React from "react";
 import axios from "axios";
 import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
-import NavBar from "../../components/navbar/navbar";
 import NestedList from "../../components/lessons/NestedList";
 import Footer from "../../components/Footer/footer";
 import ComboBox from "../../components/lessons/searchbar";
@@ -95,8 +94,6 @@ export default function RecipeReviewCard() {
 
   return (
     <>
-      <NavBar />
-
       <div style={{ textAlign: "center", margin: "1rem 0" }}>
         <p style={{ fontFamily: "Arial", fontWeight: "bold", fontSize: "50px", marginTop: "3rem" }}>
           Lessons
@@ -131,7 +128,6 @@ style={{ color: "#444" }}
 <div style={{ marginBottom: "3rem" }}>
 <ComboBox />
 </div>
-<Footer />
 </>
 );
 }
