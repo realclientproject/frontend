@@ -9,9 +9,8 @@ export default function Layout({children}) {
       <NavBar/>
       <Stack
         direction="column"
-        spacing={2}
-        paddingX={5}
-        marginY={2}
+        // spacing={2}
+        // paddingX={5}
         width="100%"
       >
         {children}
