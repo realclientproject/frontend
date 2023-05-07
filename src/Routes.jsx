@@ -23,29 +23,32 @@ import ResourcesTables from './components/resourcesTable.jsx/resourcesTable.jsx'
 import PrivateSuperAdmin from "./utils/pivateroute.jsx";
 import PrivateAdmin from "./utils/adminroute.jsx";
 import RequireAuth from "./utils/requireAuth.jsx";
+import Layout from "./components/layout/layout.jsx";
+import DashboardLayout from "./components/layout/dashboardLayout.jsx";
+
 const AllRoutes = () => {
   return (
     <Router>
       <Routes>
 
-        <Route path="/" element={<Home />} />
-        <Route exact path="/home" element={<Home />}></Route>
-        <Route exact path="/help" element={<Help />}></Route>
+        <Route path="/" element={<Layout><Home /></Layout>} />
+        <Route exact path="/home" element={<Layout><Home /></Layout>}></Route>
+        <Route exact path="/help" element={<Layout><Help /></Layout>}></Route>
+        <Route exact path="/policies" element={<Layout><Policy /></Layout>}></Route>
         <Route element={<PrivateAdmin />}>
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin" element={<DashboardLayout><Admin /></DashboardLayout>} />
         </Route>
         <Route element={<PrivateSuperAdmin />}>
-          <Route path="/superadmin" element={<SuperAdmin />} />
+          <Route path="/superadmin" element={<DashboardLayout><SuperAdmin /></DashboardLayout>} />
         </Route>
 
-        <Route exact path="/policies" element={<Policy />}></Route>
         <Route exact path="/login" element={<Login />}></Route>
         <Route exact path="/adminpanel" element={<AdminLogin />}></Route>
         <Route exact path="/signup" element={<SignUp />}></Route>
         <Route element={<RequireAuth />}>
-          <Route exact path="/quizzes" element={<Quizze />}></Route>
-          <Route exact path="/lessons" element={<Lesson />}></Route>
 
+          <Route exact path="/quizzes" element={<Layout><Quizze /></Layout>}></Route>
+          <Route exact path="/lessons" element={<Layout><Lesson /></Layout>}></Route>
         </Route>
       </Routes>
     </Router>

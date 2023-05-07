@@ -56,6 +56,7 @@ export default function CreativeTeacher() {
         height: "100vh",
         justifyContent: "center",
         alignContent: "center",
+        py:10
       }}
     >
       <Typography variant="h2" fontWeight="700" mb={4}>

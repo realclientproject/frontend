@@ -57,7 +57,7 @@ function PricingContent() {
         disableGutters
         maxWidth="sm"
         component="main"
-        sx={{ pt: 8, pb: 6 }}
+        sx={{ py:10}}
       >
         <Typography
           component="h1"

@@ -180,11 +180,11 @@ export default function ContactUs() {
 
 const styles = {
   container: {
-    textAlign: ["center", ""],
+    textAlign: ["center", "start"],
     justifyContent: "space-between",
-    gap: [4, 15],
-    pb: 5,
-    m: 5,
+    gap: [4,15],
+    py: 10,
+    margin: "auto 10%"
   },
   title: {
     mb: 2,

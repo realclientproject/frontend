@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -39,10 +38,7 @@ function NavBar() {
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  // const handleOpenUserMenu = (event) => {
-  //   setAnchorElUser(event.currentTarget);
-  // };
-
+  
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
@@ -61,7 +57,7 @@ function NavBar() {
   const id = open ? "simple-popover" : undefined;
 
   return (
-    <AppBar sx={{ backgroundColor: "#e6f0fe" }} position="static">
+    <AppBar elevation={0} sx={{ backgroundColor: "#e6f0fe" }} position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* Logo in Resp Mode */}

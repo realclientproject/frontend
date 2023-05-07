@@ -35,19 +35,36 @@ function Hero() {
   }));
 
   return (
-    <Box sx={{ backgroundColor: "#E6F0FF", minHeight: "80vh" }}>
-      <Container>
+    <Box
+      sx={{
+        backgroundColor: "#E6F0FF",
+        minHeight: "90vh",
+        display: "flex",
+        alignItems: "center",
+      }}
+    >
+      <Container
+        sx={{ maxWidth: ["98%", "80%"]}}
+      >
         <CustomBox>
-          <Box sx={{ flex: "4", left: "0" }}>
-            <Title variant="h1" sx={{ color: "black" }}>
+          <Box
+            sx={{
+              flex: "4",
+              left: "0",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+            }}
+          >
+            <Title variant="h1" sx={{ color: "black", m:0}}>
               "TeachSupport: Empowering Educators to Achieve{" "}
               <Title sx={{ color: "#FFA500" }} variant="h1">
-                “Professional Excellence"?
+                “Professional Excellence" ?
               </Title>
             </Title>
             <Typography
               variant="body2"
-              sx={{ fontSize: "18px", color: "#5A6473", my: 4 }}
+              sx={{ fontSize: "18px", color: "#5A6473", my: 4, maxWidth:["100%", "90%"], textAlign: "center" }}
             >
               Online platform that provides teachers with the resources and
               support they need to enhance their skills, develop their careers,
@@ -56,9 +73,9 @@ function Hero() {
             <Box
               sx={{
                 display: "flex",
-                maxWidth: "70%",
                 justifyContent: "center",
                 alignItems: "center",
+                gap:4
               }}
             >
               <CustomButton
@@ -69,15 +86,17 @@ function Hero() {
                 display="block"
                 guideBtn="20px"
                 fontWeight="100"
-                height="40px"
+                height="50px"
+                width={150}
               />
               <CustomButton
                 backgroundColor="#FFFFFF"
                 color="#0D7590"
-                buttonText="Discover server"
+                buttonText="Discover lessons"
                 heroBtn={true}
                 guideBtn
-                height="40px"
+                height="50px"
+                width={150}
               />
             </Box>
           </Box>
@@ -94,7 +113,7 @@ function Hero() {
               src={heroImg}
               alt="heroImg"
               style={{
-                maxWidth: "100%",
+                maxWidth: "500px",
                 marginBottom: "2rem",
                 marginLeft: "20px",
               }}
