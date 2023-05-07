@@ -11,7 +11,9 @@ import Logout from "@mui/icons-material/Logout";
 import Profile from "@mui/icons-material/PersonOutlineOutlined";
 import Notification from "../notification/notification";
 import { Menu as MenuIcon } from "@mui/icons-material";
+import UserProfileCard from "../../pages/profile/profile";
 import { useNavigate } from "react-router-dom";
+
 
 export default function BasicTextFields({
   title = "Dashboard",
@@ -78,6 +80,12 @@ export default function BasicTextFields({
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
+        <MenuItem>
+        <Box sx={{ width: "250px", height: "240px" }}>
+  <UserProfileCard />
+</Box>
+        </MenuItem>
+    
         <MenuItem onClick={() => navigateHelp()}>
           <ListItemIcon>
             <Help fontSize="small" />
@@ -89,7 +97,7 @@ export default function BasicTextFields({
             <Settings fontSize="small" />
           </ListItemIcon>
           Settings
-        </MenuItem> */}
+        </MenuItem>
         <MenuItem
           onClick={() => {
             removeData();
