@@ -19,9 +19,9 @@ import {
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-// import DashboardLayout from "../../../components/layout/dashboardLayout";
 import axios from "axios";
 import AddresourcesButton from "./resourcesAddButton";
+import DashboardLayout from "../layout/dashboardLayout";
 
 function ResourcesTable() {
   const [editDialogOpen, setEditDialogOpen] = useState(false);
@@ -141,8 +141,8 @@ function ResourcesTable() {
 
   return (
     <>
-      {/* <DashboardLayout> */}
-        <TableContainer component={Paper} sx={{ width: "98%", margin: "auto" }}>
+<DashboardLayout>   
+      <TableContainer component={Paper} sx={{ width: "98%", margin: "auto" }}>
           <Table>
             <TableHead style={{ backgroundColor: "#0D7590" }}>
               <TableRow>
@@ -272,7 +272,7 @@ function ResourcesTable() {
             <Button onClick={()=>handleEditDialogSave(editingData._id)}>Save</Button>
           </DialogActions>
         </Dialog>
-      {/* </DashboardLayout> */}
+      </DashboardLayout>
     </>
   );
 }

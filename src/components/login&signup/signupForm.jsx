@@ -44,7 +44,7 @@ export default function SignupForm(props) {
     const { ...data } = values;
 
     const response = await axios
-      .post("http://localhost:5000/user/register", data)
+      .post("http://localhost:8000/user/register", data)
       .catch((err) => {
         console.log("error in form");
         if (err && err.response) setError(err.response.data.message);

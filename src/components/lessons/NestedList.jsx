@@ -34,10 +34,10 @@ export default function NestedList() {
 
   return (
     <div style={{ width: "30%" }}>
-      <ul style={{ listStyleType: "none", padding: "20px", backgroundColor: "#f9f9f9",width: "100%"  }}>
+      <ul style={{ listStyleType: "none", padding: "20px", backgroundColor: "#e6f0ff66" }}>
         {subject.map((data1, index) => (
           <li key={index} style={{ marginBottom: "10px" }}>
-            <div
+            <div 
               style={{
                 padding: "10px",
                 fontSize: "20px",
@@ -80,6 +80,18 @@ export default function NestedList() {
           </li>
         ))}
       </ul>
+      <style jsx>{`
+        /* Responsive styles */
+        @media screen and (max-width: 767px) {
+          div {
+            width: 100%;
+          }
+
+          h4 {
+            font-size: 10px;
+          }
+        }
+      `}</style>
     </div>
   );
 }
