@@ -21,11 +21,14 @@ import NotFoundPage from "./pages/404page/404.jsx";
 import PrivateSuperAdmin from "./utils/pivateroute.jsx";
 import PrivateAdmin from "./utils/adminroute.jsx";
 import RequireAuth from "./utils/requireAuth.jsx";
+import Layout from "./components/layout/layout.jsx";
+import DashboardLayout from "./components/layout/dashboardLayout.jsx";
+
 const AllRoutes = () => {
   return (
     <Router>
       <Routes>
-          <Route path="/admin" element={<Admin />} />
+        <Route path="/admin" element={<Admin />} />
         <Route
           path="/"
           element={
@@ -50,10 +53,9 @@ const AllRoutes = () => {
             <Route path="lessons" element={<Lesson />} />
             {/* <Route path="users" element={<Users />} /> */}
           </Route>
-
+        </Route>
 
         <Route element={<PrivateSuperAdmin />}>
-
           <Route
             path="/superadmin"
             element={
@@ -75,7 +77,6 @@ const AllRoutes = () => {
         <Route exact path="/adminpanel" element={<AdminLogin />}></Route>
         <Route exact path="/signup" element={<SignUp />}></Route>
         <Route element={<RequireAuth />}>
-
           <Route
             exact
             path="/quizzes"

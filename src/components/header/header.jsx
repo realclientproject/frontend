@@ -97,7 +97,7 @@ export default function BasicTextFields({
             <Settings fontSize="small" />
           </ListItemIcon>
           Settings
-        </MenuItem>
+        </MenuItem> */}
         <MenuItem
           onClick={() => {
             removeData();
