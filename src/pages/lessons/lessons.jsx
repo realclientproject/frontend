@@ -78,7 +78,7 @@ export default function RecipeReviewCard() {
   const [data, setData] = React.useState([]);
   React.useEffect(() => {
     axios
-      .get("http://localhost:8000/resource", {
+      .get("http://localhost:5000/resource", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access_token"),
         },

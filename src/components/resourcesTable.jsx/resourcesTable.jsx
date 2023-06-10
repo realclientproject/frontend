@@ -69,7 +69,7 @@ function ResourcesTable() {
   const handleEditDialogSave = (id) => {
     // handle save logic here
     axios
-      .patch(`http://localhost:8000/resource/${id}`,editingData, {
+      .patch(`http://localhost:5000/resource/${id}`,editingData, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access_token"),
         },
@@ -100,7 +100,7 @@ function ResourcesTable() {
   const handleDeleteClick = (id) => {
     // handle delete logic here
     axios
-      .delete(`http://localhost:8000/resource${id}`, {
+      .delete(`http://localhost:5000/resource${id}`, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access_token"),
         },
@@ -125,7 +125,7 @@ function ResourcesTable() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/resource", {
+      .get("http://localhost:5000/resource", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access_token"),
         },
@@ -141,7 +141,6 @@ function ResourcesTable() {
 
   return (
     <>
-<DashboardLayout>   
       <TableContainer component={Paper} sx={{ width: "98%", margin: "auto" }}>
           <Table>
             <TableHead style={{ backgroundColor: "#0D7590" }}>
@@ -173,7 +172,7 @@ function ResourcesTable() {
                   <TableRow key={index}>
                     <TableCell>{row.name}</TableCell>
                     <TableCell>{row.type}</TableCell>
-                    <TableCell>{row.descrition}</TableCell>
+                    <TableCell>{row.description}</TableCell>
                     <TableCell>{row.price}</TableCell>
                     <TableCell>{row.count}</TableCell>
                     <TableCell>
@@ -272,7 +271,6 @@ function ResourcesTable() {
             <Button onClick={()=>handleEditDialogSave(editingData._id)}>Save</Button>
           </DialogActions>
         </Dialog>
-      </DashboardLayout>
     </>
   );
 }

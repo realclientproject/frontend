@@ -8,7 +8,7 @@ export default function NestedList() {
 
   React.useEffect(() => {
     axios
-      .get("http://localhost:8000/subject", {
+      .get("http://localhost:5000/subject", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access_token"),
         },
