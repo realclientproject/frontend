@@ -50,7 +50,7 @@ const AddresourcesButton = () => {
     e.preventDefault();
     console.log(formData);
     axios
-      .post("http://localhost:8000/resource", formData)
+      .post("http://localhost:5000/resource", formData)
       .then((response) => {
         // Handle success response
         console.log(response);

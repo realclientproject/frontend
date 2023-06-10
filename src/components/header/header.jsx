@@ -92,7 +92,7 @@ export default function BasicTextFields({
           </ListItemIcon>
           Help
         </MenuItem>
-        {/* <MenuItem>
+        <MenuItem>
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>

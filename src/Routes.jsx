@@ -21,23 +21,29 @@ import NotFoundPage from "./pages/404page/404.jsx";
 import PrivateSuperAdmin from "./utils/pivateroute.jsx";
 import PrivateAdmin from "./utils/adminroute.jsx";
 import RequireAuth from "./utils/requireAuth.jsx";
+import DashboardLayout from "./components/layout/dashboardLayout.jsx";
+import { LayoutGroup } from "framer-motion";
+import Layout from "./components/layout/layout.jsx";
+import ResourcesTable from "./components/resourcesTable.jsx/resourcesTable.jsx";
 const AllRoutes = () => {
   return (
     <Router>
       <Routes>
+      <Route path="/test" element={<ResourcesTable />} />
+
           <Route path="/admin" element={<Admin />} />
         <Route
           path="/"
           element={
-            <Layout>
+            <LayoutGroup>
               <Home />
-            </Layout>
+            </LayoutGroup>
           }
         />
         <Route exact path="/home" element={<Home />}></Route>
         <Route exact path="/help" element={<Help />}></Route>
         <Route exact path="/policies" element={<Policy />}></Route>
-        <Route element={<PrivateAdmin />}>
+        <Route element={<PrivateAdmin />}></Route>
           <Route
             path="/admin"
             element={

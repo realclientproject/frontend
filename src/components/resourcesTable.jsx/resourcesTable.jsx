@@ -29,22 +29,7 @@ function ResourcesTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [loaded, setLoaded] = useState(false);
-  const [data, setData] = useState([
-    {_id:"1",
-      first_name: "John",
-      last_name: "Doe",
-      phone: "123-456-7890",
-      email: "john.doe@example.com",
-      role: "Admin",
-    },
-    {_id:"2",
-      first_name: "Jane",
-      last_name: "Doe",
-      phone: "234-567-8901",
-      email: "jane.doe@example.com",
-      role: "User",
-    },
-  ]);
+  const [data, setData] = useState([]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -69,7 +54,7 @@ function ResourcesTable() {
   const handleEditDialogSave = (id) => {
     // handle save logic here
     axios
-      .patch(`http://localhost:8000/resource/${id}`,editingData, {
+      .patch(`http://localhost:5000/resource/${id}`,editingData, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access_token"),
         },
@@ -100,7 +85,7 @@ function ResourcesTable() {
   const handleDeleteClick = (id) => {
     // handle delete logic here
     axios
-      .delete(`http://localhost:8000/resource${id}`, {
+      .delete(`http://localhost:5000/resource${id}`, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access_token"),
         },
@@ -125,7 +110,7 @@ function ResourcesTable() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/resource", {
+      .get("http://localhost:5000/resource", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access_token"),
         },
