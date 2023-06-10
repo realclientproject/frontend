@@ -23,6 +23,7 @@ import { useAuthContext } from "./hooks/useAuthContext";
 import PrivateSuperAdmin from "./utils/pivateroute.jsx";
 import PrivateAdmin from "./utils/adminroute.jsx";
 import RequireAuth from "./utils/requireAuth.jsx";
+import Payment from "./pages/payment/payment.jsx";
 const AllRoutes = () => {
   return (
     <Router>
@@ -44,6 +45,7 @@ const AllRoutes = () => {
         <Route element={<RequireAuth />}>
           <Route exact path="/quizzes" element={<Quizze />}></Route>
           <Route exact path="/lessons" element={<Lesson />}></Route>
+          <Route exact path="/payment" element={<Payment />}></Route>
         </Route>
       </Routes>
     </Router>

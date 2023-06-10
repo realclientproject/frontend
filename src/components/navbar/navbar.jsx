@@ -13,15 +13,12 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import { Link, useNavigate } from "react-router-dom";
 import { AvatarGroup, Popover } from "@mui/material";
-
+import "./navbar.css";
 // import Tooltip from "@mui/material/Tooltip";
 // import { Button, Grid } from "@mui/material";
 
 import logo from "./logo.svg";
 import CustomButton from "../hero/custombutton.jsx";
-import { Person } from "@mui/icons-material";
-
-const pages = ["Home", "Lessons", "Quizzes", "teachers", "about"];
 
 function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -143,14 +140,7 @@ function NavBar() {
                   Home
                 </Link>
               </Button>
-              <Button sx={{ my: 2, color: "black", display: "block" }}>
-                <Link
-                  style={{ textDecoration: "none", color: "black" }}
-                  to="/teachers"
-                >
-                  Teachers
-                </Link>
-              </Button>
+
               <Button sx={{ my: 2, color: "black", display: "block" }}>
                 <Link
                   style={{ textDecoration: "none", color: "black" }}
@@ -159,7 +149,13 @@ function NavBar() {
                   Lessons
                 </Link>
               </Button>
-              <Button sx={{ my: 2, color: "black", display: "block" }}>
+              <Button
+                sx={{
+                  my: 2,
+                  color: "black",
+                  display: "block",
+                }}
+              >
                 <Link
                   style={{ textDecoration: "none", color: "black" }}
                   to="/quizzes"
@@ -190,37 +186,62 @@ function NavBar() {
           </Typography>
 
           {/* Links */}
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <Button sx={{ my: 2, color: "black", display: "block" }}>
-              <Link style={{ textDecoration: "none", color: "black" }} to="/">
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", md: "flex" },
+            }}
+          >
+            <Box sx={{ display: { xs: "none", md: "flex" } }}>
+              <Link
+                className="Link"
+                style={{
+                  borderRadius: "10px",
+
+                  padding: "5px",
+                  border: "1px solid",
+                  textDecoration: "none",
+                  color: "black",
+                  marginLeft: "20px",
+                }}
+                to="/"
+              >
                 Home
               </Link>
-            </Button>
 
-            <Button sx={{ my: 2, color: "black", display: "block" }}>
               <Link
-                style={{ textDecoration: "none", color: "black" }}
-                to="/teachers"
-              >
-                teachers
-              </Link>
-            </Button>
-            <Button sx={{ my: 2, color: "black", display: "block" }}>
-              <Link
-                style={{ textDecoration: "none", color: "black" }}
+                className="Link"
+                style={{
+                  borderRadius: "10px",
+
+                  padding: "5px",
+                  border: "1px solid",
+                  textDecoration: "none",
+                  color: "black",
+                  marginLeft: "20px",
+                }}
                 to="/lessons"
               >
                 Lessons
               </Link>
-            </Button>
-            <Button sx={{ my: 2, color: "black", display: "block" }}>
+
               <Link
-                style={{ textDecoration: "none", color: "black" }}
+                className="Link"
+                style={{
+                  borderRadius: "10px",
+
+                  padding: "5px",
+                  border: "1px solid",
+                  textDecoration: "none",
+                  color: "black",
+                  marginLeft: "20px",
+                }}
                 to="/quizzes"
               >
                 Quizzes
               </Link>
-            </Button>
+            </Box>
+
             {/* normal screen */}
             <Box
               sx={{
@@ -230,7 +251,7 @@ function NavBar() {
                 justifyContent: "end",
               }}
             >
-              <Box sx={{ marginRight: "10px" }}>
+              <Box sx={{ marginRight: "20px" }}>
                 <>
                   {isUser ? (
                     <>

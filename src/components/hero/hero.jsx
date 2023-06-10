@@ -40,10 +40,9 @@ function Hero() {
         <CustomBox>
           <Box sx={{ flex: "4", left: "0" }}>
             <Title variant="h1" sx={{ color: "black" }}>
-              "TeachSupport: Empowering Educators to Achieve{" "}
-              <Title sx={{ color: "#FFA500" }} variant="h1">
-                “Professional Excellence"?
-              </Title>
+              " TeachSupport: Empowering Educators to Achieve<br></br>
+              <span style={{ color: "#FFA500" }}>Professional Excellence </span>
+              "
             </Title>
             <Typography
               variant="body2"
