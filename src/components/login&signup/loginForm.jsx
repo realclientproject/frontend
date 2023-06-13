@@ -98,7 +98,7 @@ const LoginForm = ({ setAuth }) => {
   return (
     <>
       {submited ? (
-        SwitchRoute()
+        navigate("/")
       ) : (
         <FormikProvider value={formik}>
           <Form autoComplete="off" onSubmit={handleSubmit} noValidate>
