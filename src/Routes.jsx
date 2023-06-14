@@ -28,6 +28,7 @@ import RequireAuth from "./utils/requireAuth.jsx";
 import Payment from "./pages/payment/payment.jsx";
 import Layout from "./components/layout/layout.jsx";
 import DashboardLayout from "./components/layout/dashboardLayout.jsx";
+import QuizzesTable from './pages/dashboard/superAdmin/superAdminQuizzes.jsx'
 
 const AllRoutes = () => {
   return (
@@ -72,7 +73,7 @@ const AllRoutes = () => {
             <Route path="dashboard" element={<SuperAdmin />} />
             {/* <Route path="role_admins" element={<Admins />} /> */}
             {/* <Route path="users" element={<Users />} /> */}
-            <Route path="quizzes" element={<Quizzes />} />
+            <Route path="quizzes" element={<QuizzesTable />} />
             <Route path="lessons" element={<Lesson />} />
           </Route>
         </Route>

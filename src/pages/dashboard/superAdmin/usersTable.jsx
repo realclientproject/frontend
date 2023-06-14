@@ -14,16 +14,17 @@ import {
   DialogContentText,
   TextField,
   DialogActions,
-  Button,
-  TablePagination,
-} from "@mui/material";
+
+  Button,TablePagination} from "@mui/material";
+import BasicTextFields from '../../../components/header/header';
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import AddButton from "./addbutton";
+import DashboardLayout from "../../../components/layout/dashboardLayout";
 import axios from "axios";
-import AddresourcesButton from "./resourcesAddButton";
-import DashboardLayout from "../layout/dashboardLayout";
 
-function ResourcesTable() {
+
+function Tables() {
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [editingData, setEditingData] = useState({});
   const [page, setPage] = useState(0);
@@ -69,7 +70,7 @@ function ResourcesTable() {
   const handleEditDialogSave = (id) => {
     // handle save logic here
     axios
-      .patch(`http://localhost:5000/resource/${id}`,editingData, {
+      .patch(`http://localhost:5000/user/edit/${id}`,editingData, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access_token"),
         },
@@ -100,7 +101,7 @@ function ResourcesTable() {
   const handleDeleteClick = (id) => {
     // handle delete logic here
     axios
-      .delete(`http://localhost:5000/resource${id}`, {
+      .delete(`http://localhost:5000/user/${id}`, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access_token"),
         },
@@ -109,7 +110,7 @@ function ResourcesTable() {
         // Handle success response
         console.log(response);
         if (response.status === 200) {
-          alert("file was successfully deleted");
+          alert("user was successfully deleted");
         }
       })
       .catch((error) => {
@@ -125,7 +126,7 @@ function ResourcesTable() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/resource", {
+      .get("http://localhost:5000/user", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access_token"),
         },
@@ -141,24 +142,24 @@ function ResourcesTable() {
 
   return (
     <>
-      <TableContainer component={Paper} sx={{ width: "98%", margin: "auto" }}>
+        <TableContainer component={Paper} sx={{ width: "98%", margin: "auto" }}>
           <Table>
             <TableHead style={{ backgroundColor: "#0D7590" }}>
               <TableRow>
                 <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>
-                  Name
+                  First Name
                 </TableCell>
                 <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>
-                  Type
+                  Last Name
                 </TableCell>
                 <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>
-                 Description
+                  Phone Number
                 </TableCell>
                 <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>
-                  price
+                  Email
                 </TableCell>
                 <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>
-                  count
+                  Role
                 </TableCell>
                 <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>
                   Actions
@@ -170,11 +171,11 @@ function ResourcesTable() {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => (
                   <TableRow key={index}>
-                    <TableCell>{row.name}</TableCell>
-                    <TableCell>{row.type}</TableCell>
-                    <TableCell>{row.description}</TableCell>
-                    <TableCell>{row.price}</TableCell>
-                    <TableCell>{row.count}</TableCell>
+                    <TableCell>{row.first_name}</TableCell>
+                    <TableCell>{row.last_name}</TableCell>
+                    <TableCell>{row.phone}</TableCell>
+                    <TableCell>{row.email}</TableCell>
+                    <TableCell>{row.role}</TableCell>
                     <TableCell>
                       <IconButton onClick={() => handleEditClick(row)}>
                         <EditIcon />
@@ -196,7 +197,7 @@ function ResourcesTable() {
               padding: 0,
             }}
           >
-            <AddresourcesButton/>
+            <AddButton />
             <TablePagination
               rowsPerPageOptions={[5, 10, 25]}
               component="div"
@@ -209,60 +210,60 @@ function ResourcesTable() {
           </div>
         </TableContainer>
         <Dialog open={editDialogOpen} onClose={handleEditDialogClose}>
-          <DialogTitle>Edit resources</DialogTitle>
+          <DialogTitle>Edit User</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              To edit the resource information, please update the fields below.
+              To edit the user's information, please update the fields below.
             </DialogContentText>
             <TextField
               autoFocus
               margin="dense"
-              label="Name"
+              label="First Name"
               type="text"
               fullWidth
-              value={editingData.name || ""}
+              value={editingData.first_name || ""}
               onChange={(e) =>
-                setEditingData({ ...editingData, name: e.target.value })
+                setEditingData({ ...editingData, first_name: e.target.value })
               }
             />
             <TextField
               margin="dense"
-              label="Type"
+              label="Last Name"
               type="text"
               fullWidth
-              value={editingData.type || ""}
+              value={editingData.last_name || ""}
               onChange={(e) =>
-                setEditingData({ ...editingData, type: e.target.value })
+                setEditingData({ ...editingData, last_name: e.target.value })
               }
             />
             <TextField
               margin="dense"
-              label="description"
+              label="Phone Number"
               type="tel"
               fullWidth
-              value={editingData.description || ""}
+              value={editingData.phone || ""}
               onChange={(e) =>
-                setEditingData({ ...editingData, description: e.target.value })
+                setEditingData({ ...editingData, phone: e.target.value })
               }
             />
             <TextField
               margin="dense"
-              label="price"
-              type="text"
+              label="Email Address"
+              type="email"
               fullWidth
-              value={editingData.price || ""}
+              value={editingData.email || ""}
               onChange={(e) =>
-                setEditingData({ ...editingData, price: e.target.value })
+                setEditingData({ ...editingData, email: e.target.value })
               }
             />
             <TextField
               margin="dense"
-              label="count"
+              label="Role"
               type="text"
               fullWidth
-              value={editingData.count || ""}
+              value={editingData.role || ""}
               onChange={(e) =>
-                setEditingData({ ...editingData, count: e.target.value })
+                setEditingData({ ...editingData, role: e.target.value })
               }
             />
           </DialogContent>
@@ -274,4 +275,4 @@ function ResourcesTable() {
     </>
   );
 }
-export default ResourcesTable;
+export default Tables;

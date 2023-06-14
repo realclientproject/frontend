@@ -76,23 +76,23 @@ export const useFormControls = () => {
     validate({ [name]: value });
   };
   const handleFormSubmit = async (e) => {
-    e.preventDefault();
-    // if (formIsValid()) {
-    //   axios({
-    //     method: "POST",
-    //     url: "http://localhost:3000/send",
-    //     data: {
-    //       values,
-    //     },
-    //   }).then((response) => {
-    //     if (response.data.msg === "success") {
-    //       alert("Your message is sent successfully!");
-    //       this.resetForm();
-    //     } else if (response.data.msg === "fail") {
-    //       alert("Message failed to send.");
-    //     }
-    //   });
-    // }
+    if (formIsValid()) {
+      axios({
+        method: "POST",
+        url: "http://localhost:5000/contactUs/send",
+        data: {
+          values,
+        },
+      }).then((response) => {
+        console.log(response);
+        if (response.request.status === "success") {
+          alert("Your message is sent successfully!");
+          this.resetForm();
+        } else if (response.data.msg === "fail") {
+          alert("Message failed to send.");
+        }
+      });
+    }
   };
   const formIsValid = (fieldValues = values) => {
     const isValid =
@@ -170,7 +170,7 @@ export default function ContactUs() {
             </>
           );
         })}
-        <Button sx={styles.button} type="submit" variant="contained">
+        <Button sx={styles.button} type="submit" variant="contained" onClick={()=>handleFormSubmit()}>
           Send Message
         </Button>
       </FormControl>
