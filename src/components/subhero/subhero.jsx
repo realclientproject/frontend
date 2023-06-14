@@ -89,26 +89,6 @@ function Hero() {
               them with meaningful employment opportunities. Join us on this
               journey to kickstart your teaching career.
             </Typography>
-            <Box
-              sx={{
-                display: "flex",
-                maxWidth: "70%",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <CustomButton
-                backgroundColor="#0D7590"
-                color="#fff"
-                buttonText="Learn more"
-                heroBtn={true}
-                display="block"
-                guideBtn="20px"
-                fontWeight="100"
-                height="50px"
-                width={150}
-              />
-            </Box>
           </Box>
         </CustomBox>
       </Container>
