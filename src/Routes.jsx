@@ -13,7 +13,7 @@ import Login from "./pages/login/login.jsx";
 import Lesson from "./pages/lessons/lessons.jsx";
 import Policy from "./pages/policies/policies.jsx";
 import Admin from "./pages/dashboard/admin/adminLessons.jsx";
-import SuperAdmin from "./pages/dashboard/superadmin/admin.jsx";
+// import SuperAdmin from "./pages/dashboard/superadmin/admin.jsx";
 import Home from "./pages/home/home.jsx";
 import SignUp from "./pages/signup/signup.jsx";
 import Quizzes from "./pages/quizzes/quizzes.jsx";
@@ -81,6 +81,8 @@ const AllRoutes = () => {
         <Route exact path="/login" element={<Login />}></Route>
         <Route exact path="/adminpanel" element={<AdminLogin />}></Route>
         <Route exact path="/signup" element={<SignUp />}></Route>
+        <Route exact path="/payment" element={<Payment />}></Route>
+
         <Route element={<RequireAuth />}>
           <Route
             exact
