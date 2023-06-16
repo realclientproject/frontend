@@ -196,13 +196,12 @@ function NavBar() {
               <Link
                 className="Link"
                 style={{
-                  borderRadius: "10px",
-
                   padding: "5px",
                   border: "1px solid",
                   textDecoration: "none",
                   color: "black",
                   marginLeft: "20px",
+                  borderRadius: "10px",
                 }}
                 to="/"
               >
