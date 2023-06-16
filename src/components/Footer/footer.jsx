@@ -12,11 +12,6 @@ import {
   faTwitter,
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
-import {
-  faLocation,
-  faPhone,
-  faPaperPlane,
-} from "@fortawesome/free-solid-svg-icons";
 
 export default function Footer() {
   return (

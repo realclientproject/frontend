@@ -3,7 +3,14 @@ import { Container, display } from "@mui/system";
 import React from "react";
 import heroImg from "./hero_img.svg";
 import CustomButton from "./custombutton";
+import { useNavigate } from "react-router-dom";
+
 function Hero() {
+  const Navigate = useNavigate();
+  const user = localStorage.getItem("user");
+  const signup = () => {
+    Navigate("/signup");
+  };
   const CustomBox = styled(Box)(({ theme }) => ({
     display: "flex",
     justifyContent: "center",
@@ -60,24 +67,21 @@ function Hero() {
                 alignItems: "center",
               }}
             >
-              <CustomButton
-                backgroundColor="#0D7590"
-                color="#fff"
-                buttonText="Join now"
-                heroBtn={true}
-                display="block"
-                guideBtn="20px"
-                fontWeight="100"
-                height="40px"
-              />
-              <CustomButton
-                backgroundColor="#FFFFFF"
-                color="#0D7590"
-                buttonText="Discover server"
-                heroBtn={true}
-                guideBtn
-                height="40px"
-              />
+              {!user ? (
+                <Button
+                  size="large"
+                  style={{
+                    border: "1px solid #0D7590",
+                    color: "#0D7590",
+                    marginRight: "10px",
+                  }}
+                  onClick={signup}
+                >
+                  Join Us
+                </Button>
+              ) : (
+                ""
+              )}
             </Box>
           </Box>
 
