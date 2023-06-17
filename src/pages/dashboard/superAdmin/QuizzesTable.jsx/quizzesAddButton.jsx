@@ -18,7 +18,7 @@ const AddresourcesButton = () => {
   const [showmedia, setShowmedia] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
-    type: "",
+    type: "quiz",
     description: "",
     price: "",
     count: "",
@@ -58,7 +58,7 @@ const AddresourcesButton = () => {
         // >> RESET THE INPUTS
         setFormData({
           name: "",
-          type: "",
+          type: "quiz",
           description: "",
           price: "",
           count: "",
@@ -123,6 +123,7 @@ const AddresourcesButton = () => {
             type="text"
             fullWidth
             required
+            disabled
             value={formData.type}
             onChange={handleInputChange}
           />

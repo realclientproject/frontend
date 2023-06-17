@@ -10,21 +10,23 @@ import {
 import { Add } from "@mui/icons-material";
 import { DialogActions } from "@mui/material";
 import axios from "axios";
+import { Input, InputAdornment, IconButton } from "@mui/material";
+import { CloudUpload } from "@mui/icons-material";
 
-const AddButton = () => {
+const AddresourcesButton = () => {
   const [open, setOpen] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
+  const [showmedia, setShowmedia] = useState(false);
   const [formData, setFormData] = useState({
-    first_name: "",
-    last_name: "",
-    phone: "",
-    email: "",
-    role: "",
-    password: "",
+    name: "",
+    type: "Lesson",
+    description: "",
+    price: "",
+    count: "",
+    media: "",
   });
 
-  const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
+  const handleClickShowmedia = () => {
+    setShowmedia(!showmedia);
   };
 
   const handleClickOpen = () => {
@@ -48,19 +50,19 @@ const AddButton = () => {
     e.preventDefault();
     console.log(formData);
     axios
-      .post("http://localhost:5000/user/register", formData)
+      .post("http://localhost:8000/resource", formData)
       .then((response) => {
         // Handle success response
         console.log(response);
 
         // >> RESET THE INPUTS
         setFormData({
-          first_name: "",
-          last_name: "",
-          phone: "",
-          email: "",
-          role: "",
-          password: "",
+          name: "",
+          type: "Lesson",
+          description: "",
+          price: "",
+          count: "",
+          media: "",
         });
         handleClose();
       })
@@ -68,9 +70,9 @@ const AddButton = () => {
         // Handle error response
         console.error(error);
         if (error.response && error.response.status === 409) {
-          alert("Email already taken, please use a different email.");
+          alert("price already taken, please use a different price.");
         } else {
-          alert("Something went wrong. Please try to change the email.");
+          alert("Something went wrong. Please try to change the price.");
         }
       });
   };
@@ -106,64 +108,71 @@ const AddButton = () => {
           <TextField
             autoFocus
             margin="dense"
-            name="first_name"
-            label="First Name"
+            name="name"
+            label="Name"
             type="text"
             fullWidth
             required
-            value={formData.first_name}
+            value={formData.name}
             onChange={handleInputChange}
           />
           <TextField
             margin="dense"
-            name="last_name"
-            label="Last Name"
+            name="type"
+            label="Type"
             type="text"
             fullWidth
             required
-            value={formData.last_name}
+            disabled
+            value={formData.type}
             onChange={handleInputChange}
           />
           <TextField
             margin="dense"
-            name="phone"
-            label="Phone Number"
+            name="description"
+            label="description "
             type="text"
             fullWidth
             required
-            value={formData.phone}
+            value={formData.description}
             onChange={handleInputChange}
           />
           <TextField
             margin="dense"
-            name="email"
-            label="Email"
-            type="email"
+            name="price"
+            label="price"
+            type="text"
             fullWidth
             required
-            value={formData.email}
+            value={formData.price}
             onChange={handleInputChange}
           />
           <TextField
             margin="dense"
-            name="role"
-            label="Role"
+            name="count"
+            label="count"
             type="text"
             fullWidth
             required
-            value={formData.role}
+            value={formData.count}
             onChange={handleInputChange}
           />
-          <TextField
-            margin="dense"
-            name="password"
-            label="Password"
-            type="text"
-            fullWidth
-            required
-            value={formData.password}
-            onChange={handleInputChange}
-          />
+         <Input
+  margin="dense"
+  name="media"
+  type="file"
+  fullWidth
+  required
+  inputProps={{ accept: "image/*, .pdf, .doc, .docx" }}
+  onChange={handleClickShowmedia}
+  endAdornment={
+    <InputAdornment position="end">
+      <IconButton>
+        <CloudUpload />
+      </IconButton>
+    </InputAdornment>
+  }
+/>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
@@ -177,4 +186,4 @@ const AddButton = () => {
     </>
   );
 };
-export default AddButton;
+export default AddresourcesButton;

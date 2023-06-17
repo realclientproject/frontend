@@ -16,8 +16,8 @@ import {
   DialogActions,
   Button,
   TablePagination,
-  InputLabel,
   Select,
+  InputLabel,
   MenuItem,
 } from "@mui/material";
 import BasicTextFields from "../../../components/header/header";
@@ -27,7 +27,7 @@ import AddButton from "./addbuttonTable";
 import DashboardLayout from "../../../components/layout/dashboardLayout";
 import axios from "axios";
 
-function Tables() {
+function AdminsTables() {
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [editingData, setEditingData] = useState({});
   const [page, setPage] = useState(0);
@@ -63,7 +63,7 @@ function Tables() {
 
   const handleEditClick = (row) => {
     setEditingData(row);
-    console.log(row);
+    // console.log(row);
     setEditDialogOpen(true);
   };
 
@@ -82,7 +82,7 @@ function Tables() {
       })
       .then((response) => {
         // Handle success response
-        console.log(response);
+        // console.log(response);
         if (response.status === 200) {
           alert("user's info has been edited successfully");
         }
@@ -138,11 +138,11 @@ function Tables() {
         },
       })
       .then((response) => {
-        const users = response.data.response.filter(
-          (user) => user.role === "user"
+        const adminUsers = response.data.response.filter(
+          (user) => user.role === "admin" || user.role === "superadmin"
         );
-        setData(users);
-        console.log(response.data.response);
+        setData(adminUsers);
+        // console.log(response.data.response);
       })
       .catch((error) => {
         console.log(error);
@@ -292,4 +292,4 @@ function Tables() {
     </>
   );
 }
-export default Tables;
+export default AdminsTables;

@@ -1,8 +1,10 @@
-import React from 'react'
-import QuizzesTable from '../../../components/resourcesTable.jsx/resourcesTable'
+import React from "react";
+import QuizzesTable from "./QuizzesTable.jsx/quizzesTable";
 
 export default function SuperAdminQuizzes() {
   return (
-    <div><QuizzesTable/></div>
-  )
+    <div>
+      <QuizzesTable />
+    </div>
+  );
 }

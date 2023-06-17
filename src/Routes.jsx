@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  Navigate,
   Outlet,
 } from "react-router-dom";
 
@@ -19,16 +18,19 @@ import SignUp from "./pages/signup/signup.jsx";
 import Quizzes from "./pages/quizzes/quizzes.jsx";
 import AdminLogin from "./pages/login/adminlogin.jsx";
 import NotFoundPage from "./pages/404page/404.jsx";
-import TableContent from "./pages/dashboard/superadmin/admin.jsx";
-import ResourcesTables from "./components/resourcesTable.jsx/resourcesTable.jsx";
-import { useAuthContext } from "./hooks/useAuthContext";
+// import TableContent from "./pages/dashboard/superAdmin/admin.jsx";
+// import ResourcesTables from "./components/resourcesTable.jsx/resourcesTable.jsx";
+// import { useAuthContext } from "./hooks/useAuthContext";
+import Admins from "./pages/dashboard/superAdmin/adminsTable.jsx";
 import PrivateSuperAdmin from "./utils/pivateroute.jsx";
 import PrivateAdmin from "./utils/adminroute.jsx";
 import RequireAuth from "./utils/requireAuth.jsx";
 import Payment from "./pages/payment/payment.jsx";
 import Layout from "./components/layout/layout.jsx";
 import DashboardLayout from "./components/layout/dashboardLayout.jsx";
-import QuizzesTable from './pages/dashboard/superAdmin/superAdminQuizzes.jsx'
+import QuizzesTable from "./pages/dashboard/superAdmin/superAdminQuizzes.jsx";
+import LessonsTable from "./pages/dashboard/superAdmin/lessonsTable/lessonsTable.jsx"
+import Users from "./pages/dashboard/superAdmin/usersTable.jsx";
 
 const AllRoutes = () => {
   return (
@@ -57,7 +59,6 @@ const AllRoutes = () => {
           >
             <Route path="quizzes" element={<Quizzes />} />
             <Route path="lessons" element={<Lesson />} />
-            {/* <Route path="users" element={<Users />} /> */}
           </Route>
         </Route>
 
@@ -71,10 +72,10 @@ const AllRoutes = () => {
             }
           >
             <Route path="dashboard" element={<SuperAdmin />} />
-            {/* <Route path="role_admins" element={<Admins />} /> */}
-            {/* <Route path="users" element={<Users />} /> */}
+            <Route path="admins" element={<Admins />} />
+            <Route path="users" element={<Users />} />
             <Route path="quizzes" element={<QuizzesTable />} />
-            <Route path="lessons" element={<Lesson />} />
+            <Route path="lessons" element={<LessonsTable />} />
           </Route>
         </Route>
 

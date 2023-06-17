@@ -21,7 +21,7 @@ ChartJS.register(
 
 export default function DonutChart({data}) {
     const languageData = data.reduce((acc, curr) => {
-        const language = curr.language;
+        const language = curr.subject.lang;
         if (acc[language]) {
           acc[language]++;
         } else {
@@ -51,7 +51,7 @@ export default function DonutChart({data}) {
         },
       };
   return (
-    <Box>
+    <Box paddingX={10}>
       <Doughnut data={chartData} options={options} />
     </Box>
   );

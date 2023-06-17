@@ -20,10 +20,10 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
-import AddresourcesButton from "./resourcesAddButton";
-import DashboardLayout from "../layout/dashboardLayout";
+import AddresourcesButton from "./lessonsAddButton";
+// import DashboardLayout from "../../../../components/layout/dashboardLayout";
 
-function ResourcesTable() {
+function LessonsTable() {
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [editingData, setEditingData] = useState({});
   const [page, setPage] = useState(0);
@@ -131,8 +131,11 @@ function ResourcesTable() {
         },
       })
       .then((response) => {
-        setData(response.data.response);
-        console.log(response.data.response);
+        const quizzes = response.data.response.filter(
+          (resource) => resource.type === "Lesson"
+        );
+        setData(quizzes);
+        // console.log(response.data.response);
       })
       .catch((error) => {
         console.log(error);
@@ -274,4 +277,4 @@ function ResourcesTable() {
     </>
   );
 }
-export default ResourcesTable;
+export default LessonsTable;
