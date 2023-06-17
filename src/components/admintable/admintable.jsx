@@ -69,7 +69,7 @@ function Tables() {
   const handleEditDialogSave = (id) => {
     // handle save logic here
     axios
-      .patch(`http://localhost:5000/user/edit/${id}`,editingData, {
+      .patch(`https://supportteachers-mern-api.onrender.com/user/edit/${id}`,editingData, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access_token"),
         },
@@ -100,7 +100,7 @@ function Tables() {
   const handleDeleteClick = (id) => {
     // handle delete logic here
     axios
-      .delete(`http://localhost:5000/user/${id}`, {
+      .delete(`https://supportteachers-mern-api.onrender.com/user/${id}`, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access_token"),
         },
@@ -125,7 +125,7 @@ function Tables() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/user", {
+      .get("https://supportteachers-mern-api.onrender.com/user", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access_token"),
         },

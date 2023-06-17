@@ -2,83 +2,116 @@ import * as React from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
+import { useState } from "react";
 
 export default function NestedList() {
-  const [subject, setSubject] = React.useState([]);
+  const [selectedGrade, setSelectedGrade] = useState("");
+  const [selectedLang, setSelectedLang] = useState("");
+  const [selectedType, setSelectedType] = useState("");
+  const [searchKeyword, setSearchKeyword] = useState("");
 
-  React.useEffect(() => {
-    axios
-      .get("http://localhost:8000/subject", {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("access_token"),
-        },
-      })
-      .then((response) => {
-        setSubject(response.data.response);
-        console.log(response.data.response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
-  const [isOpen, setIsOpen] = React.useState([]);
-
-  const handleToggle = (index) => {
-    setIsOpen((prevIsOpen) => {
-      const newIsOpen = [...prevIsOpen];
-      newIsOpen[index] = !newIsOpen[index];
-      return newIsOpen;
-    });
-  };
 
   return (
-    <div style={{ width: "30%" }}>
-      <ul style={{ listStyleType: "none", padding: "20px", backgroundColor: "#e6f0ff66" }}>
-        {subject.map((data1, index) => (
-          <li key={index} style={{ marginBottom: "10px" }}>
-            <div 
-              style={{
-                padding: "10px",
-                fontSize: "20px",
-              }}
-            >
-              <h4
-                onClick={() => handleToggle(index)}
-                style={{ cursor: "pointer", display: "flex", alignItems: "center" }}
-              >
-                {data1.description}
-                {isOpen[index] ? <FaAngleUp style={{ marginLeft: "5px" }} /> : <FaAngleDown style={{ marginLeft: "5px" }} />}
-              </h4>
-              {isOpen[index] && (
-                <ul style={{ listStyleType: "none", padding: 0 }}>
-                  <li>
-                    Language:{" "}
-                    <Link
-                      to={data1.lang_link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ textDecoration: "none" }}
+    <div style={{ width: "100%" }}>
+      <ul
+        style={{
+          listStyleType: "none",
+          padding: "20px",
+          backgroundColor: "#e6f0ff66",
+        }}
+      >
+              <h1>Content</h1>
+
+        <li style={{ marginBottom: "10px" }}>
+          <div
+            style={{
+              padding: "10px",
+              fontSize: "18px",
+            }}
+          >
+          
+            <ul style={{ listStyleType: "none", padding: 0 }}>
+              <li style={{ listStyleType: "none", padding: "10px" }}>
+                <h4 style={{ marginBottom: "10px" }}>Language</h4>
+                <ul
+                  style={{
+                    textDecoration: "none",
+                    listStyleType: "none",
+                    lineHeight: "2rem",
+                    color: "#242526",
+                    fontFamily: "monospace",
+                  }}
+                >
+                  <li >Arabic</li>
+                  <li>English</li>
+                  <li>French</li>
+                </ul>
+                <hr/>
+                <ul>
+                  <li style={{ listStyleType: "none", padding: "10px" }}>
+                    <h4 style={{ marginBottom: "10px" }}> Grades</h4>
+
+                    <ul
+                      style={{
+                        textDecoration: "none",
+                        listStyleType: "none",
+                        lineHeight: "2rem",
+                        color: "#242526",
+                        fontFamily: "monospace",
+                      }}
                     >
-                      {data1.lang}
-                    </Link>
+                      <li>kg1</li>
+                      <li>kg2</li>
+                      <li>kg3</li>
+                      <li>grade1</li>
+                      <li>grade2</li>
+                      <li>grade3</li>
+                      <li>grade4</li>
+                      <li>grade5</li>
+                      <li>grade6</li>
+                      <li>grade7</li>
+                      <li>grade8</li>
+                      <li>grade9</li>
+                      <li>grade10</li>
+                      <li>grade11</li>
+                      <li>grade12</li>
+                    </ul>
                   </li>
-                  <li>
-                    Grade:{" "}
-                    <Link
-                      href={data1.grade_link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ textDecoration: "none" }}
+                  <hr/>
+                  <li style={{ listStyleType: "none", padding: "10px" }}>
+                    <h4 style={{ marginBottom: "10px" }}> Language Package</h4>
+
+                    <ul
+                      style={{
+                        textDecoration: "none",
+                        listStyleType: "none",
+                        lineHeight: "2rem",
+                        color: "#242526",
+                        fontFamily: "monospace",
+                      }}
                     >
-                      {data1.grade}
-                    </Link>
+                      <li>Compréhension</li>
+                      <li>Littérature</li>
+                      <li>Écriture</li>
+                      <li>Vocabulaire</li>
+                      <li>Lecture</li>
+                      <li>Orthographe</li>
+                      <li>Phonétique</li>
+                      <li>Écriture créative</li>
+                      <li>Poésie</li>
+                      <li>Rédaction d'essais</li>
+                      <li>Prise de parole en public</li>
+                      <li>Débat</li>
+                      <li>Pensée critique</li>
+                      <li>Compétences en recherche</li>
+                      <li>Arts du langage</li>
+                    </ul>
                   </li>
                 </ul>
-              )}
-            </div>
-          </li>
-        ))}
+              </li>
+            </ul>
+          </div>
+        </li>
       </ul>
       <style jsx>{`
         /* Responsive styles */
