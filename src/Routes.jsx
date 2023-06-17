@@ -12,23 +12,27 @@ import Help from "./pages/help/help.jsx";
 import Login from "./pages/login/login.jsx";
 import Lesson from "./pages/lessons/lessons.jsx";
 import Policy from "./pages/policies/policies.jsx";
-import Admin from "./pages/dashboard/admin/adminLessons.jsx";
+import SuperAdmin from "./pages/dashboard/superadmin/admin.jsx";
 import Home from "./pages/home/home.jsx";
 import SignUp from "./pages/signup/signup.jsx";
 import Quizzes from "./pages/quizzes/quizzes.jsx";
 import AdminLogin from "./pages/login/adminlogin.jsx";
 import NotFoundPage from "./pages/404page/404.jsx";
+import TableContent from "./pages/dashboard/superadmin/admin.jsx";
+import ResourcesTables from "./components/resourcesTable.jsx/resourcesTable.jsx";
+import { useAuthContext } from "./hooks/useAuthContext";
 import PrivateSuperAdmin from "./utils/pivateroute.jsx";
 import PrivateAdmin from "./utils/adminroute.jsx";
 import RequireAuth from "./utils/requireAuth.jsx";
 import DashboardLayout from "./components/layout/dashboardLayout.jsx";
 import Layout from "./components/layout/layout.jsx";
 import ResourcesTable from "./components/resourcesTable.jsx/resourcesTable.jsx";
+import Payment from "./pages/payment/payment.jsx";
 const AllRoutes = () => {
   return (
     <Router>
       <Routes>
-          <Route path="/admin" element={<Admin />} />
+        <Route path="/admin" element={<Admin />} />
         <Route
           path="/"
           element={
@@ -52,10 +56,8 @@ const AllRoutes = () => {
             <Route path="lessons" element={<Lesson />} />
             {/* <Route path="users" element={<Users />} /> */}
           </Route>
-
-</Route>
+        </Route>
         <Route element={<PrivateSuperAdmin />}>
-
           <Route
             path="/superadmin"
             element={
@@ -77,7 +79,6 @@ const AllRoutes = () => {
         <Route exact path="/adminpanel" element={<AdminLogin />}></Route>
         <Route exact path="/signup" element={<SignUp />}></Route>
         <Route element={<RequireAuth />}>
-
           <Route
             exact
             path="/quizzes"

@@ -3,7 +3,14 @@ import { Container, display } from "@mui/system";
 import React from "react";
 import heroImg from "./hero_img.svg";
 import CustomButton from "./custombutton";
+import { useNavigate } from "react-router-dom";
+
 function Hero() {
+  const Navigate = useNavigate();
+  const user = localStorage.getItem("user");
+  const signup = () => {
+    Navigate("/signup");
+  };
   const CustomBox = styled(Box)(({ theme }) => ({
     display: "flex",
     justifyContent: "center",
@@ -43,9 +50,7 @@ function Hero() {
         alignItems: "center",
       }}
     >
-      <Container
-        sx={{ maxWidth: ["98%", "80%"]}}
-      >
+      <Container sx={{ maxWidth: ["98%", "80%"] }}>
         <CustomBox>
           <Box
             sx={{
@@ -56,7 +61,7 @@ function Hero() {
               justifyContent: "center",
             }}
           >
-            <Title variant="h1" sx={{ color: "black", m:0}}>
+            <Title variant="h1" sx={{ color: "black", m: 0 }}>
               "TeachSupport: Empowering Educators to Achieve{" "}
               <Title sx={{ color: "#FFA500" }} variant="h1">
                 “Professional Excellence" ?
@@ -64,7 +69,13 @@ function Hero() {
             </Title>
             <Typography
               variant="body2"
-              sx={{ fontSize: "18px", color: "#5A6473", my: 4, maxWidth:["100%", "90%"], textAlign: "center" }}
+              sx={{
+                fontSize: "18px",
+                color: "#5A6473",
+                my: 4,
+                maxWidth: ["100%", "90%"],
+                textAlign: "center",
+              }}
             >
               Online platform that provides teachers with the resources and
               support they need to enhance their skills, develop their careers,
@@ -75,7 +86,7 @@ function Hero() {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                gap:4
+                gap: 4,
               }}
             >
               <CustomButton
@@ -98,6 +109,21 @@ function Hero() {
                 height="50px"
                 width={150}
               />
+              {!user ? (
+                <Button
+                  size="large"
+                  style={{
+                    border: "1px solid #0D7590",
+                    color: "#0D7590",
+                    marginRight: "10px",
+                  }}
+                  onClick={signup}
+                >
+                  Join Us
+                </Button>
+              ) : (
+                ""
+              )}
             </Box>
           </Box>
 

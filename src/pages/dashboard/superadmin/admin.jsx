@@ -1,4 +1,3 @@
-<<<<<<< HEAD:src/pages/dashboard/superAdmin/superAdmin.jsx
 import { useEffect, useState } from "react";
 import {
   Table,
@@ -15,15 +14,14 @@ import {
   DialogContentText,
   TextField,
   DialogActions,
-
-  Button,TablePagination} from "@mui/material";
-import BasicTextFields from '../../../components/header/header';
+  Button,
+  TablePagination,
+} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddButton from "./addbutton";
 import DashboardLayout from "../../../components/layout/dashboardLayout";
 import axios from "axios";
-
 
 function Tables() {
   const [editDialogOpen, setEditDialogOpen] = useState(false);
@@ -143,6 +141,7 @@ function Tables() {
 
   return (
     <>
+      <DashboardLayout>
         <TableContainer component={Paper} sx={{ width: "98%", margin: "auto" }}>
           <Table>
             <TableHead style={{ backgroundColor: "#0D7590" }}>
@@ -273,16 +272,8 @@ function Tables() {
             <Button onClick={()=>handleEditDialogSave(editingData._id)}>Save</Button>
           </DialogActions>
         </Dialog>
+      </DashboardLayout>
     </>
-=======
-import React from "react";
-function Admin() {
-  return (
-    <div>
-      <h1>Admin</h1>
-    </div>
->>>>>>> development:src/pages/dashboard/admin/admin.jsx
   );
 }
-
-export default Admin;
+export default Tables;

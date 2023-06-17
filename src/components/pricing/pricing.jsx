@@ -1,149 +1,90 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardHeader from "@mui/material/CardHeader";
-import CssBaseline from "@mui/material/CssBaseline";
-import Grid from "@mui/material/Grid";
-import StarIcon from "@mui/icons-material/StarBorder";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Link from "@mui/material/Link";
-import GlobalStyles from "@mui/material/GlobalStyles";
-import Container from "@mui/material/Container";
 
-const tiers = [
-  {
-    title: "Free",
-    price: "0",
-    description: [
-      "Quality content",
-      "Demonstrating expertise",
-      "Easy accessibility",
-      "Interactive learning",
-      "Building a community",
-    ],
-    buttonText: "Sign up for free",
-    buttonVariant: "outlined",
-  },
-  {
-    title: "Pro",
-    subheader: "Most popular",
-    price: "15",
-    description: [
-      "Valuable content",
-      "Expert instructors",
-      "Interactive learning",
-      "Flexibility and convenience",
-      "Support and community",
-    ],
-    buttonText: "Get started",
-    buttonVariant: "outlined",
-  },
-];
+import "./pricing.css";
 
 function PricingContent() {
   return (
-    <React.Fragment>
-      <GlobalStyles
-        styles={{ ul: { margin: 0, padding: 0, listStyle: "none" } }}
-      />
-      <CssBaseline />
-
-      <Container
-        disableGutters
-        maxWidth="sm"
-        component="main"
-        sx={{ py:10}}
-      >
-        <Typography
-          component="h1"
-          variant="h2"
-          align="center"
-          color="text.primary"
-          gutterBottom
-        >
-          Pricing
-        </Typography>
-      </Container>
-      {/* End hero unit */}
-      <Container maxWidth="md" component="main">
-        <Grid container spacing={5} alignItems="flex-end">
-          {tiers.map((tier) => (
-            // Enterprise card is full width at sm breakpoint
-            <Grid
-              item
-              key={tier.title}
-              xs={10}
-              md={4}
-              sx={{ margin: "0 0px 30px 0px" }}
-            >
-              <Card>
-                <CardHeader
-                  title={tier.title}
-                  subheader={tier.subheader}
-                  titleTypographyProps={{ align: "center" }}
-                  action={tier.title === "Pro" ? <StarIcon /> : null}
-                  subheaderTypographyProps={{
-                    align: "center",
-                  }}
-                  sx={{
-                    backgroundColor: (theme) =>
-                      theme.palette.mode === "light"
-                        ? theme.palette.grey[200]
-                        : theme.palette.grey[700],
-                  }}
-                />
-                <CardContent>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "baseline",
-                      mb: 2,
-                    }}
-                  >
-                    <Typography component="h2" variant="h3" color="text.info">
-                      ${tier.price}
-                    </Typography>
-                    <Typography variant="h6" color="#0D7590">
-                      /year
-                    </Typography>
-                  </Box>
-                  <ul>
-                    {tier.description.map((line) => (
-                      <Typography
-                        component="li"
-                        variant="subtitle1"
-                        align="center"
-                        key={line}
+    <>
+      <section>
+        <h1> Pricing Table</h1>
+        <div className="container">
+          <div className="row">
+            <div className="col-md-6">
+              <div className="card">
+                <div className="card-body">
+                  <div className="plan-name">Free </div>
+                  <div className="plan-description">
+                    <div className="plan-price month">
+                      $0<sub> / month</sub>
+                    </div>
+                    <p>
+                      Unlock your potential with our free learning subscription
+                      and pave your way to a successful career
+                    </p>
+                  </div>
+                  <div className="plan-description specs">
+                    Free courses
+                    <br /> Some subjects
+                  </div>
+                  <div className="plan-cta">
+                    <p>
+                      <a
+                        className="button"
+                        href="/lessons"
+                        data-open="get-pro-modal"
+                        aria-controls="get-pro-modal"
+                        aria-haspopup="true"
+                        tabindex="0"
                       >
-                        {line}
-                      </Typography>
-                    ))}
-                  </ul>
-                </CardContent>
-                <CardActions>
-                  <Button
-                    fullWidth
-                    variant={tier.buttonVariant}
-                    sx={{
-                      backgroundColor: "#fff",
-                      color: "#0D7590",
-                    }}
-                  >
-                    {tier.buttonText}
-                  </Button>
-                </CardActions>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
-    </React.Fragment>
+                        Get Started
+                      </a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-md-6 col-lg-3">
+              <div className="card">
+                <div className="card-body">
+                  <div className="plan-name">Pro </div>
+                  <div className="plan-description">
+                    <div className="plan-price month">
+                      $39<sub> / month</sub>
+                    </div>
+                    <p>
+                      Elevate your professional journey with our premium
+                      subscription, offering exclusive resources and
+                      personalized guidance for accelerated growth
+                    </p>
+                  </div>
+                  <div className="plan-description specs">
+                    Access to all courses
+                    <br /> All subjects
+                    <br />
+                    Good controll over the courses and ability to manage
+                  </div>
+                  <div className="plan-cta">
+                    <p>
+                      <a
+                        className="button"
+                        href="/payment"
+                        data-open="get-pro-modal"
+                        aria-controls="get-pro-modal"
+                        aria-haspopup="true"
+                        tabindex="0"
+                      >
+                        Get Started
+                      </a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
 
