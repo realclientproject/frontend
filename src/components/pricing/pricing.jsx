@@ -5,7 +5,7 @@ import "./pricing.css";
 function PricingContent() {
   return (
     <>
-      <section>
+      <section style={{ marginTop: "250px" }}>
         <h1> Pricing Table</h1>
         <div className="container">
           <div className="row">

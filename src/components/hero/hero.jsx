@@ -89,26 +89,6 @@ function Hero() {
                 gap: 4,
               }}
             >
-              <CustomButton
-                backgroundColor="#0D7590"
-                color="#fff"
-                buttonText="Join now"
-                heroBtn={true}
-                display="block"
-                guideBtn="20px"
-                fontWeight="100"
-                height="50px"
-                width={150}
-              />
-              <CustomButton
-                backgroundColor="#FFFFFF"
-                color="#0D7590"
-                buttonText="Discover lessons"
-                heroBtn={true}
-                guideBtn
-                height="50px"
-                width={150}
-              />
               {!user ? (
                 <Button
                   size="large"
