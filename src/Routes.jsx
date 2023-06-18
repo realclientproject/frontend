@@ -12,15 +12,15 @@ import Login from "./pages/login/login.jsx";
 import Lesson from "./pages/lessons/lessons.jsx";
 import Policy from "./pages/policies/policies.jsx";
 import Admin from "./pages/dashboard/admin/adminLessons.jsx";
-import SuperAdmin from "./pages/dashboard/superadmin/admin.jsx";
+import SuperAdmin from "./pages/dashboard/superAdmin/superAdmin.jsx";
 import Home from "./pages/home/home.jsx";
 import SignUp from "./pages/signup/signup.jsx";
 import Quizzes from "./pages/quizzes/quizzes.jsx";
 import AdminLogin from "./pages/login/adminlogin.jsx";
 import NotFoundPage from "./pages/404page/404.jsx";
-import TableContent from "./pages/dashboard/superadmin/admin.jsx";
-import ResourcesTables from "./components/resourcesTable.jsx/resourcesTable.jsx";
-import { useAuthContext } from "./hooks/useAuthContext";
+// import TableContent from "./pages/dashboard/superadmin/admin.jsx";
+// import ResourcesTables from "./components/resourcesTable.jsx/resourcesTable.jsx";
+// import { useAuthContext } from "./hooks/useAuthContext";
 import PrivateSuperAdmin from "./utils/pivateroute.jsx";
 import PrivateAdmin from "./utils/adminroute.jsx";
 import RequireAuth from "./utils/requireAuth.jsx";
@@ -28,9 +28,7 @@ import DashboardLayout from "./components/layout/dashboardLayout.jsx";
 import Layout from "./components/layout/layout.jsx";
 import ResourcesTable from "./components/resourcesTable.jsx/resourcesTable.jsx";
 import Payment from "./pages/payment/payment.jsx";
-import Layout from "./components/layout/layout.jsx";
-import DashboardLayout from "./components/layout/dashboardLayout.jsx";
-import QuizzesTable from './pages/dashboard/superAdmin/superAdminQuizzes.jsx'
+// import QuizzesTable from './pages/dashboard/superAdmin/superAdminQuizzes.jsx'
 
 const AllRoutes = () => {
   return (
