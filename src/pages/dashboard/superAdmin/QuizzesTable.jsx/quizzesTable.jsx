@@ -16,18 +16,14 @@ import {
   DialogActions,
   Button,
   TablePagination,
-  InputLabel,
-  Select,
-  MenuItem,
 } from "@mui/material";
-import BasicTextFields from "../../../components/header/header";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import AddButton from "./addbuttonTable";
-import DashboardLayout from "../../../components/layout/dashboardLayout";
 import axios from "axios";
+import AddresourcesButton from "./quizzesAddButton";
+import DashboardLayout from "../../../../components/layout/dashboardLayout";
 
-function Tables() {
+function QuizzesTable() {
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [editingData, setEditingData] = useState({});
   const [page, setPage] = useState(0);
@@ -75,7 +71,7 @@ function Tables() {
   const handleEditDialogSave = (id) => {
     // handle save logic here
     axios
-      .patch(`http://localhost:5000/user/edit/${id}`, editingData, {
+      .patch(`http://localhost:5000/resource/${id}`, editingData, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access_token"),
         },
@@ -107,7 +103,7 @@ function Tables() {
   const handleDeleteClick = (id) => {
     // handle delete logic here
     axios
-      .delete(`http://localhost:5000/user/${id}`, {
+      .delete(`http://localhost:5000/resource${id}`, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access_token"),
         },
@@ -116,7 +112,7 @@ function Tables() {
         // Handle success response
         console.log(response);
         if (response.status === 200) {
-          alert("user was successfully deleted");
+          alert("file was successfully deleted");
         }
       })
       .catch((error) => {
@@ -132,17 +128,17 @@ function Tables() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/user", {
+      .get("http://localhost:5000/resource", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access_token"),
         },
       })
       .then((response) => {
-        const users = response.data.response.filter(
-          (user) => user.role === "user"
+        const quizzes = response.data.response.filter(
+          (resource) => resource.type === "quiz"
         );
-        setData(users);
-        console.log(response.data.response);
+        setData(quizzes);
+        // console.log(response.data.response);
       })
       .catch((error) => {
         console.log(error);
@@ -156,19 +152,19 @@ function Tables() {
           <TableHead style={{ backgroundColor: "#0D7590" }}>
             <TableRow>
               <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>
-                First Name
+                Name
               </TableCell>
               <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>
-                Last Name
+                Type
               </TableCell>
               <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>
-                Phone Number
+                Description
               </TableCell>
               <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>
-                Email
+                price
               </TableCell>
               <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>
-                Role
+                count
               </TableCell>
               <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>
                 Actions
@@ -180,11 +176,11 @@ function Tables() {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row, index) => (
                 <TableRow key={index}>
-                  <TableCell>{row.first_name}</TableCell>
-                  <TableCell>{row.last_name}</TableCell>
-                  <TableCell>{row.phone}</TableCell>
-                  <TableCell>{row.email}</TableCell>
-                  <TableCell>{row.role}</TableCell>
+                  <TableCell>{row.name}</TableCell>
+                  <TableCell>{row.type}</TableCell>
+                  <TableCell>{row.description}</TableCell>
+                  <TableCell>{row.price}</TableCell>
+                  <TableCell>{row.count}</TableCell>
                   <TableCell>
                     <IconButton onClick={() => handleEditClick(row)}>
                       <EditIcon />
@@ -206,7 +202,7 @@ function Tables() {
             padding: 0,
           }}
         >
-          <AddButton />
+          <AddresourcesButton />
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
@@ -219,68 +215,62 @@ function Tables() {
         </div>
       </TableContainer>
       <Dialog open={editDialogOpen} onClose={handleEditDialogClose}>
-        <DialogTitle>Edit User</DialogTitle>
+        <DialogTitle>Edit resources</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To edit the user's information, please update the fields below.
+            To edit the resource information, please update the fields below.
           </DialogContentText>
           <TextField
             autoFocus
             margin="dense"
-            label="First Name"
+            label="Name"
             type="text"
             fullWidth
-            value={editingData.first_name || ""}
+            value={editingData.name || ""}
             onChange={(e) =>
-              setEditingData({ ...editingData, first_name: e.target.value })
+              setEditingData({ ...editingData, name: e.target.value })
             }
           />
           <TextField
             margin="dense"
-            label="Last Name"
+            label="Type"
             type="text"
             fullWidth
-            value={editingData.last_name || ""}
+            value={editingData.type || ""}
             onChange={(e) =>
-              setEditingData({ ...editingData, last_name: e.target.value })
+              setEditingData({ ...editingData, type: e.target.value })
             }
           />
           <TextField
             margin="dense"
-            label="Phone Number"
+            label="description"
             type="tel"
             fullWidth
-            value={editingData.phone || ""}
+            value={editingData.description || ""}
             onChange={(e) =>
-              setEditingData({ ...editingData, phone: e.target.value })
+              setEditingData({ ...editingData, description: e.target.value })
             }
           />
           <TextField
             margin="dense"
-            label="Email Address"
-            type="email"
+            label="price"
+            type="text"
             fullWidth
-            value={editingData.email || ""}
+            value={editingData.price || ""}
             onChange={(e) =>
-              setEditingData({ ...editingData, email: e.target.value })
+              setEditingData({ ...editingData, price: e.target.value })
             }
           />
-          <InputLabel id="role">Role</InputLabel>
-          <Select
-            labelId="role"
-            id="role"
+          <TextField
             margin="dense"
-            label="Role"
+            label="count"
+            type="text"
             fullWidth
-            value={editingData.role || ""}
+            value={editingData.count || ""}
             onChange={(e) =>
-              setEditingData({ ...editingData, role: e.target.value })
+              setEditingData({ ...editingData, count: e.target.value })
             }
-          >
-            <MenuItem value="user">User</MenuItem>
-            <MenuItem value="admin">Admin</MenuItem>
-            <MenuItem value="superadmin">SuperAdmin</MenuItem>
-          </Select>
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleEditDialogClose}>Cancel</Button>
@@ -292,4 +282,4 @@ function Tables() {
     </>
   );
 }
-export default Tables;
+export default QuizzesTable;

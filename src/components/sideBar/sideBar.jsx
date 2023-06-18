@@ -41,12 +41,12 @@ function Sidebar({ isMenuOpen, handleDrawerToggle, admin }) {
     {
       text: "Admins",
       icon: <SupervisorAccountIcon />,
-      path: "/superadmin/role_admins",
+      path: "/superadmin/admins",
     },
     {
       text: "Users",
       icon: <PersonIcon />,
-      path: "/superadmin/role_users",
+      path: "/superadmin/users",
     },
     {
       text: "Lessons",

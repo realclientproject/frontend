@@ -57,7 +57,7 @@ const BalanceChart = ({ data }) => {
   };
 
   return (
-    <Box>
+    <Box paddingX={10}>
       <Line data={chartData} options={options} />
     </Box>
   );

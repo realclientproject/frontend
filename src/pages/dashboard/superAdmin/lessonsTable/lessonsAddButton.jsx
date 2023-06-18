@@ -18,30 +18,17 @@ const AddresourcesButton = () => {
   const [showmedia, setShowmedia] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
-    type: "",
+    type: "Lesson",
     description: "",
     price: "",
     count: "",
-    media: null, // Use null as initial value for file
+    media: "",
   });
 
-  const handleClickShowmedia = (event) => {
-    const file = event.target.files[0]; // Get the selected file
-  
-    // Check if the file type is allowed (e.g., image or PDF)
-    if (file.type.includes("image/") || file.type === "application/pdf") {
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        media: file, // Update the media property with the file
-      }));
-      setShowmedia(true);
-      console.log(file.name); // Display the file name in the console
-    } else {
-      // Display an error message or perform any other desired action
-      alert("Please select a valid file type (image or PDF).");
-    }
+  const handleClickShowmedia = () => {
+    setShowmedia(!showmedia);
   };
-  
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -58,48 +45,36 @@ const AddresourcesButton = () => {
     }));
   };
 
-  const handleAddClick = async (e) => {
+  const handleAddClick = (e) => {
+    // handle adding data
     e.preventDefault();
     console.log(formData);
+    axios
+      .post("http://localhost:8000/resource", formData)
+      .then((response) => {
+        // Handle success response
+        console.log(response);
 
-    try {
-     // Before creating formDataToSend
-console.log("formData:", formData);
-
-const formDataToSend = new FormData();
-formDataToSend.append("name", formData.name);
-formDataToSend.append("type", formData.type);
-formDataToSend.append("description", formData.description);
-formDataToSend.append("price", formData.price);
-formDataToSend.append("count", formData.count);
-formDataToSend.append("media", formData.media);
-
-// After creating formDataToSend
-console.log("formDataToSend:", formDataToSend);
-
-
-      const response = await axios.post("https://supportteachers-mern-api.onrender.com/resource", formDataToSend);
-
-      console.log(response);
-
-      // >> RESET THE INPUTS
-      setFormData({
-        name: "",
-        type: "",
-        description: "",
-        price: "",
-        count: "",
-        media: null,
+        // >> RESET THE INPUTS
+        setFormData({
+          name: "",
+          type: "Lesson",
+          description: "",
+          price: "",
+          count: "",
+          media: "",
+        });
+        handleClose();
+      })
+      .catch((error) => {
+        // Handle error response
+        console.error(error);
+        if (error.response && error.response.status === 409) {
+          alert("price already taken, please use a different price.");
+        } else {
+          alert("Something went wrong. Please try to change the price.");
+        }
       });
-      handleClose();
-    } catch (error) {
-      console.error(error);
-      if (error.response && error.response.status === 409) {
-        alert("Price already taken, please use a different price.");
-      } else {
-        alert("Something went wrong. Please try to change the price.");
-      }
-    }
   };
 
   return (
@@ -120,11 +95,15 @@ console.log("formDataToSend:", formDataToSend);
       >
         Add
       </Button>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="form-dialog-title"
+      >
         <DialogTitle id="form-dialog-title">Add Admin</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Fill in the form below to add a new Admin.
+            Please fill in the form below to add new Admin.
           </DialogContentText>
           <TextField
             autoFocus
@@ -144,13 +123,14 @@ console.log("formDataToSend:", formDataToSend);
             type="text"
             fullWidth
             required
+            disabled
             value={formData.type}
             onChange={handleInputChange}
           />
           <TextField
             margin="dense"
             name="description"
-            label="Description"
+            label="description "
             type="text"
             fullWidth
             required
@@ -160,7 +140,7 @@ console.log("formDataToSend:", formDataToSend);
           <TextField
             margin="dense"
             name="price"
-            label="Price"
+            label="price"
             type="text"
             fullWidth
             required
@@ -170,7 +150,7 @@ console.log("formDataToSend:", formDataToSend);
           <TextField
             margin="dense"
             name="count"
-            label="Count"
+            label="count"
             type="text"
             fullWidth
             required
@@ -183,7 +163,7 @@ console.log("formDataToSend:", formDataToSend);
   type="file"
   fullWidth
   required
-  inputProps={{ accept: "image/*, .pdf" }}
+  inputProps={{ accept: "image/*, .pdf, .doc, .docx" }}
   onChange={handleClickShowmedia}
   endAdornment={
     <InputAdornment position="end">
@@ -206,5 +186,4 @@ console.log("formDataToSend:", formDataToSend);
     </>
   );
 };
-
 export default AddresourcesButton;

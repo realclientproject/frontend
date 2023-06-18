@@ -11,7 +11,7 @@ import { Add } from "@mui/icons-material";
 import { DialogActions } from "@mui/material";
 import axios from "axios";
 
-const AddButton = () => {
+const AddbuttonTable = () => {
   const [open, setOpen] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -177,4 +177,4 @@ const AddButton = () => {
     </>
   );
 };
-export default AddButton;
+export default AddbuttonTable;
