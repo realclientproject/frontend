@@ -69,22 +69,22 @@ const LoginForm = ({ setAuth }) => {
     },
   });
 
-  const SwitchRoute = () => {
-    switch (user?.role) {
-      case "admin":
-        navigate("/admin/lessons");
-        break;
-      case "user":
-        navigate("/");
-        break;
-      case "superadmin":
-        navigate("/superadmin/dashboard");
-        break;
-      default:
-        navigate("/");
-        break;
-    }
-  };
+  // const navigate = () => {
+  //   switch (user?.role) {
+  //     case "admin":
+  //       navigate("/admin");
+  //       break;
+  //     case "user":
+  //       navigate("/");
+  //       break;
+  //     case "superadmin":
+  //       navigate("/superadmin");
+  //       break;
+  //     default:
+  //       navigate("/");
+  //       break;
+  //   }
+  // };
   const {
     errors,
     touched,

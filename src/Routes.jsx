@@ -7,13 +7,12 @@ import {
   Outlet,
 } from "react-router-dom";
 
-import SuperAdmin from "./pages/dashboard/superAdmin/superAdmin.jsx";
 import Help from "./pages/help/help.jsx";
 import Login from "./pages/login/login.jsx";
 import Lesson from "./pages/lessons/lessons.jsx";
 import Policy from "./pages/policies/policies.jsx";
 import Admin from "./pages/dashboard/admin/adminLessons.jsx";
-// import SuperAdmin from "./pages/dashboard/superadmin/admin.jsx";
+import SuperAdmin from "./pages/dashboard/superadmin/admin.jsx";
 import Home from "./pages/home/home.jsx";
 import SignUp from "./pages/signup/signup.jsx";
 import Quizzes from "./pages/quizzes/quizzes.jsx";
@@ -25,6 +24,9 @@ import { useAuthContext } from "./hooks/useAuthContext";
 import PrivateSuperAdmin from "./utils/pivateroute.jsx";
 import PrivateAdmin from "./utils/adminroute.jsx";
 import RequireAuth from "./utils/requireAuth.jsx";
+import DashboardLayout from "./components/layout/dashboardLayout.jsx";
+import Layout from "./components/layout/layout.jsx";
+import ResourcesTable from "./components/resourcesTable.jsx/resourcesTable.jsx";
 import Payment from "./pages/payment/payment.jsx";
 import Layout from "./components/layout/layout.jsx";
 import DashboardLayout from "./components/layout/dashboardLayout.jsx";
@@ -55,7 +57,6 @@ const AllRoutes = () => {
               </DashboardLayout>
             }
           >
-            <Route path="quizzes" element={<Quizzes />} />
             <Route path="lessons" element={<Lesson />} />
             {/* <Route path="users" element={<Users />} /> */}
           </Route>
@@ -73,8 +74,8 @@ const AllRoutes = () => {
             <Route path="dashboard" element={<SuperAdmin />} />
             {/* <Route path="role_admins" element={<Admins />} /> */}
             {/* <Route path="users" element={<Users />} /> */}
-            <Route path="quizzes" element={<QuizzesTable />} />
-            <Route path="lessons" element={<Lesson />} />
+            <Route path="quizzes" element={<Quizzes />} />
+            <Route path="lessons" element={<ResourcesTable />} />
           </Route>
         </Route>
 

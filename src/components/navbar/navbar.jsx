@@ -11,16 +11,13 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import { Link, useNavigate } from "react-router-dom";
-import { AvatarGroup, ListItemIcon, ListItemText, Popover } from "@mui/material";
-
+import { AvatarGroup, Popover } from "@mui/material";
+import "./navbar.css";
 // import Tooltip from "@mui/material/Tooltip";
 // import { Button, Grid } from "@mui/material";
 
 import logo from "./logo.svg";
 import CustomButton from "../hero/custombutton.jsx";
-import { Help, Logout, Person } from "@mui/icons-material";
-
-const pages = ["Home", "Lessons", "Quizzes", "teachers", "about"];
 
 function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -198,13 +195,12 @@ function NavBar() {
               <Link
                 className="Link"
                 style={{
-                  borderRadius: "10px",
-
                   padding: "5px",
                   border: "1px solid",
                   textDecoration: "none",
                   color: "black",
                   marginLeft: "20px",
+                  borderRadius: "10px",
                 }}
                 to="/"
               >
@@ -274,7 +270,7 @@ function NavBar() {
                           vertical: "bottom",
                           horizontal: "left",
                         }}
-                        sx={{ mt: 1.5}}
+                        sx={{ mt: 1.5 }}
                       >
                         <Typography sx={{ p: 2 }}>{isUser.email}</Typography>{" "}
                         <Typography sx={{ p: 2 }}>

@@ -15,6 +15,7 @@ import {
 
 import * as Yup from "yup";
 import axios from "axios";
+import { LoadingButton } from "@mui/lab";
 
 const validationSchema = Yup.object().shape({
   first_name: Yup.string()
@@ -39,12 +40,13 @@ const validationSchema = Yup.object().shape({
 export default function SignupForm(props) {
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
+  const [fetching, setfeching] = useState(true);
   const Navigate = useNavigate();
   const onSubmit = async (values) => {
     const { ...data } = values;
 
     const response = await axios
-      .post("http://localhost:5000/user/register", data)
+      .post("https://supportteachers-mern-api.onrender.com/user/register", data)
       .catch((err) => {
         console.log("error in form");
         if (err && err.response) setError(err.response.data.message);
@@ -55,6 +57,7 @@ export default function SignupForm(props) {
       console.log("response is", response);
       setError(null);
       setSuccess(response.data.message);
+      setfeching(false);
       formik.resetForm();
     }
   };
@@ -73,6 +76,7 @@ export default function SignupForm(props) {
     onSubmit,
     validationSchema: validationSchema,
   });
+  const { isSubmitting } = formik;
 
   console.log("Error", error);
 
@@ -208,7 +212,15 @@ export default function SignupForm(props) {
             </FieldContainer>
 
             <Marginer direction="vertical" margin="1em" />
-            <SubmitButton type="submit">Signup</SubmitButton>
+            <LoadingButton
+              fullWidth
+              size="large"
+              type="submit"
+              variant="contained"
+              loading={isSubmitting}
+            >
+              {isSubmitting ? "loading..." : "Sign in"}
+            </LoadingButton>
           </FormContainer>
           <Marginer direction="vertical" margin={5} />
         </BoxContainer>

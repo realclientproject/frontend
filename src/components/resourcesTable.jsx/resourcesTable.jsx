@@ -16,12 +16,12 @@ import {
   DialogActions,
   Button,
   TablePagination,
+  MenuItem,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import AddresourcesButton from "./resourcesAddButton";
-import DashboardLayout from "../layout/dashboardLayout";
 
 function ResourcesTable() {
   const [editDialogOpen, setEditDialogOpen] = useState(false);
@@ -29,22 +29,11 @@ function ResourcesTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [loaded, setLoaded] = useState(false);
-  const [data, setData] = useState([
-    {_id:"1",
-      first_name: "John",
-      last_name: "Doe",
-      phone: "123-456-7890",
-      email: "john.doe@example.com",
-      role: "Admin",
-    },
-    {_id:"2",
-      first_name: "Jane",
-      last_name: "Doe",
-      phone: "234-567-8901",
-      email: "jane.doe@example.com",
-      role: "User",
-    },
-  ]);
+  const [data, setData] = useState([]);
+  const [selectedGrade, setSelectedGrade] = useState("");
+  const [selectedLang, setSelectedLang] = useState("");
+  const [selectedType, setSelectedType] = useState("");
+  const [searchKeyword, setSearchKeyword] = useState("");
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -56,29 +45,44 @@ function ResourcesTable() {
   };
 
   const handleEditClick = (row) => {
-    setEditingData(row);
-    console.log(row);
+    setEditingData({ ...row });
     setEditDialogOpen(true);
   };
 
   const handleEditDialogClose = () => {
     setEditDialogOpen(false);
     setEditingData({});
+    setSelectedGrade("");
+    setSelectedLang("");
+    setSelectedType("");
+
   };
 
   const handleEditDialogSave = (id) => {
     // handle save logic here
     axios
-      .patch(`http://localhost:5000/resource/${id}`,editingData, {
+    .put(
+      `https://supportteachers-mern-api.onrender.com
+    /resource/${id}`,
+      editingData,
+      {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access_token"),
         },
-      })
+      }
+    )
       .then((response) => {
         // Handle success response
         console.log(response);
         if (response.status === 200) {
-          alert("user's info has been edited successfully");
+          alert("Product's info has been edited successfully");
+          const updatedData = data.map((row) => {
+            if (row._id === id) {
+              return { ...row, ...editingData };
+            }
+            return row;
+          });
+          setData(updatedData);
         }
       })
       .catch((error) => {
@@ -86,21 +90,25 @@ function ResourcesTable() {
         console.error(error);
         if (error.response && error.response.status === 409) {
           alert("Email already taken, please use a different email.");
-        } if (error.response && error.response.status === 403) {
-          alert("you are not authorized");
+        }
+        if (error.response && error.response.status === 403) {
+          alert("You are not authorized");
         } else {
           alert("Something went wrong. Please try to change something.");
         }
       });
 
     setEditDialogOpen(false);
-    setEditingData({});
+    setEditingData({}); // Clear the editing data after saving
   };
 
+  // ...
+
+  ///////////////////////////////////
   const handleDeleteClick = (id) => {
     // handle delete logic here
     axios
-      .delete(`http://localhost:5000/resource${id}`, {
+      .delete(`https://supportteachers-mern-api.onrender.com/resource/${id}`, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access_token"),
         },
@@ -109,23 +117,44 @@ function ResourcesTable() {
         // Handle success response
         console.log(response);
         if (response.status === 200) {
-          alert("file was successfully deleted");
+          alert("resource was successfully deleted");
+          fetching();
         }
       })
       .catch((error) => {
         if (error.response && error.response.status === 403) {
           alert("you are not authorized");
-        }else {
+        } else {
           alert("Something went wrong.");
         }
         // Handle error response
         console.error(error);
       });
   };
+  const fetching = () => {
+    axios
+      .get("https://supportteachers-mern-api.onrender.com/resource", {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("access_token"),
+        },
+      })
+      .then((response) => {
+        setData(response.data.response);
+        console.log(response.data.response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  useEffect(() => {
+    fetching();
+  }, []);
+
+  ///////////////////////////////
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/resource", {
+      .get("https://supportteachers-mern-api.onrender.com/resource", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access_token"),
         },
@@ -141,6 +170,7 @@ function ResourcesTable() {
 
   return (
     <>
+<DashboardLayout>   
       <TableContainer component={Paper} sx={{ width: "98%", margin: "auto" }}>
           <Table>
             <TableHead style={{ backgroundColor: "#0D7590" }}>
@@ -172,7 +202,7 @@ function ResourcesTable() {
                   <TableRow key={index}>
                     <TableCell>{row.name}</TableCell>
                     <TableCell>{row.type}</TableCell>
-                    <TableCell>{row.description}</TableCell>
+                    <TableCell>{row.descrition}</TableCell>
                     <TableCell>{row.price}</TableCell>
                     <TableCell>{row.count}</TableCell>
                     <TableCell>
@@ -271,6 +301,7 @@ function ResourcesTable() {
             <Button onClick={()=>handleEditDialogSave(editingData._id)}>Save</Button>
           </DialogActions>
         </Dialog>
+      </DashboardLayout>
     </>
   );
 }

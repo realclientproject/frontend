@@ -40,8 +40,7 @@ function Hero() {
   }));
 
   return (
-    <Box sx={{ backgroundColor: "#E6F0FF", minHeight: "80vh",     py: 10,
-  }}>
+    <Box sx={{ backgroundColor: "#E6F0FF", minHeight: "80vh", py: 10 }}>
       <Container>
         <CustomBox>
           <Box
