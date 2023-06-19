@@ -26,9 +26,9 @@ import PrivateAdmin from "./utils/adminroute.jsx";
 import RequireAuth from "./utils/requireAuth.jsx";
 import DashboardLayout from "./components/layout/dashboardLayout.jsx";
 import Layout from "./components/layout/layout.jsx";
-import ResourcesTable from "./components/resourcesTable.jsx/resourcesTable.jsx";
+import ResourcesTable from "./components/resourcesTable/resourcesTable.jsx";
 import Payment from "./pages/payment/payment.jsx";
-// import QuizzesTable from "./pages/dashboard/superAdmin/superAdminQuizzes.jsx";
+import QuizzesTable from "./pages/dashboard/superAdmin/superAdminQuizzes.jsx";
 import LessonsTable from "./pages/dashboard/superAdmin/lessonsTable/lessonsTable.jsx"
 import Users from "./pages/dashboard/superAdmin/usersTable.jsx";
 

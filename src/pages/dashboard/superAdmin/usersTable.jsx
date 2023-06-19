@@ -19,7 +19,9 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  Typography,
 } from "@mui/material";
+import LoyaltyIcon from "@mui/icons-material/Loyalty";
 import BasicTextFields from "../../../components/header/header";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -30,27 +32,12 @@ import axios from "axios";
 function Tables() {
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [editingData, setEditingData] = useState({});
+  const [SubscriptionDialogOpen, setSubscriptionDialogOpen] = useState(false);
+  const [SubscriptionData, setSubscriptionData] = useState({});
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [loaded, setLoaded] = useState(false);
-  const [data, setData] = useState([
-    {
-      _id: "1",
-      first_name: "John",
-      last_name: "Doe",
-      phone: "123-456-7890",
-      email: "john.doe@example.com",
-      role: "Admin",
-    },
-    {
-      _id: "2",
-      first_name: "Jane",
-      last_name: "Doe",
-      phone: "234-567-8901",
-      email: "jane.doe@example.com",
-      role: "User",
-    },
-  ]);
+  const [data, setData] = useState([]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -63,7 +50,7 @@ function Tables() {
 
   const handleEditClick = (row) => {
     setEditingData(row);
-    console.log(row);
+    // console.log(row);
     setEditDialogOpen(true);
   };
 
@@ -130,6 +117,106 @@ function Tables() {
       });
   };
 
+  const handleSubscriptionClick = (row) => {
+    setEditingData(row);
+    if (row.subscription) {
+      setSubscriptionData(row.subscription);
+    }
+    setSubscriptionDialogOpen(true);
+  };
+
+  const handleSubscriptionDialogClose = () => {
+    setSubscriptionDialogOpen(false);
+    setSubscriptionData({});
+  };
+
+  const handleSubscriptionDialogSave = (editingData) => {
+    // handle save logic here
+
+    const url = editingData.subscription
+      ? `http://localhost:5000/subscription/edit/${editingData.subscription._id}`
+      : `http://localhost:5000/subscription`;
+
+    const axiosConfig = {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("access_token"),
+      },
+    };
+
+    const saveSubscription = () => {
+      axios
+        .patch(url, SubscriptionData, axiosConfig)
+        .then((response) => {
+          if (response.status === 200) {
+            alert("User's subscription info has been edited successfully");
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+          if (error.response && error.response.status === 403) {
+            alert("You are not authorized");
+          } else {
+            alert(
+              "Something went wrong while creating subscription. Please try to change something."
+            );
+          }
+        });
+    };
+
+    const handleSuccessResponse = (response) => {
+      if (response.status === 200) {
+        alert("Subscription has been added successfully");
+        console.log(response);
+        // const subscription = response.data.response._id;
+        axios
+          .patch(
+            `http://localhost:5000/user/edit/${editingData._id}`,
+            { subscription: response.data.response._id },
+            axiosConfig
+          )
+          .then((response) => {
+            console.log(response);
+            if (response.status === 200) {
+              alert("User's info has been edited successfully");
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+            if (error.response && error.response.status === 403) {
+              alert("You are not authorized");
+            } else {
+              alert(
+                "Something went wrong while saving subscription ID. Please try to change something."
+              );
+            }
+          });
+      }
+    };
+
+    if (editingData.subscription) {
+      saveSubscription();
+    } else {
+      axios
+        .post(url, SubscriptionData, axiosConfig)
+        .then((response) => {
+          console.log(response);
+          handleSuccessResponse(response);
+        })
+        .catch((error) => {
+          console.error(error);
+          if (error.response && error.response.status === 403) {
+            alert("You are not authorized");
+          } else {
+            alert("Something went wrong. Please try to change something.");
+          }
+        });
+    }
+
+    setSubscriptionDialogOpen(false);
+    setSubscriptionData({});
+    setEditingData({});
+  };
+
   useEffect(() => {
     axios
       .get("http://localhost:5000/user", {
@@ -173,6 +260,9 @@ function Tables() {
               <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>
                 Actions
               </TableCell>
+              <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>
+                Status
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -192,6 +282,30 @@ function Tables() {
                     <IconButton onClick={() => handleDeleteClick(row._id)}>
                       <DeleteIcon />
                     </IconButton>
+                    <IconButton onClick={() => handleSubscriptionClick(row)}>
+                      <LoyaltyIcon />
+                    </IconButton>
+                  </TableCell>
+                  <TableCell>
+                    <span
+                      style={{
+                        display: "inline-block",
+                        width: "12px",
+                        height: "12px",
+                        borderRadius: "50%",
+                        backgroundColor: row.subscription
+                          ? row.subscription.isActive
+                            ? "green"
+                            : "red"
+                          : "red",
+                        marginRight: "4px",
+                      }}
+                    />
+                    {row.subscription
+                      ? row.subscription.isActive
+                        ? "Subscribed"
+                        : "Unsubscribed"
+                      : "Unsubscribed"}
                   </TableCell>
                 </TableRow>
               ))}
@@ -285,6 +399,97 @@ function Tables() {
         <DialogActions>
           <Button onClick={handleEditDialogClose}>Cancel</Button>
           <Button onClick={() => handleEditDialogSave(editingData._id)}>
+            Save
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* subscription dialogue */}
+      <Dialog
+        open={SubscriptionDialogOpen}
+        onClose={handleSubscriptionDialogClose}
+      >
+        <DialogTitle>Edit User</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            To edit the user's subscription information, please update the
+            fields below.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            label="Description"
+            type="text"
+            fullWidth
+            value={SubscriptionData.Description || ""}
+            onChange={(e) =>
+              setSubscriptionData({
+                ...SubscriptionData,
+                Description: e.target.value,
+              })
+            }
+          />
+          <TextField
+            margin="dense"
+            label="Payment"
+            type="number"
+            fullWidth
+            value={SubscriptionData.Payment || ""}
+            onChange={(e) =>
+              setSubscriptionData({
+                ...SubscriptionData,
+                Payment: e.target.value,
+              })
+            }
+          />
+          <TextField
+            margin="dense"
+            label="Start Date"
+            type="date"
+            fullWidth
+            value={SubscriptionData.StartDate || ""}
+            onChange={(e) =>
+              setSubscriptionData({
+                ...SubscriptionData,
+                StartDate: e.target.value,
+              })
+            }
+          />
+          <TextField
+            margin="dense"
+            label="Due Date"
+            type="date"
+            fullWidth
+            value={SubscriptionData.DueDate || ""}
+            onChange={(e) =>
+              setSubscriptionData({
+                ...SubscriptionData,
+                DueDate: e.target.value,
+              })
+            }
+          />
+          <InputLabel id="isActive">isActive</InputLabel>
+          <Select
+            labelId="isActive"
+            id="isActive"
+            margin="dense"
+            label="isActive"
+            fullWidth
+            value={SubscriptionData.isActive || ""}
+            onChange={(e) =>
+              setSubscriptionData({
+                ...SubscriptionData,
+                isActive: e.target.value,
+              })
+            }
+          >
+            <MenuItem value={true}>Active</MenuItem>
+            <MenuItem value={false}>Disactive</MenuItem>
+          </Select>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleSubscriptionDialogClose}>Cancel</Button>
+          <Button onClick={() => handleSubscriptionDialogSave(editingData)}>
             Save
           </Button>
         </DialogActions>

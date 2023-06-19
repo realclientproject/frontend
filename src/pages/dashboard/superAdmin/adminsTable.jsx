@@ -33,24 +33,7 @@ function AdminsTables() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [loaded, setLoaded] = useState(false);
-  const [data, setData] = useState([
-    {
-      _id: "1",
-      first_name: "John",
-      last_name: "Doe",
-      phone: "123-456-7890",
-      email: "john.doe@example.com",
-      role: "Admin",
-    },
-    {
-      _id: "2",
-      first_name: "Jane",
-      last_name: "Doe",
-      phone: "234-567-8901",
-      email: "jane.doe@example.com",
-      role: "User",
-    },
-  ]);
+  const [data, setData] = useState([]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
