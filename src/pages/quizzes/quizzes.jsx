@@ -6,11 +6,10 @@ import NestedList from "../../components/lessons/NestedList";
 import ComboBox from "../../components/lessons/searchbar";
 import GetAppIcon from "@mui/icons-material/GetApp";
 import DownloadIcon from "@mui/icons-material/Download";
-import { Document, Page } from "react-pdf";
+import { Document, Page, pdfjs } from "react-pdf";
+import PdfIcon from "../../images/logoo.png";
 
-// import "react-pdf/dist/esm/Page/AnnotationLayer.css";
-
-// pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.js";
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -50,7 +49,7 @@ const CardImage = styled("img")({
 const CardTitle = styled("h2")({
   fontSize: "1rem",
   fontWeight: "bold",
-  margin: "1rem 0 0.5rem",
+  margin: "0.5rem 0",
   overflow: "hidden",
   textOverflow: "ellipsis",
   whiteSpace: "nowrap",
@@ -58,7 +57,7 @@ const CardTitle = styled("h2")({
 
 const CardDescription = styled("p")({
   color: "#777",
-  fontSize: "1rem",
+  fontSize: "0.8rem",
   margin: "0.5rem 0",
   overflow: "hidden",
   textOverflow: "ellipsis",
@@ -74,9 +73,9 @@ const DownloadButton = styled(GetAppIcon)({
   fontSize: "2rem",
 });
 
-const handleDownload = (url) => {
+const handleDownload = (fileUrl) => {
   axios
-    .get(`https://supportteachers-mern-api.onrender.com${url}`, {
+    .get(`/public${fileUrl}`, {
       responseType: "blob",
     })
     .then((response) => {
@@ -127,7 +126,7 @@ export default function RecipeReviewCard() {
       </div>
       <div style={{ display: "flex", flexDirection: "row", marginTop: "1rem" }}>
         <div style={{ width: "20%" }}>
-          <NestedList  class/>
+          <NestedList class />
         </div>
         <div
           style={{
@@ -142,39 +141,39 @@ export default function RecipeReviewCard() {
           {data.map((data2, index) => (
             <CardContainer key={index}>
               {data2.type === "pdf" || data2.type === "doc" ? (
+                <>
+                  <PdfIcon />
+                  <CardTitle>{data2.name}</CardTitle>
+                  <CardDescription>{data2.description}</CardDescription>
+                </>
+              ) : (
                 <Document
-                  file={`https://supportteachers-mern-api.onrender.com${data2.media}`}
-                  options={{ workerSrc: "/pdf.worker.js" }}
+                  file={`https://supportteachers-mern-api.onrender.com/resource/${data2.media}`}
+                  onLoadSuccess={() =>
+                    console.log("Document loaded successfully")
+                  }
                 >
                   <Page pageNumber={1} width={200} />
                 </Document>
-              ) : (
-                <CardImage
-                  src={`https://supportteachers-mern-api.onrender.com${data2.media}`}
-                  alt="Media"
-                />
               )}
-              <CardTitle>{data2.name}</CardTitle>
-              <CardDescription>{data2.description}</CardDescription>
               <CardFooter>
-  <div>{data2.type}</div>
-  <div>{data2.price}</div>
-  <div>
-    {data2.type === "pdf" || data2.type === "doc" ? (
-      <IconButton
-        aria-label="download"
-        component="span"
-        style={{ color: "#444" }}
-        onClick={() => handleDownload(data2.media)}
-      >
-        <DownloadIcon />
-      </IconButton>
-    ) : (
-      <span>Download not available</span>
-    )}
-  </div>
-</CardFooter>
-
+                <div>{data2.type}</div>
+                <div>{data2.price}</div>
+                <div>
+                <IconButton
+  aria-label="download"
+  component="span"
+  style={{ color: "#444" }}
+  onClick={() =>
+    handleDownload(
+      `https://supportteachers-mern-api.onrender.com/resource/${data2.media}`
+    )
+  }
+>
+                    <DownloadIcon />
+                  </IconButton>
+                </div>
+              </CardFooter>
             </CardContainer>
           ))}
         </div>
