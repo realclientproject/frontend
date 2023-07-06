@@ -17,11 +17,14 @@ import {
   Button,
   TablePagination,
   MenuItem,
+  InputAdornment,
+  Input,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import AddresourcesButton from "./resourcesAddButton";
+import { CloudUpload } from "@mui/icons-material";
 
 function ResourcesTable() {
   const [editDialogOpen, setEditDialogOpen] = useState(false);
@@ -55,15 +58,12 @@ function ResourcesTable() {
     setSelectedGrade("");
     setSelectedLang("");
     setSelectedType("");
-
   };
 
   const handleEditDialogSave = (id) => {
-    // handle save logic here
     axios
       .put(
-        `https://supportteachers-mern-api.onrender.com
-      /resource/${id}`,
+        `https://supportteachers-mern-api.onrender.com/resource/${id}`,
         editingData,
         {
           headers: {
@@ -88,22 +88,36 @@ function ResourcesTable() {
       .catch((error) => {
         // Handle error response
         console.error(error);
-        if (error.response && error.response.status === 409) {
-          alert("Email already taken, please use a different email.");
-        }
-        if (error.response && error.response.status === 403) {
-          alert("You are not authorized");
+        if (error.response) {
+          if (error.response.status === 409) {
+            alert("Email already taken, please use a different email.");
+          } else if (error.response.status === 403) {
+            alert("You are not authorized");
+          } else {
+            alert("Something went wrong. Please try again.");
+          }
         } else {
-          alert("Something went wrong. Please try to change something.");
+          alert("Something went wrong. Please try again.");
         }
+      })
+      .finally(() => {
+        setEditDialogOpen(false);
+        setEditingData({});
+        setSelectedGrade("");
+        setSelectedLang("");
+        setSelectedType("");
       });
-
-    setEditDialogOpen(false);
-    setEditingData({}); // Clear the editing data after saving
   };
 
   // ...
+  const [mediaFile, setMediaFile] = useState(null);
 
+  // ...
+
+  const handleMediaFileChange = (event) => {
+    const file = event.target.files[0];
+    setMediaFile(file);
+  };
   ///////////////////////////////////
   const handleDeleteClick = (id) => {
     // handle delete logic here
@@ -170,85 +184,85 @@ function ResourcesTable() {
 
   return (
     <>
-    <div style={{ display: "flex", alignItems: "center" }}>
-    <TextField
-  select
-  value={selectedGrade}
-  onChange={(e) => setSelectedGrade(e.target.value)}
-  style={{ marginRight: "10px", width: "140px", height: "40px" }}
-  InputLabelProps={{
-    shrink: selectedGrade !== "",
-    style: { color: selectedGrade !== "" ? "#000000" : "#9e9e9e" },
-  }}
-  SelectProps={{
-    displayEmpty: true,
-    renderValue: (value) => (value === "" ? "All Grades" : value),
-  }}
->
-  <MenuItem value="">All</MenuItem>
-  <MenuItem value="grade1">Grade 1</MenuItem>
-  <MenuItem value="grade2">Grade 2</MenuItem>
-  <MenuItem value="grade3">Grade 3</MenuItem>
-  <MenuItem value="grade4">Grade 4</MenuItem>
-  <MenuItem value="grade5">Grade 5</MenuItem>
-  <MenuItem value="grade6">Grade 6</MenuItem>
-  <MenuItem value="grade7">Grade 7</MenuItem>
-  <MenuItem value="grade8">Grade 8</MenuItem>
-  <MenuItem value="grade9">Grade 9</MenuItem>
-  <MenuItem value="grade10">Grade 10</MenuItem>
-  <MenuItem value="grade11">Grade 11</MenuItem>
-  <MenuItem value="grade12">Grade 12</MenuItem>
-</TextField>
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <TextField
+          select
+          value={selectedGrade}
+          onChange={(e) => setSelectedGrade(e.target.value)}
+          style={{ marginRight: "10px", width: "140px", height: "40px" }}
+          InputLabelProps={{
+            shrink: selectedGrade !== "",
+            style: { color: selectedGrade !== "" ? "#000000" : "#9e9e9e" },
+          }}
+          SelectProps={{
+            displayEmpty: true,
+            renderValue: (value) => (value === "" ? "All Grades" : value),
+          }}
+        >
+          <MenuItem value="">All</MenuItem>
+          <MenuItem value="grade1">Grade 1</MenuItem>
+          <MenuItem value="grade2">Grade 2</MenuItem>
+          <MenuItem value="grade3">Grade 3</MenuItem>
+          <MenuItem value="grade4">Grade 4</MenuItem>
+          <MenuItem value="grade5">Grade 5</MenuItem>
+          <MenuItem value="grade6">Grade 6</MenuItem>
+          <MenuItem value="grade7">Grade 7</MenuItem>
+          <MenuItem value="grade8">Grade 8</MenuItem>
+          <MenuItem value="grade9">Grade 9</MenuItem>
+          <MenuItem value="grade10">Grade 10</MenuItem>
+          <MenuItem value="grade11">Grade 11</MenuItem>
+          <MenuItem value="grade12">Grade 12</MenuItem>
+        </TextField>
 
-  <TextField
-  select
-  value={selectedLang}
-  onChange={(e) => setSelectedLang(e.target.value)}
-  style={{ margin: "10px", width: "166px", height: "40px" }}
-  InputLabelProps={{
-    shrink: selectedLang !== "",
-    style: { color: selectedLang !== "" ? "#000000" : "#9e9e9e" },
-  }}
-  SelectProps={{
-    displayEmpty: true,
-    renderValue: (value) => (value === "" ? "All Languages" : value),
-  }}
->
-  <MenuItem value="">All Languages</MenuItem>
-  <MenuItem value="English">English</MenuItem>
-  <MenuItem value="Arabic">Arabic</MenuItem>
-  <MenuItem value="French">French</MenuItem>
-</TextField>
-<TextField
-  select
-  value={selectedType}
-  onChange={(e) => setSelectedType(e.target.value)}
-  style={{ margin: "10px", width: "166px", height: "40px" }}
-  InputLabelProps={{
-    shrink: selectedType !== "",
-    style: { color: selectedType !== "" ? "#000000" : "#9e9e9e" },
-  }}
-  SelectProps={{
-    displayEmpty: true,
-    renderValue: (value) => (value === "" ? "All Type" : value),
-  }}
->
-  <MenuItem value="">All Type</MenuItem>
-  <MenuItem value="Lesson">Lesson</MenuItem>
-  <MenuItem value="quiz">quiz</MenuItem>
-</TextField>
-<TextField style={{ margin: "10px", width: "200px", height: "40px" }}
-  label="Search "
-  type="text"
-  fullWidth
-  value={searchKeyword}
-  onChange={(e) => setSearchKeyword(e.target.value)}
-/>
-</div>
+        <TextField
+          select
+          value={selectedLang}
+          onChange={(e) => setSelectedLang(e.target.value)}
+          style={{ margin: "10px", width: "166px", height: "40px" }}
+          InputLabelProps={{
+            shrink: selectedLang !== "",
+            style: { color: selectedLang !== "" ? "#000000" : "#9e9e9e" },
+          }}
+          SelectProps={{
+            displayEmpty: true,
+            renderValue: (value) => (value === "" ? "All Languages" : value),
+          }}
+        >
+          <MenuItem value="">All Languages</MenuItem>
+          <MenuItem value="English">English</MenuItem>
+          <MenuItem value="Arabic">Arabic</MenuItem>
+          <MenuItem value="French">French</MenuItem>
+        </TextField>
+        <TextField
+          select
+          value={selectedType}
+          onChange={(e) => setSelectedType(e.target.value)}
+          style={{ margin: "10px", width: "166px", height: "40px" }}
+          InputLabelProps={{
+            shrink: selectedType !== "",
+            style: { color: selectedType !== "" ? "#000000" : "#9e9e9e" },
+          }}
+          SelectProps={{
+            displayEmpty: true,
+            renderValue: (value) => (value === "" ? "All Type" : value),
+          }}
+        >
+          <MenuItem value="">All Type</MenuItem>
+          <MenuItem value="Lesson">Lesson</MenuItem>
+          <MenuItem value="quiz">quiz</MenuItem>
+        </TextField>
+        <TextField
+          style={{ margin: "10px", width: "200px", height: "40px" }}
+          label="Search "
+          type="text"
+          fullWidth
+          value={searchKeyword}
+          onChange={(e) => setSearchKeyword(e.target.value)}
+        />
+      </div>
 
       <TableContainer component={Paper} sx={{ width: "98%", margin: "auto" }}>
         <Table>
-          
           <TableHead style={{ backgroundColor: "#0D7590" }}>
             <TableRow>
               <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>
@@ -278,19 +292,21 @@ function ResourcesTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-          {data
-  .filter((row) => selectedGrade === "" || row.grade === selectedGrade)
-  .filter((row) => selectedLang === "" || row.lang === selectedLang)
-  .filter((row) => selectedType === "" || row.type === selectedType)
-  .filter((row) =>
-    Object.values(row).some(
-      (value) =>
-        typeof value === 'string' &&
-        value.toLowerCase().includes(searchKeyword.toLowerCase())
-    )
-  )
-  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-  .map((row, index) => (
+            {data
+              .filter(
+                (row) => selectedGrade === "" || row.grade === selectedGrade
+              )
+              .filter((row) => selectedLang === "" || row.lang === selectedLang)
+              .filter((row) => selectedType === "" || row.type === selectedType)
+              .filter((row) =>
+                Object.values(row).some(
+                  (value) =>
+                    typeof value === "string" &&
+                    value.toLowerCase().includes(searchKeyword.toLowerCase())
+                )
+              )
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row, index) => (
                 <TableRow key={index}>
                   <TableCell>{row.name}</TableCell>
                   <TableCell>{row.type}</TableCell>
@@ -388,6 +404,43 @@ function ResourcesTable() {
             value={editingData.count || ""}
             onChange={(e) =>
               setEditingData({ ...editingData, count: e.target.value })
+            }
+          />
+          <TextField
+            margin="dense"
+            label="lang"
+            type="text"
+            fullWidth
+            value={editingData.lang || ""}
+            onChange={(e) =>
+              setEditingData({ ...editingData, lang: e.target.value })
+            }
+          />
+          <TextField
+            margin="dense"
+            label="grade"
+            type="text"
+            fullWidth
+            value={editingData.grade || ""}
+            onChange={(e) =>
+              setEditingData({ ...editingData, grade: e.target.value })
+            }
+          />
+
+          <Input
+            margin="dense"
+            name="media"
+            type="file"
+            fullWidth
+            required
+            inputProps={{ accept: "image/*" }} // Specify accepted file types
+            onChange={handleMediaFileChange}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton>
+                  <CloudUpload />
+                </IconButton>
+              </InputAdornment>
             }
           />
         </DialogContent>

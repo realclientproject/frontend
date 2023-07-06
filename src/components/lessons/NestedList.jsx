@@ -6,9 +6,7 @@ import { useState } from "react";
 
 export default function NestedList() {
   const [selectedGrade, setSelectedGrade] = useState("");
-  const [selectedLang, setSelectedLang] = useState("");
   const [selectedType, setSelectedType] = useState("");
-  const [searchKeyword, setSearchKeyword] = useState("");
 
 
   return (
@@ -42,9 +40,9 @@ export default function NestedList() {
                     fontFamily: "monospace",
                   }}
                 >
-                  <li >Arabic</li>
-                  <li>English</li>
-                  <li>French</li>
+                  <Link onClick={() => setSelectedType("Arabic")}>Arabic</Link>
+                  <li><a href ="" onClick={() => setSelectedType("English")}>English</a></li>
+                  <li><a href="" onClick={() => setSelectedType("French")}>French</a></li>
                 </ul>
                 <hr/>
                 <ul>
@@ -60,7 +58,7 @@ export default function NestedList() {
                         fontFamily: "monospace",
                       }}
                     >
-                      <li>kg1</li>
+                      <li >kg1</li>
                       <li>kg2</li>
                       <li>kg3</li>
                       <li>grade1</li>
