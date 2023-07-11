@@ -58,11 +58,15 @@ function AdminsTables() {
   const handleEditDialogSave = (id) => {
     // handle save logic here
     axios
-      .patch(`http://localhost:5000/user/edit/${id}`, editingData, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("access_token"),
-        },
-      })
+      .patch(
+        `https://supportteachers-mern-api.onrender.com/user/edit/${id}`,
+        editingData,
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("access_token"),
+          },
+        }
+      )
       .then((response) => {
         // Handle success response
         // console.log(response);
@@ -90,7 +94,7 @@ function AdminsTables() {
   const handleDeleteClick = (id) => {
     // handle delete logic here
     axios
-      .delete(`http://localhost:5000/user/${id}`, {
+      .delete(`https://supportteachers-mern-api.onrender.com/user/${id}`, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access_token"),
         },
@@ -115,7 +119,7 @@ function AdminsTables() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/user", {
+      .get("https://supportteachers-mern-api.onrender.com/user", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access_token"),
         },

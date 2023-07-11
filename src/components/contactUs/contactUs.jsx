@@ -79,7 +79,7 @@ export const useFormControls = () => {
     if (formIsValid()) {
       axios({
         method: "POST",
-        url: "http://localhost:5000/contactUs/send",
+        url: "https://supportteachers-mern-api.onrender.com/contactUs/send",
         data: {
           values,
         },
@@ -170,7 +170,12 @@ export default function ContactUs() {
             </>
           );
         })}
-        <Button sx={styles.button} type="submit" variant="contained" onClick={()=>handleFormSubmit()}>
+        <Button
+          sx={styles.button}
+          type="submit"
+          variant="contained"
+          onClick={() => handleFormSubmit()}
+        >
           Send Message
         </Button>
       </FormControl>
@@ -182,9 +187,9 @@ const styles = {
   container: {
     textAlign: ["center", "start"],
     justifyContent: "space-between",
-    gap: [4,15],
+    gap: [4, 15],
     py: 10,
-    margin: "auto 10%"
+    margin: "auto 10%",
   },
   title: {
     mb: 2,

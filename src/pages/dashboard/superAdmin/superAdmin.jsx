@@ -45,7 +45,7 @@ export default function SuperAdmin() {
   ]);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/user", {
+      .get("https://supportteachers-mern-api.onrender.com/user", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access_token"),
         },

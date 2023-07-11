@@ -30,14 +30,16 @@ function LessonsTable() {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [loaded, setLoaded] = useState(false);
   const [data, setData] = useState([
-    {_id:"1",
+    {
+      _id: "1",
       first_name: "John",
       last_name: "Doe",
       phone: "123-456-7890",
       email: "john.doe@example.com",
       role: "Admin",
     },
-    {_id:"2",
+    {
+      _id: "2",
       first_name: "Jane",
       last_name: "Doe",
       phone: "234-567-8901",
@@ -69,11 +71,15 @@ function LessonsTable() {
   const handleEditDialogSave = (id) => {
     // handle save logic here
     axios
-      .patch(`http://localhost:5000/resource/${id}`,editingData, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("access_token"),
-        },
-      })
+      .patch(
+        `https://supportteachers-mern-api.onrender.com/resource/${id}`,
+        editingData,
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("access_token"),
+          },
+        }
+      )
       .then((response) => {
         // Handle success response
         console.log(response);
@@ -86,7 +92,8 @@ function LessonsTable() {
         console.error(error);
         if (error.response && error.response.status === 409) {
           alert("Email already taken, please use a different email.");
-        } if (error.response && error.response.status === 403) {
+        }
+        if (error.response && error.response.status === 403) {
           alert("you are not authorized");
         } else {
           alert("Something went wrong. Please try to change something.");
@@ -100,7 +107,7 @@ function LessonsTable() {
   const handleDeleteClick = (id) => {
     // handle delete logic here
     axios
-      .delete(`http://localhost:5000/resource${id}`, {
+      .delete(`https://supportteachers-mern-api.onrender.com/resource${id}`, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access_token"),
         },
@@ -115,7 +122,7 @@ function LessonsTable() {
       .catch((error) => {
         if (error.response && error.response.status === 403) {
           alert("you are not authorized");
-        }else {
+        } else {
           alert("Something went wrong.");
         }
         // Handle error response
@@ -125,7 +132,7 @@ function LessonsTable() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/resource", {
+      .get("https://supportteachers-mern-api.onrender.com/resource", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access_token"),
         },
@@ -145,135 +152,137 @@ function LessonsTable() {
   return (
     <>
       <TableContainer component={Paper} sx={{ width: "98%", margin: "auto" }}>
-          <Table>
-            <TableHead style={{ backgroundColor: "#0D7590" }}>
-              <TableRow>
-                <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>
-                  Name
-                </TableCell>
-                <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>
-                  Type
-                </TableCell>
-                <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>
-                 Description
-                </TableCell>
-                <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>
-                  price
-                </TableCell>
-                <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>
-                  count
-                </TableCell>
-                <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>
-                  Actions
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {data
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => (
-                  <TableRow key={index}>
-                    <TableCell>{row.name}</TableCell>
-                    <TableCell>{row.type}</TableCell>
-                    <TableCell>{row.description}</TableCell>
-                    <TableCell>{row.price}</TableCell>
-                    <TableCell>{row.count}</TableCell>
-                    <TableCell>
-                      <IconButton onClick={() => handleEditClick(row)}>
-                        <EditIcon />
-                      </IconButton>
-                      <IconButton onClick={() => handleDeleteClick(row._id)}>
-                        <DeleteIcon />
-                      </IconButton>
-                    </TableCell>
-                  </TableRow>
-                ))}
-            </TableBody>
-          </Table>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              margin: 0,
-              padding: 0,
-            }}
-          >
-            <AddresourcesButton/>
-            <TablePagination
-              rowsPerPageOptions={[5, 10, 25]}
-              component="div"
-              count={data.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-          </div>
-        </TableContainer>
-        <Dialog open={editDialogOpen} onClose={handleEditDialogClose}>
-          <DialogTitle>Edit resources</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              To edit the resource information, please update the fields below.
-            </DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              label="Name"
-              type="text"
-              fullWidth
-              value={editingData.name || ""}
-              onChange={(e) =>
-                setEditingData({ ...editingData, name: e.target.value })
-              }
-            />
-            <TextField
-              margin="dense"
-              label="Type"
-              type="text"
-              fullWidth
-              value={editingData.type || ""}
-              onChange={(e) =>
-                setEditingData({ ...editingData, type: e.target.value })
-              }
-            />
-            <TextField
-              margin="dense"
-              label="description"
-              type="tel"
-              fullWidth
-              value={editingData.description || ""}
-              onChange={(e) =>
-                setEditingData({ ...editingData, description: e.target.value })
-              }
-            />
-            <TextField
-              margin="dense"
-              label="price"
-              type="text"
-              fullWidth
-              value={editingData.price || ""}
-              onChange={(e) =>
-                setEditingData({ ...editingData, price: e.target.value })
-              }
-            />
-            <TextField
-              margin="dense"
-              label="count"
-              type="text"
-              fullWidth
-              value={editingData.count || ""}
-              onChange={(e) =>
-                setEditingData({ ...editingData, count: e.target.value })
-              }
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleEditDialogClose}>Cancel</Button>
-            <Button onClick={()=>handleEditDialogSave(editingData._id)}>Save</Button>
-          </DialogActions>
-        </Dialog>
+        <Table>
+          <TableHead style={{ backgroundColor: "#0D7590" }}>
+            <TableRow>
+              <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>
+                Name
+              </TableCell>
+              <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>
+                Type
+              </TableCell>
+              <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>
+                Description
+              </TableCell>
+              <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>
+                price
+              </TableCell>
+              <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>
+                count
+              </TableCell>
+              <TableCell style={{ color: "#FFFFFF", fontWeight: "bold" }}>
+                Actions
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row, index) => (
+                <TableRow key={index}>
+                  <TableCell>{row.name}</TableCell>
+                  <TableCell>{row.type}</TableCell>
+                  <TableCell>{row.description}</TableCell>
+                  <TableCell>{row.price}</TableCell>
+                  <TableCell>{row.count}</TableCell>
+                  <TableCell>
+                    <IconButton onClick={() => handleEditClick(row)}>
+                      <EditIcon />
+                    </IconButton>
+                    <IconButton onClick={() => handleDeleteClick(row._id)}>
+                      <DeleteIcon />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))}
+          </TableBody>
+        </Table>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            margin: 0,
+            padding: 0,
+          }}
+        >
+          <AddresourcesButton />
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25]}
+            component="div"
+            count={data.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </div>
+      </TableContainer>
+      <Dialog open={editDialogOpen} onClose={handleEditDialogClose}>
+        <DialogTitle>Edit resources</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            To edit the resource information, please update the fields below.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            label="Name"
+            type="text"
+            fullWidth
+            value={editingData.name || ""}
+            onChange={(e) =>
+              setEditingData({ ...editingData, name: e.target.value })
+            }
+          />
+          <TextField
+            margin="dense"
+            label="Type"
+            type="text"
+            fullWidth
+            value={editingData.type || ""}
+            onChange={(e) =>
+              setEditingData({ ...editingData, type: e.target.value })
+            }
+          />
+          <TextField
+            margin="dense"
+            label="description"
+            type="tel"
+            fullWidth
+            value={editingData.description || ""}
+            onChange={(e) =>
+              setEditingData({ ...editingData, description: e.target.value })
+            }
+          />
+          <TextField
+            margin="dense"
+            label="price"
+            type="text"
+            fullWidth
+            value={editingData.price || ""}
+            onChange={(e) =>
+              setEditingData({ ...editingData, price: e.target.value })
+            }
+          />
+          <TextField
+            margin="dense"
+            label="count"
+            type="text"
+            fullWidth
+            value={editingData.count || ""}
+            onChange={(e) =>
+              setEditingData({ ...editingData, count: e.target.value })
+            }
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleEditDialogClose}>Cancel</Button>
+          <Button onClick={() => handleEditDialogSave(editingData._id)}>
+            Save
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 }

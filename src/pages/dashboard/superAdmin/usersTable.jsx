@@ -62,11 +62,15 @@ function Tables() {
   const handleEditDialogSave = (id) => {
     // handle save logic here
     axios
-      .patch(`http://localhost:5000/user/edit/${id}`, editingData, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("access_token"),
-        },
-      })
+      .patch(
+        `https://supportteachers-mern-api.onrender.com/user/edit/${id}`,
+        editingData,
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("access_token"),
+          },
+        }
+      )
       .then((response) => {
         // Handle success response
         console.log(response);
@@ -94,7 +98,7 @@ function Tables() {
   const handleDeleteClick = (id) => {
     // handle delete logic here
     axios
-      .delete(`http://localhost:5000/user/${id}`, {
+      .delete(`https://supportteachers-mern-api.onrender.com/user/${id}`, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access_token"),
         },
@@ -134,8 +138,8 @@ function Tables() {
     // handle save logic here
 
     const url = editingData.subscription
-      ? `http://localhost:5000/subscription/edit/${editingData.subscription._id}`
-      : `http://localhost:5000/subscription`;
+      ? `https://supportteachers-mern-api.onrender.com/subscription/edit/${editingData.subscription._id}`
+      : `https://supportteachers-mern-api.onrender.com/subscription`;
 
     const axiosConfig = {
       headers: {
@@ -170,7 +174,7 @@ function Tables() {
         // const subscription = response.data.response._id;
         axios
           .patch(
-            `http://localhost:5000/user/edit/${editingData._id}`,
+            `https://supportteachers-mern-api.onrender.com/user/edit/${editingData._id}`,
             { subscription: response.data.response._id },
             axiosConfig
           )
@@ -219,7 +223,7 @@ function Tables() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/user", {
+      .get("https://supportteachers-mern-api.onrender.com/user", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access_token"),
         },

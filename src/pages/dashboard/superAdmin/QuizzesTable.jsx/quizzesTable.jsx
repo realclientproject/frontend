@@ -71,11 +71,15 @@ function QuizzesTable() {
   const handleEditDialogSave = (id) => {
     // handle save logic here
     axios
-      .patch(`http://localhost:5000/resource/${id}`, editingData, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("access_token"),
-        },
-      })
+      .patch(
+        `https://supportteachers-mern-api.onrender.com/resource/${id}`,
+        editingData,
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("access_token"),
+          },
+        }
+      )
       .then((response) => {
         // Handle success response
         console.log(response);
@@ -103,7 +107,7 @@ function QuizzesTable() {
   const handleDeleteClick = (id) => {
     // handle delete logic here
     axios
-      .delete(`http://localhost:5000/resource${id}`, {
+      .delete(`https://supportteachers-mern-api.onrender.com/resource${id}`, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access_token"),
         },
@@ -128,7 +132,7 @@ function QuizzesTable() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/resource", {
+      .get("https://supportteachers-mern-api.onrender.com/resource", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access_token"),
         },
